@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string-array name="suggestions_array">
+        
+        <item>Avonmore Milk 1.75L €1.99</item>
+        <item>Avonmore Fresh Milk 1L €1.24</item>
+        <item>Avonmore Super Milk 1L €1.44</item>
+        <item>Dawn Milk 1L €1.19</item>
+        <item>Dawn L.F. Milk 1L €2.19 </item>
+        <item>Avonmore Milk 2L €1.99</item>
+        <item>Avonmore Butter Milk 2L €1.99</item>
+        <item>Brennans White Bread 800G €1.77</item>
+        <item>Brennans Wholgrain Bread 800G €1.77</item>
+        <item>Brennans H.P. Wholgrain Bread 400G €1.26</item>
+        <item>Brennans H.P. Wholemeal Bread 400G €1.26</item>
+        <item>Pat The Baker Sliced Brown Loaf 800G</item>
+        
+      
+    </string-array>
+</resources>
