@@ -19,8 +19,7 @@ public class ShoppingList extends Activity {
 	TextView txtMsg;
 	Button  btnClearText;
 	
-	
-	
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class ShoppingList extends Activity {
 	    textView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
 		String[] suggestedItems = getResources().getStringArray(R.array.suggestions_array);
 		ArrayAdapter<String> adapter = 
-		        new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, suggestedItems);
+		        new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, suggestedItems);
 		textView.setAdapter(adapter);
 		
 		btnClearText.setOnClickListener(new OnClickListener() {	
