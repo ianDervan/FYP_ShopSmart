@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string-array name="countries_array">
+        
+        <item>Avonmore Super milk 1.75L €1.99</item>
+        <item>Avonmore Fresh milk 1L €1.24</item>
+        <item>Avonmore Super milk 1L €1.44</item>
+        <item>Dawn milk 1L €1.19</item>
+        <item>Dawn L.F. milk 1L €2.19 </item>
+        <item>Avonmore milk 2L €1.99</item>
+        <item>Anguilla</item>
+        <item>Antarctica</item>
+      
+    </string-array>
+</resources>
