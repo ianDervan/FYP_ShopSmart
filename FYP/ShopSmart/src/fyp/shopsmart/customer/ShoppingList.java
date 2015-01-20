@@ -1,5 +1,9 @@
 package fyp.shopsmart.customer;
 
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+import android.R.string;
 import android.app.Activity;
 import android.content.Intent;
 import fyp.shopsmart.R;
@@ -12,12 +16,16 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ShoppingList extends Activity {
 	
 	AutoCompleteTextView textView;
 	TextView txtMsg;
 	Button  btnClearText;
+	Button  btnAddItem;
+	ArrayList<String> storeItem;
+	ArrayList<String> storeCost;
 	
 	
 	
@@ -29,6 +37,10 @@ public class ShoppingList extends Activity {
 		
 		txtMsg = (TextView) findViewById(R.id.txtMsg);
 		btnClearText = (Button) findViewById(R.id.cleartext);
+		btnAddItem = (Button) findViewById(R.id.addItem);
+		
+		storeItem = new ArrayList<String>();
+		storeCost = new ArrayList<String>();
 
 	    textView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
 		String[] suggestedItems = getResources().getStringArray(R.array.suggestions_array);
@@ -40,6 +52,39 @@ public class ShoppingList extends Activity {
 	      	public void onClick(View v) {
 	      		
 				textView.setText("");
+				
+	      		}		
+	 		});
+	
+		
+		btnAddItem.setOnClickListener(new OnClickListener() {	
+	      	public void onClick(View v) {
+	      		
+			
+				
+				String storeInput =textView.getText().toString();
+						
+				String[] inputItem = storeInput.split("€");
+				
+			
+					
+				
+				 txtMsg.append(inputItem[0]+"\n");
+				 txtMsg.append(inputItem[1]+"\n");
+				 
+				 
+				
+				
+				
+				for (String item : storeItem)
+				  {
+				    txtMsg.setText(item+"\n");
+				  }
+				for (String cost : storeCost)
+				  {
+				    txtMsg.setText(cost+"\n");
+				  }
+				
 				
 	      		}		
 	 		});
