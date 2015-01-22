@@ -5,17 +5,22 @@ import java.util.StringTokenizer;
 
 import android.R.string;
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import fyp.shopsmart.R;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -30,11 +35,14 @@ public class ShoppingList extends Activity {
 	EditText inputQuantity;
 	Button  btnClearText;
 	Button  btnAddItem;
+	Button  btnHide;
 	ArrayList<String> storeItem;
 	ArrayList<String> price;
 	ArrayList<String> quantity;
 	
 	SQLiteDatabase db;
+	
+	int sh;
 	
 	
 	
@@ -44,10 +52,13 @@ public class ShoppingList extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shopping_list);
 		
+		sh=0;
+		
 		txtMsg = (TextView) findViewById(R.id.txtMsg);
 		inputQuantity = (EditText) findViewById(R.id.quantity);
 		btnClearText = (Button) findViewById(R.id.cleartext);
 		btnAddItem = (Button) findViewById(R.id.addItem);
+		btnHide = (Button) findViewById(R.id.hide);
 		
 		storeItem = new ArrayList<String>();
 		price = new ArrayList<String>();
@@ -63,32 +74,66 @@ public class ShoppingList extends Activity {
 	      	public void onClick(View v) {
 	      		
 				textView.setText("");
+				txtMsg.setText("");
+	      		}		
+	 		});
+		
+		btnHide.setOnClickListener(new OnClickListener() {	
+	      	public void onClick(View v) {
+	      		
+	      		
+//				if(sh == 1)
+//	      		{
+//					InputMethodManager imm = (InputMethodManager)getSystemService(
+//			      		      Context.INPUT_METHOD_SERVICE);
+//			      		imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
+//	      			
+//	      			sh=0;
+//	      			
+//	      		}
+	
+	      			InputMethodManager imm = (InputMethodManager)getSystemService(
+		  	      		      Context.INPUT_METHOD_SERVICE);
+		      			imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+		      			
+		      			openDatabase();
+		      			useRawQueryShowAll();
+		      			
+		      		
+		      		
 				
 	      		}		
 	 		});
+		
 	
 		
 		btnAddItem.setOnClickListener(new OnClickListener() {	
 	      	public void onClick(View v) {
+	      		
+	      		String text =textView.getText().toString();
+	      		
+	      		
+	      		if (text != null && text.trim().length() > 0) {
+	      		    // your code
+	      		
 
 				String storeInput =textView.getText().toString();		
 				String[] inputItem = storeInput.split("€");
-
-					
+			
 				quantity.add(inputQuantity.getText().toString());
-
 
 				 storeItem.add(inputItem[0]);
 				 price.add("€"+inputItem[1]);
 				 
-				 for(String testp : price)
-				 {
-					 txtMsg.append(testp);
-				 }
-				 
+				
 				 openDatabase();
 				 dropTable();
 				 insertSomeDbData();
+				 useRawQueryShowAll();
+				
+	
+				 textView.setText("");
+	      		}
 
 	      		}		
 	 		});
@@ -135,12 +180,10 @@ public class ShoppingList extends Activity {
 		try {
 			// create table
 			db.execSQL("create table shoppingList ("
-					+ " itemID integer PRIMARY KEY autoincrement, "
-					+ " Item  text, " + " Price text, " +" Quantity text);");
+					+ " ID integer PRIMARY KEY autoincrement, "
+					+ " Item  text, " + " Price text, "+" Quantity text);");
 			// commit your changes
 			db.setTransactionSuccessful();
-
-			txtMsg.append("\n-insertSomeDbData - Table was created");
 
 		} catch (SQLException e1) {
 			txtMsg.append("\nError insertSomeDbData: " + e1.getMessage());
@@ -179,6 +222,72 @@ public class ShoppingList extends Activity {
 			txtMsg.append("\nError dropTable: " + e.getMessage());
 			finish();
 		}
+	}
+	private void useRawQueryShowAll() {
+		try {
+			// hard-coded SQL select with no arguments
+			String mySQL = "select * from shoppingList";
+			Cursor c1 = db.rawQuery(mySQL, null);
+			
+			txtMsg.append("\nShow All" + showCursor(c1) );
+			
+		} catch (Exception e) {
+			txtMsg.append("\nError useRawQuery1: " + e.getMessage());
+			
+		}
+	}// useRawQuery1
+	
+	private String showCursor( Cursor cursor) {
+		// show SCHEMA (column names & types)
+		cursor.moveToPosition(-1); //reset cursor's top		
+		String cursorData = "\nCursor: [";
+		
+		try {
+			// get column names
+			String[] colName = cursor.getColumnNames();
+			for(int i=0; i<colName.length; i++){
+				String dataType = getColumnType(cursor, i);
+				cursorData += colName[i] + dataType;
+				
+				if (i<colName.length-1){
+					cursorData+= ", ";
+				}
+			}
+		} catch (Exception e) {
+			Log.e( "<<SCHEMA>>" , e.getMessage() );
+		}
+		cursorData += "]";
+		
+		// now get the rows
+		cursor.moveToPosition(-1); //reset cursor's top
+		while (cursor.moveToNext()) {
+			String cursorRow = "\n[";
+			for (int i = 0; i < cursor.getColumnCount(); i++) {
+				cursorRow += cursor.getString(i);
+				if (i<cursor.getColumnCount()-1) 
+					cursorRow +=  ", ";
+			}
+			cursorData += cursorRow + "]";
+		}
+		return cursorData + "\n";
+	}
+	private String getColumnType(Cursor cursor, int i) {
+		try {
+			//peek at a row holding valid data 
+			cursor.moveToFirst(); 
+			int result = cursor.getType(i);
+			String[] types = {":NULL", ":INT", ":FLOAT", ":STR", ":BLOB", ":UNK" };
+			//backtrack - reset cursor's top
+			cursor.moveToPosition(-1);
+			return types[result];
+		} catch (Exception e) {
+			return " ";
+		}
+	}
+
+	public void onClick(DialogInterface dialog, int which) {
+		// TODO Auto-generated method stub
+		finish();
 	}
 	
 }

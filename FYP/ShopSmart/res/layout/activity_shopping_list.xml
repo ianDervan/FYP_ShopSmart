@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="70dp"
         android:orientation="horizontal" >
 
         <Button
@@ -51,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="0.42"
+            android:layout_weight="0.5"
             android:background="@drawable/custombutton_lr"
             android:text="Add Item"
             android:textColor="#FFFFFF" />
@@ -62,20 +62,64 @@
             android:layout_height="36dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="0.42"
+            android:layout_weight="0.5"
             android:background="@drawable/custombutton_lr"
-            android:text="Clear T8ext"
+            android:text="Clear Text"
             android:textColor="#FFFFFF" />
 
         <Button
-            android:id="@+id/btn_2"
+            android:id="@+id/hide"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="0.15"
+            android:layout_weight="0.5"
             android:background="@drawable/custombutton_lr"
-            android:text="No."
+           	android:duration="0"
+            android:text="Show"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+    
+     <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="120dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/but1"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/custombutton_lr"
+            android:text="Remove 1"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/but2"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/custombutton_lr"
+            android:text="Remove All"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/but3"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/custombutton_lr"
+        
+           android:duration="0"
+            android:text="Spending"
             android:textColor="#FFFFFF" />
     </LinearLayout>
     
