@@ -7,6 +7,7 @@
 
      <AutoCompleteTextView
          android:id="@+id/autocomplete"
+         android:inputType="text|textMultiLine"
          android:layout_width="275dp"
          android:layout_height="51dp"
          android:layout_marginLeft="7dp"
@@ -14,29 +15,22 @@
          android:dropDownWidth="340dp"
          android:background="@drawable/customeditext"
          android:hint="Enter Item"
-         android:paddingLeft="10dp" 
-       />
-         
-      
-         
-        
-              
-        <EditText
-            android:id="@+id/quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="51dp"
-            android:layout_alignBottom="@+id/autocomplete"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="5dp"
-            android:layout_toRightOf="@+id/autocomplete"
-            android:hint="#"
-            android:paddingLeft="10dp"
-            android:background="@drawable/customeditext"
-            android:ems="10" >
-
-      
-    </EditText>
+         android:paddingLeft="10dp"
+          />
+     
+     <EditText
+         android:id="@+id/quantity"
+         android:layout_width="wrap_content"
+         android:layout_height="51dp"
+         android:layout_alignBottom="@+id/autocomplete"
+         android:layout_alignParentRight="true"
+         android:layout_marginLeft="12dp"
+         android:layout_marginRight="5dp"
+         android:layout_toRightOf="@+id/autocomplete"
+         android:background="@drawable/customeditext"
+         android:ems="10"
+         android:hint="#"
+         android:paddingLeft="10dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -89,7 +83,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/but1"
+            android:id="@+id/removeOne"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginTop="10dp"
@@ -99,7 +93,7 @@
             android:textColor="#FFFFFF" />
 
         <Button
-            android:id="@+id/but2"
+            android:id="@+id/removeAll"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginLeft="10dp"
@@ -117,10 +111,10 @@
             android:layout_marginTop="10dp"
             android:layout_weight="0.5"
             android:background="@drawable/custombutton_lr"
-        
-           android:duration="0"
+            android:duration="0"
             android:text="Spending"
             android:textColor="#FFFFFF" />
+
     </LinearLayout>
     
     <LinearLayout 
@@ -130,25 +124,20 @@
 		android:layout_marginTop="170dp"
 		android:orientation="vertical">
 		
-		  <ScrollView
-        android:id="@+id/ScrollView01"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2" 
-        android:padding="10dp">
+		<ScrollView
+	        android:id="@+id/ScrollView01"
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="2" 
+	        android:padding="10dp">
 
         <TextView
             android:id="@+id/txtMsg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#ffeeeeee"  />
-    </ScrollView>
-
+    	</ScrollView>
 
 	  </LinearLayout>
-
-   
-
- 
 
 </RelativeLayout>

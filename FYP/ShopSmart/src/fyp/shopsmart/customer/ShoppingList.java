@@ -5,6 +5,7 @@ import java.util.StringTokenizer;
 
 import android.R.string;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.database.sqlite.SQLiteException;
 import fyp.shopsmart.R;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +25,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.AutoCompleteTextView.Validator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,12 +33,16 @@ import android.widget.Toast;
 
 public class ShoppingList extends Activity {
 	
+	private Validator mValidator = null;
+	
 	AutoCompleteTextView textView;
 	TextView txtMsg;
 	EditText inputQuantity;
 	Button  btnClearText;
 	Button  btnAddItem;
 	Button  btnHide;
+	Button  btnRemoveOne;
+	Button  btnRemoveAll;
 	ArrayList<String> storeItem;
 	ArrayList<String> price;
 	ArrayList<String> quantity;
@@ -43,9 +50,6 @@ public class ShoppingList extends Activity {
 	SQLiteDatabase db;
 	
 	int sh;
-	
-	
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,9 @@ public class ShoppingList extends Activity {
 		btnAddItem = (Button) findViewById(R.id.addItem);
 		btnHide = (Button) findViewById(R.id.hide);
 		
+		btnRemoveOne = (Button) findViewById(R.id.removeOne);
+		btnRemoveAll = (Button) findViewById(R.id.removeAll);
+		
 		storeItem = new ArrayList<String>();
 		price = new ArrayList<String>();
 		quantity = new ArrayList<String>();
@@ -71,74 +78,85 @@ public class ShoppingList extends Activity {
 		textView.setAdapter(adapter);
 		
 		btnClearText.setOnClickListener(new OnClickListener() {	
-	      	public void onClick(View v) {
-	      		
+			public void onClick(View v) {
+
 				textView.setText("");
 				txtMsg.setText("");
-	      		}		
-	 		});
+			}		
+		});
 		
 		btnHide.setOnClickListener(new OnClickListener() {	
-	      	public void onClick(View v) {
-	      		
-	      		
-//				if(sh == 1)
-//	      		{
-//					InputMethodManager imm = (InputMethodManager)getSystemService(
-//			      		      Context.INPUT_METHOD_SERVICE);
-//			      		imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
-//	      			
-//	      			sh=0;
-//	      			
-//	      		}
-	
-	      			InputMethodManager imm = (InputMethodManager)getSystemService(
-		  	      		      Context.INPUT_METHOD_SERVICE);
-		      			imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
-		      			
-		      			openDatabase();
-		      			useRawQueryShowAll();
-		      			
-		      		
-		      		
-				
-	      		}		
-	 		});
-		
-	
-		
-		btnAddItem.setOnClickListener(new OnClickListener() {	
-	      	public void onClick(View v) {
-	      		
-	      		String text =textView.getText().toString();
-	      		
-	      		
-	      		if (text != null && text.trim().length() > 0) {
-	      		    // your code
-	      		
+			public void onClick(View v) {
 
-				String storeInput =textView.getText().toString();		
-				String[] inputItem = storeInput.split("€");
+				InputMethodManager imm = (InputMethodManager)getSystemService(
+						Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
+				
 			
-				quantity.add(inputQuantity.getText().toString());
+				
+//				if(txtMsg.getText().toString().equals("\nShoping List is Empty"));
+//				{
+//					txtMsg.setText("");
+//					
+//				}
+				
 
-				 storeItem.add(inputItem[0]);
-				 price.add("€"+inputItem[1]);
-				 
+				openDatabase();
+				useRawQueryShowAll();
+
+			}		
+		});
+		
+		btnRemoveOne.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				useDeleteMethod();
+				textView.setText("");
 				
-				 openDatabase();
-				 dropTable();
-				 insertSomeDbData();
-				 useRawQueryShowAll();
+				sh=1;
+			}
+		});
+		btnRemoveAll.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				dropTable();
+				txtMsg.setText("");
 				
+			}
+		});
 	
-				 textView.setText("");
-	      		}
+		btnAddItem.setOnClickListener(new OnClickListener() {	
+			public void onClick(View v) {
 
-	      		}		
-	 		});
-		
-		
+				String text =textView.getText().toString();
+				
+				
+
+				if (text != null && text.trim().length() > 0 ) 
+	            {
+					
+					String storeInput =textView.getText().toString();		
+					String[] inputItem = storeInput.split("€");
+					quantity.add(inputQuantity.getText().toString());
+					storeItem.add(inputItem[0]);
+					price.add("€"+inputItem[1]);
+
+				
+						openDatabase();
+						insertSomeDbData();
+						useRawQueryShowAll();
+					
+					
+					textView.setText("");
+				}
+
+			}		
+		});
+
 	}
 
 	@Override
@@ -229,10 +247,10 @@ public class ShoppingList extends Activity {
 			String mySQL = "select * from shoppingList";
 			Cursor c1 = db.rawQuery(mySQL, null);
 			
-			txtMsg.append("\nShow All" + showCursor(c1) );
+			txtMsg.append("" + showCursor(c1) );
 			
 		} catch (Exception e) {
-			txtMsg.append("\nError useRawQuery1: " + e.getMessage());
+			txtMsg.append("\nShoping List is Empty");
 			
 		}
 	}// useRawQuery1
@@ -240,7 +258,7 @@ public class ShoppingList extends Activity {
 	private String showCursor( Cursor cursor) {
 		// show SCHEMA (column names & types)
 		cursor.moveToPosition(-1); //reset cursor's top		
-		String cursorData = "\nCursor: [";
+		String cursorData = "\n";
 		
 		try {
 			// get column names
@@ -256,18 +274,18 @@ public class ShoppingList extends Activity {
 		} catch (Exception e) {
 			Log.e( "<<SCHEMA>>" , e.getMessage() );
 		}
-		cursorData += "]";
+		cursorData += "";
 		
 		// now get the rows
 		cursor.moveToPosition(-1); //reset cursor's top
 		while (cursor.moveToNext()) {
-			String cursorRow = "\n[";
+			String cursorRow = "\n";
 			for (int i = 0; i < cursor.getColumnCount(); i++) {
 				cursorRow += cursor.getString(i);
 				if (i<cursor.getColumnCount()-1) 
 					cursorRow +=  ", ";
 			}
-			cursorData += cursorRow + "]";
+			cursorData += cursorRow + "";
 		}
 		return cursorData + "\n";
 	}
@@ -276,7 +294,7 @@ public class ShoppingList extends Activity {
 			//peek at a row holding valid data 
 			cursor.moveToFirst(); 
 			int result = cursor.getType(i);
-			String[] types = {":NULL", ":INT", ":FLOAT", ":STR", ":BLOB", ":UNK" };
+			String[] types = { };
 			//backtrack - reset cursor's top
 			cursor.moveToPosition(-1);
 			return types[result];
@@ -284,6 +302,40 @@ public class ShoppingList extends Activity {
 			return " ";
 		}
 	}
+	
+	private void useDeleteMethod() {
+		// using the 'delete' method to remove a group of friends
+		// whose id# is between 2 and 7
+
+		try {
+				
+			String[] whereArgs = { textView.getText().toString() };
+
+			int recAffected = db.delete("shoppingList", "ID = ?",
+					whereArgs);
+
+			//txtMsg.append("\n" + recAffected);
+			showTable("shoppingList");
+			
+		} catch (Exception e) {
+			txtMsg.append("\n-useDeleteMethod - Error: " + e.getMessage());
+		}
+	}
+	
+	private void showTable(String tableName) {
+		try {
+			String sql = "select * from " + tableName;
+			Cursor c = db.rawQuery(sql, null);
+			txtMsg.append(""  + showCursor(c));
+
+		} catch (Exception e) {
+			txtMsg.append("\nError showTable: " + e.getMessage());
+
+		}
+	}// useCursor1
+	
+
+
 
 	public void onClick(DialogInterface dialog, int which) {
 		// TODO Auto-generated method stub

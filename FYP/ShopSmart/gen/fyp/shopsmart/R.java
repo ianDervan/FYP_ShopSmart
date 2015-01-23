@@ -37,8 +37,6 @@ public final class R {
         public static final int action_settings=0x7f09001a;
         public static final int addItem=0x7f09000a;
         public static final int autocomplete=0x7f090007;
-        public static final int but1=0x7f09000e;
-        public static final int but2=0x7f09000f;
         public static final int but3=0x7f090010;
         public static final int button1=0x7f090000;
         public static final int button2=0x7f090001;
@@ -52,6 +50,8 @@ public final class R {
         public static final int linearLayout1=0x7f090009;
         public static final int linearLayout2=0x7f09000d;
         public static final int quantity=0x7f090008;
+        public static final int removeAll=0x7f09000f;
+        public static final int removeOne=0x7f09000e;
         public static final int shoplist=0x7f090004;
         public static final int signIn=0x7f090005;
         public static final int textView1=0x7f090014;
@@ -65,6 +65,7 @@ public final class R {
         public static final int activity_employee_menu=0x7f030001;
         public static final int activity_shopping_list=0x7f030002;
         public static final int activity_sign=0x7f030003;
+        public static final int spending=0x7f030004;
     }
     public static final class menu {
         public static final int employee__menu=0x7f080000;
