@@ -1,7 +1,12 @@
 package fyp.shopsmart.customer;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.StringTokenizer;
+import java.util.TimeZone;
 
 import android.R.string;
 import android.app.Activity;
@@ -14,9 +19,12 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import fyp.shopsmart.R;
+import fyp.shopsmart.employee.EmployeeMenu;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.InputType;
+import android.text.format.DateFormat;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,40 +50,63 @@ public class ShoppingList extends Activity {
 	Button  btnAddItem;
 	Button  btnHide;
 	Button  btnRemoveOne;
-	Button  btnRemoveAll;
+	Button  btnRemoveA;
+	Button  btnSpending;
 	ArrayList<String> storeItem;
 	ArrayList<String> price;
 	ArrayList<String> quantity;
+	ArrayList<Double> totalSpent;
+	ArrayList<String> sendtotalSpent;
+	
+	
+	ArrayList<String> sendTime;
 	
 	SQLiteDatabase db;
 	
+	
 	int sh;
+	int n ;
+	double sum;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shopping_list);
 		
+		
+	
+		
 		sh=0;
+		sum=0;
+		n=0;
 		
 		txtMsg = (TextView) findViewById(R.id.txtMsg);
 		inputQuantity = (EditText) findViewById(R.id.quantity);
 		btnClearText = (Button) findViewById(R.id.cleartext);
 		btnAddItem = (Button) findViewById(R.id.addItem);
 		btnHide = (Button) findViewById(R.id.hide);
+		btnSpending = (Button) findViewById(R.id.spending);
 		
 		btnRemoveOne = (Button) findViewById(R.id.removeOne);
-		btnRemoveAll = (Button) findViewById(R.id.removeAll);
+		btnRemoveA = (Button) findViewById(R.id.removeAll);
 		
 		storeItem = new ArrayList<String>();
 		price = new ArrayList<String>();
 		quantity = new ArrayList<String>();
+		
+		totalSpent = new ArrayList<Double>();
+		sendtotalSpent = new ArrayList<String>();
+		sendTime = new ArrayList<String>();
 
 	    textView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
 		String[] suggestedItems = getResources().getStringArray(R.array.suggestions_array);
 		ArrayAdapter<String> adapter = 
 		        new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, suggestedItems);
 		textView.setAdapter(adapter);
+		
+		sendtotalSpent.clear();
+		totalSpent.clear();
 		
 		btnClearText.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
@@ -85,24 +116,43 @@ public class ShoppingList extends Activity {
 			}		
 		});
 		
+		btnSpending.setOnClickListener(new OnClickListener() {	
+			public void onClick(View v) {
+				
+				 
+
+				  Intent spending = new Intent (ShoppingList.this,
+						  Spending.class);
+				  
+				  Calendar cal = Calendar.getInstance(TimeZone.getDefault());
+				  SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+				  String timeC=sdf.format(cal.getTime());
+				  
+				  sendTime.add(timeC);
+				  
+				 
+				  String temp = String.format("%.2f", sum);
+				  
+				  sendtotalSpent.add(String.valueOf(temp));
+				  
+				  spending.putStringArrayListExtra("cost", sendtotalSpent);
+				  spending.putStringArrayListExtra("time",sendTime);
+				  
+
+				  startActivity(spending);
+			}		
+		});
+		
 		btnHide.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
 
 				InputMethodManager imm = (InputMethodManager)getSystemService(
 						Context.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
-				
-			
-				
-//				if(txtMsg.getText().toString().equals("\nShoping List is Empty"));
-//				{
-//					txtMsg.setText("");
-//					
-//				}
-				
 
 				openDatabase();
 				useRawQueryShowAll();
+				//txtMsg.setText("");
 
 			}		
 		});
@@ -111,21 +161,43 @@ public class ShoppingList extends Activity {
 
 			@Override
 			public void onClick(View v) {
-
-				useDeleteMethod();
-				textView.setText("");
 				
-				sh=1;
+//				db.close();
+
+				
+				//dropTable();
+				//openDatabase();
+			useDeleteMethod();
+			
+			//db.close();
+			textView.setText("");
+				
+			
+	
 			}
 		});
-		btnRemoveAll.setOnClickListener(new View.OnClickListener() {
+		btnRemoveA.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-
-				dropTable();
-				txtMsg.setText("");
+				//openDatabase();
+			
+			//	String myDbPath = SDcardPath + "/" + "shopingList.db"
+		//	Context.deleteDatabase);
 				
+				openDatabase();
+				
+			//	insertSomeDbData();
+				
+				dropTable();
+				
+				//db.close();
+		
+				
+				
+			//db.close();
+			txtMsg.setText("");
+	
 			}
 		});
 	
@@ -133,22 +205,39 @@ public class ShoppingList extends Activity {
 			public void onClick(View v) {
 
 				String text =textView.getText().toString();
-				
-				
+
 
 				if (text != null && text.trim().length() > 0 ) 
 	            {
 					
 					String storeInput =textView.getText().toString();		
 					String[] inputItem = storeInput.split("€");
+					
 					quantity.add(inputQuantity.getText().toString());
 					storeItem.add(inputItem[0]);
 					price.add("€"+inputItem[1]);
+					
+					
+					
+					sum =Double.parseDouble(inputItem[1]);
+					totalSpent.add(sum);
+
+					for(int i = 0; i < totalSpent.size(); i++){
+							
+							  sum += totalSpent.get(i);
+							
+					}
+				
 
 				
-						openDatabase();
-						insertSomeDbData();
-						useRawQueryShowAll();
+				    txtMsg.append("Total spent\n" + sum);
+
+					openDatabase();
+					dropTable();
+					insertSomeDbData();
+					useRawQueryShowAll();
+					
+				//db.close(); // make sure to release the DB
 					
 					
 					textView.setText("");
@@ -182,10 +271,12 @@ public class ShoppingList extends Activity {
 		try {
 
 			String SDcardPath = Environment.getExternalStorageDirectory().getPath();
-			String myDbPath = SDcardPath + "/" + "shopingList.db";
-		
-			db = SQLiteDatabase.openDatabase(myDbPath, null,
-					SQLiteDatabase.CREATE_IF_NECESSARY);
+
+				String myDbPath = SDcardPath + "/" + "shopingList.db";
+				db = SQLiteDatabase.openDatabase(myDbPath, null,
+						SQLiteDatabase.CREATE_IF_NECESSARY);
+			
+			
 
 		} catch (SQLiteException e) {
 
@@ -315,6 +406,8 @@ public class ShoppingList extends Activity {
 					whereArgs);
 
 			//txtMsg.append("\n" + recAffected);
+			//db.close();
+			
 			showTable("shoppingList");
 			
 		} catch (Exception e) {

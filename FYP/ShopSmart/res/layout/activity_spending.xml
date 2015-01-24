@@ -11,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
+      
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/removeOne"
+            android:id="@+id/exit"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginTop="10dp"
@@ -25,18 +25,18 @@
             android:textColor="#FFFFFF" />
 
         <Button
-            android:id="@+id/removeAll"
+            android:id="@+id/remove"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_weight="0.5"
             android:background="@drawable/custombutton_lr"
-            android:text="Remove All"
+            android:text="Exit"
             android:textColor="#FFFFFF" />
 
         <Button
-            android:id="@+id/but3"
+            android:id="@+id/show"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginLeft="10dp"
@@ -44,7 +44,7 @@
             android:layout_weight="0.5"
             android:background="@drawable/custombutton_lr"
             android:duration="0"
-            android:text="Spending"
+            android:text="Show"
             android:textColor="#FFFFFF" />
 
     </LinearLayout>
@@ -53,7 +53,7 @@
         android:id="@+id/LinearLayout01"
 		android:layout_width="fill_parent" 
 		android:layout_height="fill_parent"
-		android:layout_marginTop="150dp"
+		android:layout_marginTop="60dp"
 		android:orientation="vertical">
 		
 		<ScrollView

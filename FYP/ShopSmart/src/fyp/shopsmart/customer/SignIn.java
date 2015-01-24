@@ -27,7 +27,7 @@ public class SignIn extends Activity {
 	 
 	 Button   btnSignIn;
 	 
-	String temp,temp1;
+	 String temp,temp1;
 	
 	//String SDcardPath = Environment.getExternalStorageDirectory().getPath();
 	SQLiteDatabase db;

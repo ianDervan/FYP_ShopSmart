@@ -104,7 +104,7 @@
             android:textColor="#FFFFFF" />
 
         <Button
-            android:id="@+id/but3"
+            android:id="@+id/spending"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginLeft="10dp"

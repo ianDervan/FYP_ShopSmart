@@ -20,5 +20,6 @@
     <string name="changeprice">Change Price</string>
     <string name="title_activity_employee_menu">EmployeeMenu</string>
     <string name="title_activity_shopping_list">ShoppingList</string>
+    <string name="title_activity_spending">Spending</string>
 
 </resources>

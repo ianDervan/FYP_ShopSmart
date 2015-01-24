@@ -34,9 +34,13 @@
             android:name=".customer.ShoppingList"
             android:label="@string/title_activity_shopping_list" >
         </activity>
+        <activity
+            android:name="fyp.shopsmart.customer.Spending"
+            android:label="@string/title_activity_spending" >
+        </activity>
     </application>
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>
