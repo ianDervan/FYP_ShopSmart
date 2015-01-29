@@ -74,9 +74,6 @@ public class ShoppingList extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shopping_list);
 		
-		
-	
-		
 		sh=0;
 		sum=0;
 		n=0;

@@ -15,6 +15,7 @@ public class MainActivity extends Activity {
 	
 	 Button btnSign;
 	 Button btnShopList;
+	 Button btnScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class MainActivity extends Activity {
         
         btnSign = (Button) findViewById(R.id.signIn);
         btnShopList = (Button) findViewById(R.id.shoplist);
+        btnScan = (Button) findViewById(R.id.scan);
         
         
         btnSign.setOnClickListener(new OnClickListener() {	
@@ -33,6 +35,14 @@ public class MainActivity extends Activity {
 			
       		}		
  		});
+        btnScan.setOnClickListener(new OnClickListener() {	
+          	public void onClick(View v) {
+          		
+    			Intent scan = new Intent (MainActivity.this,BarcodeScan.class);
+    			startActivity(scan);
+    			
+          		}		
+     		});
         
         btnShopList.setOnClickListener(new OnClickListener() {	
           	public void onClick(View v) {

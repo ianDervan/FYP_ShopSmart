@@ -21,5 +21,7 @@
     <string name="title_activity_employee_menu">EmployeeMenu</string>
     <string name="title_activity_shopping_list">ShoppingList</string>
     <string name="title_activity_spending">Spending</string>
+    <string name="title_activity_barcode_scan">Barcode Scaner</string>
+    <string name="app_name1">Barcode Scaner</string>
 
 </resources>
