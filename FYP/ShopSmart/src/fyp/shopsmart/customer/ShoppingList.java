@@ -105,6 +105,8 @@ public class ShoppingList extends Activity {
 		sendtotalSpent.clear();
 		totalSpent.clear();
 		
+		openDatabase();
+		
 		btnClearText.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
 
@@ -115,9 +117,7 @@ public class ShoppingList extends Activity {
 		
 		btnSpending.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
-				
-				 
-
+	
 				  Intent spending = new Intent (ShoppingList.this,
 						  Spending.class);
 				  
@@ -147,7 +147,6 @@ public class ShoppingList extends Activity {
 						Context.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
 
-				openDatabase();
 				useRawQueryShowAll();
 				//txtMsg.setText("");
 
@@ -189,10 +188,7 @@ public class ShoppingList extends Activity {
 				dropTable();
 				
 				//db.close();
-		
-				
-				
-			//db.close();
+
 			txtMsg.setText("");
 	
 			}
@@ -225,18 +221,14 @@ public class ShoppingList extends Activity {
 							
 					}
 				
-
-				
 				    txtMsg.append("Total spent\n" + sum);
-
-					openDatabase();
+				    
 					dropTable();
+
 					insertSomeDbData();
+
 					useRawQueryShowAll();
-					
-				//db.close(); // make sure to release the DB
-					
-					
+
 					textView.setText("");
 				}
 
@@ -391,6 +383,7 @@ public class ShoppingList extends Activity {
 		}
 	}
 	
+	
 	private void useDeleteMethod() {
 		// using the 'delete' method to remove a group of friends
 		// whose id# is between 2 and 7
@@ -429,6 +422,8 @@ public class ShoppingList extends Activity {
 
 	public void onClick(DialogInterface dialog, int which) {
 		// TODO Auto-generated method stub
+		
+
 		finish();
 	}
 	

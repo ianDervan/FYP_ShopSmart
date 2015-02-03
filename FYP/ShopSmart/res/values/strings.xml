@@ -23,5 +23,6 @@
     <string name="title_activity_spending">Spending</string>
     <string name="title_activity_barcode_scan">Barcode Scaner</string>
     <string name="app_name1">Barcode Scaner</string>
+    <string name="title_activity_database">Database</string>
 
 </resources>

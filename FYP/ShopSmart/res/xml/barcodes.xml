@@ -2,7 +2,7 @@
 
 <barcodes>
     
-         <item barcode = "11111111111111" >Avonmore Milk 1.75L €1.99</item>
+        <item barcode = "11111111111111" >Avonmore Milk 1.75L €1.99</item>
         <item >Avonmore Fresh Milk 1L €1.24</item>
         <item >Avonmore Super Milk 1L €1.44</item>
         <item >Dawn Milk 1L €1.19</item>
@@ -15,7 +15,7 @@
         <item>Brennans H.P. Wholemeal Bread 400G €1.26</item>
         <item>Pat The Baker Sliced Brown Loaf 800G</item>
         
-        <item barcode = "7622210154125">Cadbury Dairy Milk Daim Chocolate Bar 120G</item>
+        <item barcode = "7622210154125">Cadbury Daim Chocolate Bar 120G €2.20</item>
     
     
     

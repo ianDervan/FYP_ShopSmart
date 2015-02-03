@@ -3,10 +3,12 @@
     package="fyp.shopsmart"
     android:versionCode="1"
     android:versionName="1.0" >
-    
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera" android:required="false"/>
-    
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <uses-sdk
         android:minSdkVersion="19"
@@ -43,18 +45,25 @@
             android:label="@string/title_activity_spending" >
         </activity>
         <activity
-            android:name="fyp.shopsmart.customer.BarcodeScan"
+            android:name=".customer.BarcodeScan"
             android:label="@string/title_activity_barcode_scan" >
         </activity>
-         <activity
-					android:name="com.dm.zbar.android.scanner.ZBarScannerActivity"
-                  android:screenOrientation="landscape"
-                  android:label="@string/app_name1">
-          </activity>
+        <activity
+            android:name="com.dm.zbar.android.scanner.ZBarScannerActivity"
+            android:label="@string/app_name1"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".customer.Database"
+            android:label="@string/title_activity_database" >
+        </activity>
+        <activity
+            android:name="fyp.shopsmart.customer.Database"
+            android:label="@string/title_activity_database" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    
-    
+
 </manifest>
