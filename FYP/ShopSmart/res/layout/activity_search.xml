@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dip" >
+
+     <AutoCompleteTextView
+         android:id="@+id/autocomplete"
+         android:layout_width="255dp"
+         android:layout_height="51dp"
+         android:layout_marginLeft="5dp"
+         android:layout_marginTop="5dp"
+         android:background="@drawable/customeditext"
+         android:dropDownWidth="340dp"
+         android:hint="Enter Item"
+         android:inputType="text|textMultiLine"
+         android:paddingLeft="10dp" />
+
+     <Button
+         android:id="@+id/button1"
+         android:layout_width="65dp"
+         android:layout_height="51dp"
+         android:layout_alignBottom="@+id/autocomplete"
+         android:layout_alignParentRight="true"
+         android:background="@drawable/custombutton_lr"
+         android:text="Search"
+         android:textColor="#FFFFFF" />
+
+     </RelativeLayout>

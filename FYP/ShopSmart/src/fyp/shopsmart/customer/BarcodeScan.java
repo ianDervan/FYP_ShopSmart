@@ -11,6 +11,7 @@ import org.xmlpull.v1.XmlPullParser;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -55,10 +56,15 @@ public class BarcodeScan extends Activity {
 	ArrayList<String> price;
 	
 	SQLiteDatabase db;
+	
+	int quantity;
 
-	int n =0;
+	int  n;
 	
 	int check =0;
+	int back =0;
+	
+	
     private static final int ZBAR_SCANNER_REQUEST = 0;
 
 
@@ -78,7 +84,15 @@ public class BarcodeScan extends Activity {
         
         storeItem = new ArrayList<String>();
         price = new ArrayList<String>();
+        
+        quantity = 1;
+        n =0;
+        
+        openDatabase();
     
+        Intent intent = getIntent();
+    	
+  	    back = intent.getIntExtra("back",0);
         btnScan.setOnClickListener(new OnClickListener() {	
     		public void onClick(View v) {
 
@@ -105,23 +119,40 @@ public class BarcodeScan extends Activity {
 				
 				txtItem.setText("");
 				
-				openDatabase();
-				dropTable();
-				insertSomeDbData();
-				useRawQueryShowAll();
+				if( back == 1)
+				{
+					insertData();
+					useRawQueryShowAll();
+					
+				}
+				else
+				{
+					dropTable();
+					insertSomeDbData();
+					useRawQueryShowAll();
+				}
 
     		}
     	});
         btnShow.setOnClickListener(new OnClickListener() {	
     		public void onClick(View v) {
+    			
+				useRawQueryShowAll();
+
 
     		}
     	});
         
         btnOptions.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
+				
+				//db.close();
 
 				Intent shopList = new Intent (BarcodeScan.this,ShoppingList.class);
+				
+				shopList.putExtra("start", 1);
+				
+
     			startActivity(shopList);
 			}		
 		});
@@ -293,7 +324,7 @@ public class BarcodeScan extends Activity {
 			// create table
 			db.execSQL("create table shoppingList ("
 					+ " ID integer PRIMARY KEY autoincrement, "
-					+ " Item  text, " + " Price text " + " Quantity text);");
+					+ " Item  text, " + " Price text, "+" Quantity text);");
 			// commit your changes
 			db.setTransactionSuccessful();
 
@@ -309,8 +340,8 @@ public class BarcodeScan extends Activity {
 		try {
 			
 			for(int i = 0; i < storeItem.size(); i++){
-				db.execSQL("insert into shoppingList (Item,Price) "
-						+ " values ('"+ storeItem.get(i)+"', '" + price.get(i)+"');");
+				db.execSQL("insert into shoppingList (Item,Price, Quantity) "
+						+ " values ('"+ storeItem.get(i)+"', '" + price.get(i)+"', '" + quantity+"');");
 			}
 			db.setTransactionSuccessful();
 			
@@ -323,6 +354,28 @@ public class BarcodeScan extends Activity {
 		}
 
 	}
+	private void insertData() {
+		
+		
+		db.beginTransaction();
+		try {
+			
+			for(int i = 0; i < storeItem.size(); i++){
+				db.execSQL("insert into shoppingList (Item,Price, Quantity) "
+						+ " values ('"+ storeItem.get(i)+"', '" + price.get(i)+"', '" + quantity+"');");
+			}
+			db.setTransactionSuccessful();
+			
+			
+		} catch (SQLiteException e2) {
+			 txtMsg.append("\nError insertSomeDbData: " + e2.getMessage());
+			
+		} finally {
+			db.endTransaction();
+		}
+
+	}
+
 
 	private void dropTable() {
 		// (clean start) action query to drop table
@@ -398,7 +451,17 @@ public class BarcodeScan extends Activity {
 	}
 	
 
-
+	@Override
+	public void onBackPressed()
+	{
+		Intent intent = new Intent (BarcodeScan.this,MainActivity.class);
+	
+	
+		startActivity(intent);
+	
+		db.close();
+	    finish();  
+	}
 
 
 

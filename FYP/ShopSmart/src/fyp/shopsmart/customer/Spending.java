@@ -244,4 +244,11 @@ public class Spending extends Activity {
 			return " ";
 		}
 	}
+	
+	@Override
+	public void onBackPressed()
+	{
+		db.close();
+	    finish();  
+	}
 }

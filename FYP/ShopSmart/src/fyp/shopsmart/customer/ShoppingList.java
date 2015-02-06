@@ -60,15 +60,15 @@ public class ShoppingList extends Activity {
 	
 	
 	ArrayList<String> sendTime;
-	
 	SQLiteDatabase db;
-	
-	
+		
 	int sh;
 	int n ;
 	double sum;
 	
-
+	int v1;
+	int ok;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,7 +77,7 @@ public class ShoppingList extends Activity {
 		sh=0;
 		sum=0;
 		n=0;
-		
+
 		txtMsg = (TextView) findViewById(R.id.txtMsg);
 		inputQuantity = (EditText) findViewById(R.id.quantity);
 		btnClearText = (Button) findViewById(R.id.cleartext);
@@ -105,7 +105,15 @@ public class ShoppingList extends Activity {
 		sendtotalSpent.clear();
 		totalSpent.clear();
 		
-		openDatabase();
+	    Intent intent = getIntent();
+	
+	    ok = intent.getIntExtra("start",0);
+	  
+	  	
+
+		
+			
+	  	openDatabase();
 		
 		btnClearText.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
@@ -146,9 +154,12 @@ public class ShoppingList extends Activity {
 				InputMethodManager imm = (InputMethodManager)getSystemService(
 						Context.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
+				
+			//	openDatabase();
 
 				useRawQueryShowAll();
 				//txtMsg.setText("");
+	
 
 			}		
 		});
@@ -181,11 +192,12 @@ public class ShoppingList extends Activity {
 			//	String myDbPath = SDcardPath + "/" + "shopingList.db"
 		//	Context.deleteDatabase);
 				
-				openDatabase();
+				//openDatabase();
 				
 			//	insertSomeDbData();
 				
 				dropTable();
+				
 				
 				//db.close();
 
@@ -223,11 +235,22 @@ public class ShoppingList extends Activity {
 				
 				    txtMsg.append("Total spent\n" + sum);
 				    
-					dropTable();
+				    if(ok == 1)
+				    {
+				    	//openDatabase();
+				    	insertData();
+					    useRawQueryShowAll();
+				    	
+				    }
+				    else
+				    {
+				    	//openDatabase();
+						dropTable();
+						insertSomeDbData();
+					    useRawQueryShowAll();
+				    	
+				    }
 
-					insertSomeDbData();
-
-					useRawQueryShowAll();
 
 					textView.setText("");
 				}
@@ -416,15 +439,57 @@ public class ShoppingList extends Activity {
 
 		}
 	}// useCursor1
-	
-
-
-
-	public void onClick(DialogInterface dialog, int which) {
-		// TODO Auto-generated method stub
+	private void insertData() {
 		
+		db.beginTransaction();
+		try {
+			// create table
+			
+			// commit your changes
+			db.setTransactionSuccessful();
 
-		finish();
+		} catch (SQLException e1) {
+			txtMsg.append("\nError insertSomeDbData: " + e1.getMessage());
+			finish();
+		} finally {
+			db.endTransaction();
+		}
+
+		
+		db.beginTransaction();
+		try {
+			
+			for(int i = 0; i < storeItem.size(); i++){
+				db.execSQL("insert into shoppingList (Item,Price,Quantity) "
+						+ " values ('"+ storeItem.get(i)+"', '" + price.get(i)+"', '" + quantity.get(i)+"');");
+			}
+			db.setTransactionSuccessful();
+			
+			
+		} catch (SQLiteException e2) {
+			txtMsg.append("\nError insertSomeDbData: " + e2.getMessage());
+			
+		} finally {
+			db.endTransaction();
+		}
+
+	}
+
+	@Override
+	public void onBackPressed()
+	{
+		
+		if(ok == 1)
+		{
+		
+			Intent shopList = new Intent (ShoppingList.this,BarcodeScan.class);
+		
+			shopList.putExtra("back", 1);
+		
+			startActivity(shopList);
+		}
+		//db.close();
+	    finish();  
 	}
 	
 }

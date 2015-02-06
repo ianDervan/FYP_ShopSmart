@@ -209,5 +209,12 @@ public class SignIn extends Activity {
 			finish();
 		}
 	}
+	
+	@Override
+	public void onBackPressed()
+	{
+		db.close();
+	    finish();  
+	}
 
 }
