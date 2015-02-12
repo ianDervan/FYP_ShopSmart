@@ -17,7 +17,7 @@
       android:textSize="30sp" />
   
    <Button
-      android:id="@+id/button2"
+      android:id="@+id/search"
       android:layout_width="200dp"
       android:layout_height="60dp"
       android:layout_centerHorizontal="true"
@@ -33,7 +33,7 @@
       android:layout_width="200dp"
       android:layout_height="60dp"
       android:layout_centerHorizontal="true"
-      android:layout_below="@+id/button2"
+      android:layout_below="@+id/search"
       android:layout_marginTop="15dp"
       android:background="@drawable/custombutton"
       android:text="Request Item"
@@ -75,8 +75,5 @@
       android:text="Sign In"
       android:textColor="#FFFFFF"
       android:textSize="30sp" />
-   
-   
-   
 
 </RelativeLayout>

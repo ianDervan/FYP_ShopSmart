@@ -8,9 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="fyp.shopsmart.customer.BarcodeScan" >
 
-
-
-
     <Button
         android:id="@+id/scanBarcode"
         android:layout_width="230dp"
@@ -24,15 +21,98 @@
 
     <TextView
         android:id="@+id/item"
+        android:layout_width="270dp"
+        android:layout_height="51dp"
+        android:layout_below="@+id/scanBarcode"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/customtxtview"
+        android:gravity="center_vertical"
+        android:hint="Please Scan Item..."
+        android:inputType="textMultiLine"
+        android:paddingLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/shoplist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/scanBarcode"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/scanBarcode"
-        android:layout_below="@+id/scanBarcode"
-        android:layout_marginTop="56dp"
-        android:text="TextView" />
+        android:layout_centerHorizontal="true"
+         android:layout_below="@+id/item"
+        android:layout_marginTop="23dp"
+        android:text="Shoping List"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+        <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="183dp"
+        android:background="#ED6F26" />
+        
+        <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="195dp"
+        android:orientation="horizontal" >
 
-/>
+        <Button
+            android:id="@+id/addItem"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/custombutton_lr"
+            android:text="Add Item"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/show"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/custombutton_lr"
+            android:text="Show"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/options"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/custombutton_lr"
+           	android:duration="0"
+            android:text="Options"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+    <LinearLayout 
+            
+        android:id="@+id/LinearLayout01"
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent"
+		android:layout_marginTop="250dp"
+		android:orientation="vertical">
+		
+		<ScrollView
+	        android:id="@+id/ScrollView01"
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="2" 
+	        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/txtMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffeeeeee"  />
+    	</ScrollView>
+
+	  </LinearLayout>
 
 </RelativeLayout>

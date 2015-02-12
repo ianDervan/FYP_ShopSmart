@@ -16,6 +16,7 @@ public class MainActivity extends Activity {
 	 Button btnSign;
 	 Button btnShopList;
 	 Button btnScan;
+	 Button btnSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class MainActivity extends Activity {
         btnSign = (Button) findViewById(R.id.signIn);
         btnShopList = (Button) findViewById(R.id.shoplist);
         btnScan = (Button) findViewById(R.id.scan);
+        btnSearch = (Button) findViewById(R.id.search);
         
         
         btnSign.setOnClickListener(new OnClickListener() {	
@@ -52,6 +54,15 @@ public class MainActivity extends Activity {
     			
           		}		
      		});
+        btnSearch.setOnClickListener(new OnClickListener() {	
+          	public void onClick(View v) {
+          		
+    			Intent search = new Intent (MainActivity.this,Search.class);
+    			startActivity(search);
+    			
+          		}		
+     		});
+
     }
 
 
@@ -73,6 +84,12 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+	@Override
+	public void onBackPressed()
+	{
+
+	    finish();  
+	}
     
     
 }
