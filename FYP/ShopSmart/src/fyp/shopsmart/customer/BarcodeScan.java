@@ -93,6 +93,7 @@ public class BarcodeScan extends Activity {
         Intent intent = getIntent();
     	
   	    back = intent.getIntExtra("back",0);
+  	    
         btnScan.setOnClickListener(new OnClickListener() {	
     		public void onClick(View v) {
 
@@ -456,7 +457,7 @@ public class BarcodeScan extends Activity {
 	{
 		Intent intent = new Intent (BarcodeScan.this,MainActivity.class);
 	
-	
+		intent.putExtra("main", 1);
 		startActivity(intent);
 	
 		db.close();

@@ -62,8 +62,12 @@
             android:label="@string/title_activity_database" >
         </activity>
         <activity
-            android:name="fyp.shopsmart.customer.Search"
+            android:name=".customer.Search"
             android:label="@string/title_activity_search" >
+        </activity>
+        <activity
+            android:name="fyp.shopsmart.customer.ReadXML"
+            android:label="@string/title_activity_read_xml" >
         </activity>
     </application>
 

@@ -17,6 +17,9 @@ public class MainActivity extends Activity {
 	 Button btnShopList;
 	 Button btnScan;
 	 Button btnSearch;
+	 
+	 int ok;
+	 int backOk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,13 @@ public class MainActivity extends Activity {
         btnShopList = (Button) findViewById(R.id.shoplist);
         btnScan = (Button) findViewById(R.id.scan);
         btnSearch = (Button) findViewById(R.id.search);
+        
+        Intent mainIntent = getIntent();
+	    ok = mainIntent.getIntExtra("main",0);
+	    
+	    backOk = 1;
+	    
+	    
         
         
         btnSign.setOnClickListener(new OnClickListener() {	
@@ -50,6 +60,12 @@ public class MainActivity extends Activity {
           	public void onClick(View v) {
           		
     			Intent shopList = new Intent (MainActivity.this,ShoppingList.class);
+    			
+    			if(ok == 1)
+    			{
+    				shopList.putExtra("main", 1);
+    			}
+    			shopList.putExtra("backOk",1);
     			startActivity(shopList);
     			
           		}		

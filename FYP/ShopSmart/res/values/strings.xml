@@ -25,5 +25,6 @@
     <string name="app_name1">Barcode Scaner</string>
     <string name="title_activity_database">Database</string>
     <string name="title_activity_search">Search</string>
+    <string name="title_activity_read_xml">ReadXML</string>
 
 </resources>

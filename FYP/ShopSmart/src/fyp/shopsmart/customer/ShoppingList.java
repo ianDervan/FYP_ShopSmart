@@ -1,18 +1,18 @@
 package fyp.shopsmart.customer;
 
-import java.sql.Date;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.StringTokenizer;
+
 import java.util.TimeZone;
 
-import android.R.string;
+
 import android.app.Activity;
-import android.content.ContentValues;
+
 import android.content.Context;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -41,7 +41,9 @@ import android.widget.Toast;
 
 public class ShoppingList extends Activity {
 	
-	private Validator mValidator = null;
+
+	public static int shopListOk = 0;
+	
 	
 	AutoCompleteTextView textView;
 	TextView txtMsg;
@@ -57,8 +59,7 @@ public class ShoppingList extends Activity {
 	ArrayList<String> quantity;
 	ArrayList<Double> totalSpent;
 	ArrayList<String> sendtotalSpent;
-	
-	
+
 	ArrayList<String> sendTime;
 	SQLiteDatabase db;
 		
@@ -68,6 +69,8 @@ public class ShoppingList extends Activity {
 	
 	int v1;
 	int ok;
+	int mainOk;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,16 +105,19 @@ public class ShoppingList extends Activity {
 		        new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, suggestedItems);
 		textView.setAdapter(adapter);
 		
+		txtMsg.setText("value" + shopListOk);
+		
 		sendtotalSpent.clear();
 		totalSpent.clear();
-		
-	    Intent intent = getIntent();
-	
-	    ok = intent.getIntExtra("start",0);
-	  
-	  	
 
-		
+	    Intent intent = getIntent();
+	    ok = intent.getIntExtra("start",0);
+	    
+
+	    Intent mainIntent = getIntent();
+	    mainOk = mainIntent.getIntExtra("main",0);
+	    
+
 			
 	  	openDatabase();
 		
@@ -120,6 +126,8 @@ public class ShoppingList extends Activity {
 
 				textView.setText("");
 				txtMsg.setText("");
+				
+				
 			}		
 		});
 		
@@ -235,7 +243,7 @@ public class ShoppingList extends Activity {
 				
 				    txtMsg.append("Total spent\n" + sum);
 				    
-				    if(ok == 1)
+				    if(ok == 1 || mainOk==1 || shopListOk == 1)
 				    {
 				    	//openDatabase();
 				    	insertData();
@@ -479,16 +487,29 @@ public class ShoppingList extends Activity {
 	public void onBackPressed()
 	{
 		
+		//ok=1;
+		shopListOk = 1;
+		
 		if(ok == 1)
 		{
+			ok = 0;
+			Intent barCode = new Intent (ShoppingList.this,BarcodeScan.class);
 		
-			Intent shopList = new Intent (ShoppingList.this,BarcodeScan.class);
+			barCode.putExtra("back", 1);
 		
-			shopList.putExtra("back", 1);
-		
-			startActivity(shopList);
+			startActivity(barCode);
 		}
-		//db.close();
+//		if(mainOk == 1 )
+//		{
+//			mainOk = 0;
+//			
+//			Intent main = new Intent (ShoppingList.this,MainActivity.class);	
+//			
+//			startActivity(main);
+//		}
+		
+
+		db.close();
 	    finish();  
 	}
 	

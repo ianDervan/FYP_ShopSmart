@@ -18,7 +18,7 @@
          android:paddingLeft="10dp" />
 
      <Button
-         android:id="@+id/button1"
+         android:id="@+id/search"
          android:layout_width="65dp"
          android:layout_height="51dp"
          android:layout_alignBottom="@+id/autocomplete"
@@ -26,5 +26,15 @@
          android:background="@drawable/custombutton_lr"
          android:text="Search"
          android:textColor="#FFFFFF" />
+
+     <TextView
+         android:id="@+id/textView1"
+         android:layout_width="wrap_content"
+         android:layout_height="300dp"
+         android:layout_alignParentLeft="true"
+         android:layout_alignRight="@+id/search"
+         android:layout_below="@+id/autocomplete"
+         android:layout_marginTop="148dp"
+         android:text="TextView" />
 
      </RelativeLayout>
