@@ -77,6 +77,12 @@ public class Search extends Activity {
 		    Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
 
 		    Canvas canvas = new Canvas(mutableBitmap);
+		    
+		  	 Paint paint = new Paint();
+			    paint.setAntiAlias(true);
+			    paint.setColor(Color.BLUE);
+	    	
+	    	 canvas.drawCircle(XCord, YCord, 25, paint);
 		   
 
 		    ImageView imageView = (ImageView)findViewById(R.id.imageView1);
@@ -93,11 +99,7 @@ public class Search extends Activity {
 			    	Integer xmlResFile =  R.xml.barcodes;
 			    	new backgroundAsyncTask().execute(xmlResFile);
 			    	
-			    	 Paint paint = new Paint();
-					    paint.setAntiAlias(true);
-					    paint.setColor(Color.BLUE);
-			    	
-			    	 canvas.drawCircle(XCord, YCord, 25, paint);
+			  
 					
 					
 				}		
