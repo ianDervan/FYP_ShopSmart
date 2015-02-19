@@ -41,10 +41,12 @@ public class Search extends Activity {
 	int n;
 	
 	AutoCompleteTextView textView;
-	TextView textView1;
+	//TextView textView1;
 	String x;
-	int y;
+	String y;
 	
+	float XCord;
+	float YCord;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +54,13 @@ public class Search extends Activity {
 		setContentView(R.layout.activity_search);
 		
 		 btnSearch = (Button) findViewById(R.id.search);
-		
-		
-		y=0;
-		 textView1 = (TextView) findViewById(R.id.textView1);
+		 
+		 XCord = Float.parseFloat(x);
+		 YCord = Float.parseFloat(y);
+		 
+		 
+
+	//	 textView1 = (TextView) findViewById(R.id.textView1);
 		 textView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
 			String[] suggestedItems = getResources().getStringArray(R.array.suggestions_array);
 			ArrayAdapter<String> adapter = 
@@ -65,21 +70,19 @@ public class Search extends Activity {
 			BitmapFactory.Options myOptions = new BitmapFactory.Options();
 		    myOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;// important
 
-		    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.grocery_store_layout_l,myOptions);
-		    Paint paint = new Paint();
-		    paint.setAntiAlias(true);
-		    paint.setColor(Color.BLUE);
+		    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.grocery1,myOptions);
+		   
 
 		    Bitmap workingBitmap = Bitmap.createBitmap(bitmap);
 		    Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
 
 		    Canvas canvas = new Canvas(mutableBitmap);
-		    canvas.drawCircle(500, 500, 25, paint);
+		   
 
-		 //   ImageView imageView = (ImageView)findViewById(R.id.imageView1);
-		//    imageView.setAdjustViewBounds(true);
-		//    imageView.setScaleType(ScaleType.FIT_XY);
-		//    imageView.setImageBitmap(mutableBitmap);
+		    ImageView imageView = (ImageView)findViewById(R.id.imageView1);
+		    imageView.setScaleType(ScaleType.FIT_XY);
+		   imageView.setAdjustViewBounds(true);
+		   imageView.setImageBitmap(mutableBitmap);
 		    
 		    btnSearch.setOnClickListener(new OnClickListener() {	
 				public void onClick(View v) {
@@ -89,6 +92,12 @@ public class Search extends Activity {
 					//Toast.makeText(getApplicationContext(), searchItem, Toast.LENGTH_SHORT).show();
 			    	Integer xmlResFile =  R.xml.barcodes;
 			    	new backgroundAsyncTask().execute(xmlResFile);
+			    	
+			    	 Paint paint = new Paint();
+					    paint.setAntiAlias(true);
+					    paint.setColor(Color.BLUE);
+			    	
+			    	 canvas.drawCircle(XCord, YCord, 25, paint);
 					
 					
 				}		
@@ -125,7 +134,8 @@ public class Search extends Activity {
     	protected void onPostExecute(StringBuilder result) {
     		super.onPostExecute(result);
     		dialog.dismiss();
-    		textView1.append (result.toString());
+    	//	textView1.append (result.toString());
+    		Toast.makeText(getApplicationContext(),x+y, Toast.LENGTH_SHORT).show();
     	//	Toast.makeText(getApplicationContext(), "msg msg", Toast.LENGTH_SHORT).show();
     		//txtItem.append( "\n" + resultBarcode);
     	}
@@ -192,19 +202,12 @@ public class Search extends Activity {
 					
 						
 						
-						if(nodeText.equals("Brennans White Bread 800G €1.77"))
+						if(nodeText.equals(searchItem))
 						{
 							//0textView1.append("im here");
 							//stringBuilder.append("\n    TEXT: ");
 							n =1;
-						
-							
-					
-				
-		    				
-							
-							
-							
+
 						}
 
 					
@@ -235,12 +238,14 @@ public class Search extends Activity {
     				if(attrName.equals("X"))
     				{
     					
+    					x = attrValue;
     					
     					//stringBuilder.append("X value");
     					stringBuilder.append("X value" + attrValue);
     				}
     				if(attrName.equals("Y"))
     				{
+    					y = attrValue;
     					stringBuilder.append("Y value" + attrValue);
     				}
 
