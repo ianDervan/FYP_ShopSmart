@@ -127,87 +127,10 @@ public class SignIn extends Activity {
  		 }
  		 else
  		 {
- 			 
+ 			Toast.makeText(getApplicationContext(),"ARA SHTOP" , 
+ 					 Toast.LENGTH_LONG).show();
  		 }
-		 
-		
-		
-	}
-	private void openDatabase() {
-		try {
-			// path to private memory:
-			//String SDcardPath = "//storage//extSdCard";
-			// -----------------------------------------------------------
-			// this provides the path name to the SD card
-			// String SDcardPath =
-			// Environment.getExternalStorageDirectory().getPath();
-		String SDcardPath = Environment.getExternalStorageDirectory().getPath();
-			String myDbPath = SDcardPath + "/" + "Base.db";
-			//txtMsg.append("\n-openDatabase - DB Path: " + myDbPath);
-
-			db = SQLiteDatabase.openDatabase(myDbPath, null,
-					SQLiteDatabase.CREATE_IF_NECESSARY);
-
-			//txtMsg.append("\n-openDatabase - DB was opened");
-			//txtMsg.append("\n-openDatabase - DB was opened");
-		} catch (SQLiteException e) {
-			//txtMsg.append("\nError openDatabase: " + e.getMessage());
-			finish();
-		}
-	}// createDatabase
-
-	private void insertSomeDbData() {
-		// create table: myAdroidTable
-		db.beginTransaction();
-		try {
-			// create table
-			db.execSQL("create table books ("
-					+ " booksID integer PRIMARY KEY autoincrement, "
-					+ " name  text, " + " cost text, " +" bookLength text, " + " bookType text, " + " bookAuthor text );  ");
-			// commit your changes
-			db.setTransactionSuccessful();
-			
-			//txtMsg.append("\n-insertSomeDbData - Table was created");
-
-		} catch (SQLException e1) {
-			//txtMsg.append("\nError insertSomeDbData: " + e1.getMessage());
-			finish();
-		} finally {
-			db.endTransaction();
-		}
-
-		
-		db.beginTransaction();
-		try {
-			
-			for(int i = 0; i < 5; i++){
-				db.execSQL("insert into books(name, cost, bookLength, bookType, bookAuthor) "
-						);
-			}
-
-	
-			db.setTransactionSuccessful();
-			//txtMsg.append("\n-insertSomeDbData - 3 rec. were inserted");
-			
-		} catch (SQLiteException e2) {
-			//txtMsg.append("\nError insertSomeDbData: " + e2.getMessage());
-			
-		} finally {
-			db.endTransaction();
-		}
-
-	}// insertSomeData
-
-	private void dropTable() {
-		// (clean start) action query to drop table
-
-		try {
-			db.execSQL("DROP TABLE IF EXISTS books;");
-			//txtMsg.append("\n-dropTable - dropped!!");
-		} catch (Exception e) {
-			//txtMsg.append("\nError dropTable: " + e.getMessage());
-			finish();
-		}
+		 	
 	}
 	
 	@Override
