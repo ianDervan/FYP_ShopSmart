@@ -7,58 +7,15 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="fyp.shopsmart.customer.SignIn" >
-    
-    
-     <TextView
-      android:id="@+id/textView1"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentLeft="true"
-      android:layout_marginTop="170dp"
-      android:text="@string/username"
-      android:textAppearance="?android:attr/textAppearanceLarge" />
 
    
-
-    <EditText
-	  android:id="@+id/editText1"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="162dp"
-      android:layout_marginLeft="35dp"
-      android:layout_toRightOf="@+id/textView1"
-      android:ems="10" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1" 
-        android:layout_marginTop="40dp"
-        android:text="@string/password"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-    <EditText
-	  android:id="@+id/editText2"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/editText1" 
-      android:layout_marginTop="30dp"
-       android:layout_marginLeft="35dp"
-      android:layout_toRightOf="@+id/textView2"
-      android:ems="10" />
-
-    
-    
-     
-     
        <Button
       android:id="@+id/signIn"
       android:layout_width="130dp"
       android:layout_height="50dp"
       android:layout_centerHorizontal="true"
       android:layout_below="@+id/editText2"
-      android:layout_marginTop="30dp"
+      android:layout_marginTop="40dp"
       android:background="@drawable/custombutton"
       android:text="@string/signin"
       android:textColor="#FFFFFF"
@@ -83,5 +40,56 @@
            android:layout_marginTop="44dp"
              android:text="@string/signin"
            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editText1"
+        android:layout_alignBottom="@+id/editText1"
+        android:text="@string/username"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="165dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/editText1"
+        android:layout_marginTop="36dp"
+         android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/TextView02"
+        android:background="@drawable/customeditext"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editText2"
+        android:layout_alignBottom="@+id/editText2"
+        android:layout_alignParentLeft="true"
+        android:text="@string/password"
+    
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_alignRight="@+id/editText2"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/customeditext"
+        android:ems="10"
+        android:paddingLeft="10dp" >
+        
+        
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

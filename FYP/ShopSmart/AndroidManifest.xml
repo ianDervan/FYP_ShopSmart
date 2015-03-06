@@ -58,20 +58,26 @@
             android:label="@string/title_activity_database" >
         </activity>
         <activity
-            android:name=".customer.Database"
-            android:label="@string/title_activity_database" >
-        </activity>
-        <activity
             android:name=".customer.Search"
             android:label="@string/title_activity_search" >
         </activity>
         <activity
-            android:name="fyp.shopsmart.customer.ReadXML"
+            android:name=".customer.ReadXML"
             android:label="@string/title_activity_read_xml" >
+        </activity>
+        <activity
+            android:name=".employee.StaffHours"
+             >
+        </activity>
+        <activity
+            android:name="fyp.shopsmart.employee.CheckSignedIn"
+            android:label="@string/title_activity_check_signed_in" >
         </activity>
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

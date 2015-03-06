@@ -11,7 +11,7 @@
     <Button
         android:id="@+id/scanBarcode"
         android:layout_width="230dp"
-        android:layout_height="36dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
@@ -29,7 +29,6 @@
         android:background="@drawable/customtxtview"
         android:gravity="center_vertical"
         android:hint="Please Scan Item..."
-        android:inputType="textMultiLine"
         android:paddingLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

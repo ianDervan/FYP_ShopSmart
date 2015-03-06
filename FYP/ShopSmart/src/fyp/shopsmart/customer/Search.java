@@ -41,7 +41,7 @@ public class Search extends Activity {
 	int n;
 	
 	AutoCompleteTextView textView;
-	//TextView textView1;
+
 	String x;
 	String y;
 	
@@ -55,11 +55,9 @@ public class Search extends Activity {
 		
 		 btnSearch = (Button) findViewById(R.id.search);
 		 
-		 XCord = Float.parseFloat(x);
-		 YCord = Float.parseFloat(y);
+		// XCord = Float.parseFloat(x);
+		// YCord = Float.parseFloat(y);
 		 
-		 
-
 	//	 textView1 = (TextView) findViewById(R.id.textView1);
 		 textView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
 			String[] suggestedItems = getResources().getStringArray(R.array.suggestions_array);

@@ -4,6 +4,7 @@ import fyp.shopsmart.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View.OnClickListener;
@@ -20,7 +21,6 @@ public class MainActivity extends Activity {
 	 
 	 int ok;
 	 int backOk;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +33,10 @@ public class MainActivity extends Activity {
         
         Intent mainIntent = getIntent();
 	    ok = mainIntent.getIntExtra("main",0);
+
 	    
 	    backOk = 1;
-	    
-	    
-        
-        
+	     
         btnSign.setOnClickListener(new OnClickListener() {	
       	public void onClick(View v) {
       		
@@ -67,6 +65,8 @@ public class MainActivity extends Activity {
     			}
     			shopList.putExtra("backOk",1);
     			startActivity(shopList);
+    			
+    			
     			
           		}		
      		});

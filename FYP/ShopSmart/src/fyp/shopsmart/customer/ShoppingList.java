@@ -116,8 +116,7 @@ public class ShoppingList extends Activity {
 
 	    Intent mainIntent = getIntent();
 	    mainOk = mainIntent.getIntExtra("main",0);
-	    
-
+	   
 			
 	  	openDatabase();
 		

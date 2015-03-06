@@ -1,6 +1,5 @@
 package fyp.shopsmart.customer;
 
-
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -89,7 +88,6 @@ public class BarcodeScan extends Activity {
         n =0;
         
         openDatabase();
-    
         Intent intent = getIntent();
     	
   	    back = intent.getIntExtra("back",0);

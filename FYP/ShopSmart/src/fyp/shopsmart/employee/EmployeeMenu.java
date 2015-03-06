@@ -1,35 +1,117 @@
 package fyp.shopsmart.employee;
 
 import fyp.shopsmart.R;
+import fyp.shopsmart.customer.MainActivity;
+import fyp.shopsmart.customer.SignIn;
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class EmployeeMenu extends Activity {
+	
+	Button btnStaffH;
+	int check;
+	
 
+	int john;
+	
+	String time;
+	
+	int ian;
+	int sarah;
+	int aishling;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_employee_menu);
+		
+		check = 0;
+		
+		btnStaffH = (Button) findViewById(R.id.staffhours);
+		 Intent intent = getIntent();	
+	  	 ian = intent.getIntExtra("ian",0);
+	  	 john = intent.getIntExtra("john",0);
+	  	 sarah= intent.getIntExtra("sarah",0);
+	  	 aishling = intent.getIntExtra("aishling",0);
+
+	  	  	
+		 if(john == 1)
+	  	 {
+	  		 
+			 //time = intent.getStringExtra("jtime");
+			 //Toast.makeText(this, "time" +time, Toast.LENGTH_LONG).show();
+			 
+	  		 setTitle("ShopSmart"+ "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+"John");
+	  		 check=1;
+	  		 
+	  	 }		
+		 if(ian == 1)
+	  	 {
+			 //time = intent.getStringExtra("itime");
+			// Toast.makeText(this, "time" +time, Toast.LENGTH_LONG).show();
+			 
+	  		 setTitle("ShopSmart"+ "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  "+"Ian");
+	  		 check = 2;
+	  		 
+	  	 }	
+		 if(sarah == 1)
+	  	 {
+			 //time = intent.getStringExtra("stime");
+			// Toast.makeText(this, "time" +time, Toast.LENGTH_LONG).show();
+	  		 setTitle("ShopSmart"+ "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+"Sarah");
+	  		 check=3;
+	  		 
+	  	 }		
+	  	 if(aishling == 1)
+	  	 {
+	  		 //time = intent.getStringExtra("atime");
+	  		// Toast.makeText(this, "time" +time, Toast.LENGTH_LONG).show();
+	  		 setTitle("ShopSmart"+ "\t\t\t\t\t\t\t\t\t\t\t\t\t"+"Aishling");
+	  		 check=4;
+	  		 
+	  	 }		
+		 btnStaffH.setOnClickListener(new OnClickListener() {	
+		      	public void onClick(View v) {
+		      		
+					Intent staffHours = new Intent (EmployeeMenu.this,StaffHours.class);
+					if(check == 1)
+					{
+						staffHours.putExtra("SignedIn" , 1);
+						staffHours.putExtra("jt" , time);
+						startActivity(staffHours);		
+					}
+					if(check == 2)
+					{
+						staffHours.putExtra("SignedIn" , 2);
+						staffHours.putExtra("it" , time);
+						startActivity(staffHours);		
+					}
+					if(check == 3)
+					{
+						staffHours.putExtra("SignedIn" , 3);
+						staffHours.putExtra("st" , time);
+						startActivity(staffHours);		
+					}
+					if(check == 4)
+					{
+						staffHours.putExtra("SignedIn" , 4);
+						staffHours.putExtra("at" , time);
+						startActivity(staffHours);		
+					}
+						
+		    }		
+		 });
+		 
+		 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.employee_menu, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
 }

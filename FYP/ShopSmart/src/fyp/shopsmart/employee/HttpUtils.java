@@ -1,4 +1,4 @@
-package fyp.shopsmart.customer;
+package fyp.shopsmart.employee;
 
 import java.io.IOException;
 import java.util.*;

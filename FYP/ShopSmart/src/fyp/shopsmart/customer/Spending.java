@@ -56,11 +56,7 @@ public class Spending extends Activity {
 		 int day = calendar.get(Calendar.DAY_OF_WEEK); 
 		 
 		 txtMsg.append(day + ""  + "\n");
-		 
-
-		
-
-		
+		 		
 		 Intent myLocalIntent = getIntent();
 		 time=myLocalIntent.getStringArrayListExtra("time");
 		
