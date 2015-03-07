@@ -12,6 +12,10 @@ import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
 
 import fyp.shopsmart.R;
 import fyp.shopsmart.R.id;
@@ -22,8 +26,11 @@ import fyp.shopsmart.customer.MainActivity;
 import android.R.string;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +42,8 @@ import android.widget.Toast;
 public class StaffHours extends Activity {
 	
 	int check;
+	
+	Context context = this;
 	TextView timeIn;
 	TextView timeOut;
 	TextView breakIn;
@@ -43,6 +52,9 @@ public class StaffHours extends Activity {
 
 	String timeC;
 	String name;
+	String senduser;
+	
+	int recieve = 0;
 	
 	
 	
@@ -77,6 +89,7 @@ public class StaffHours extends Activity {
 		 
 		 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
+
 		 
 		 Intent intent = getIntent();	
 			check = intent.getIntExtra("SignedIn",0);
@@ -88,12 +101,49 @@ public class StaffHours extends Activity {
 				time.put("TimeOut" ,null);
 				time.put("BreakIn" ,null);
 				time.put("BreakOut" ,null);
+				recieve=1;
 				
 				send();
 				
-				 Toast.makeText(this, "send", Toast.LENGTH_LONG).show();
-				
+				 
 			}		
+			if(check == 1)
+			{
+				time.put("userName","John (Manager)");
+				time.put("TimeIn" ,null);
+				time.put("TimeOut" ,null);
+				time.put("BreakIn" ,null);
+				time.put("BreakOut" ,null);
+				recieve=1;
+				
+				send();
+
+			}		
+			if(check == 3)
+			{
+				time.put("userName","Sarah");
+				time.put("TimeIn" ,null);
+				time.put("TimeOut" ,null);
+				time.put("BreakIn" ,null);
+				time.put("BreakOut" ,null);
+				recieve=1;
+				
+				send();
+
+			}		
+			if(check == 3)
+			{
+				time.put("userName","Aishling");
+				time.put("TimeIn" ,null);
+				time.put("TimeOut" ,null);
+				time.put("BreakIn" ,null);
+				time.put("BreakOut" ,null);
+				recieve=1;
+				
+				send();
+
+			}		
+			
 			
 			
 		
@@ -111,6 +161,16 @@ public class StaffHours extends Activity {
 	    				time.put("userName","Ian");
 	    				insertTime(1);
 	    			}
+	    			if(check == 3)
+	    			{
+	    				time.put("userName","Sarah");
+	    				insertTime(1);
+	    			}
+	    			if(check == 4)
+	    			{
+	    				time.put("userName","Aishling");
+	    				insertTime(1);
+	    			}
 	    			
 
 	    			
@@ -118,17 +178,33 @@ public class StaffHours extends Activity {
 	    	});
 		  btnTO.setOnClickListener(new OnClickListener() {	
 	    		public void onClick(View v) {
-	    			
+	    				
 	    			if(check == 1)
 	    			{
 	    				time.put("userName","John (Manager)");
 	    				insertTime(2);
+	    				alertDialog("John (Manager)");
 	    			}	
 	    			if(check == 2)
 	    			{
 	    				time.put("userName","Ian");
 	    				insertTime(2);
+	    				alertDialog("Ian");
 	    			}
+	    			if(check == 3)
+	    			{
+	    				time.put("userName","Sarah");
+	    				insertTime(2);
+	    				alertDialog("Sarah");
+	    			}
+	    			if(check == 4)
+	    			{
+	    				time.put("userName","Aishling");
+	    				insertTime(2);
+	    				alertDialog("Aishling");
+	    			}
+	    			
+	    			
 	    			
 	    		}
 	    	});
@@ -143,6 +219,16 @@ public class StaffHours extends Activity {
 	    			if(check == 2)
 	    			{
 	    				time.put("userName","Ian");
+	    				insertTime(3);
+	    			}
+	    			if(check == 3)
+	    			{
+	    				time.put("userName","Sarah");
+	    				insertTime(3);
+	    			}
+	    			if(check == 4)
+	    			{
+	    				time.put("userName","Aishling");
 	    				insertTime(3);
 	    			}
 
@@ -163,6 +249,16 @@ public class StaffHours extends Activity {
 	    				time.put("userName","Ian");
 	    				insertTime(4);
 	    			}
+	    			if(check == 3)
+	    			{
+	    				time.put("userName","Sarah");
+	    				insertTime(4);
+	    			}
+	    			if(check == 4)
+	    			{
+	    				time.put("userName","Aishling");
+	    				insertTime(4);
+	    			}
 		
 	    		}
 	    	});
@@ -181,8 +277,10 @@ public class StaffHours extends Activity {
 			time.put("BreakIn" ,null);
 			time.put("BreakOut" ,null);
 			send();
+			
+			
 		}
-		if(field == 2 &&timeOut.getText().toString().equals(""))
+		if(field == 2 &&breakIn.getText().toString().equals(""))
 		{
 			getTime();
 			timeOut.append(timeC);
@@ -192,6 +290,13 @@ public class StaffHours extends Activity {
 			time.put("BreakIn" ,null);
 			time.put("BreakOut" ,null);
 			send();
+			
+		//	breakIn.setText("");
+		//	breakOut.setText("");
+		//	timeOut.setText("");
+		//	timeIn.setText("");
+		
+			
 		}
 		if(field == 3 &&breakIn.getText().toString().equals(""))
 		{
@@ -214,47 +319,100 @@ public class StaffHours extends Activity {
 			time.put("TimeOut" ,null);
 			time.put("BreakIn" ,null);
 			time.put("BreakOut" ,timeC);
+			
 			send();
+			
+
 			
 		}
 		
+	}
+	public void alertDialog(String user)
+	{
+		
+		senduser =user;
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				context);
+
+
+		alertDialogBuilder.setTitle("Sign Out");
+
+		alertDialogBuilder
+
+		.setMessage("Click yes to to sign out")
+		.setCancelable(false)
+		.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+				
+					breakIn.setText("");
+					breakOut.setText("");
+					timeOut.setText("");
+					timeIn.setText("");
+					
+					time.put("userName","Ian");
+					time.put("TimeIn" ,"1");
+					time.put("TimeOut" ,);
+					time.put("BreakIn" ,"1");
+					time.put("BreakOut" ,"1");
+					
+					send();
+
+			}
+		})
+		.setNegativeButton("No",new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+
+				dialog.cancel();
+			}
+		});
+
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.setTitle( Html.fromHtml("<font color='#ED6F26'>Set IP Address</font>"));
+		alertDialog.show();
+
+
+		int titleDividerId = getResources().getIdentifier("android:id/titleDivider", "id", "android");
+		View titleDivider = alertDialog.findViewById(titleDividerId);
+		if (titleDivider != null)
+			titleDivider.setBackgroundColor(Color.parseColor("#ED6F26"));
+		
+
 	}
 	public void send()
 	{
 		
 		 String st,ft,bi,bo;
 		
-		String url=  "http://192.168.1.100:8080/NetworkingSupport/servlet";
+		String url=  "http://192.168.0.29:8080/NetworkingSupport/servlet";
 		JSONObject jsonSEND = new JSONObject(time);
 
 		 try{
-			 String min,max,average;
+			 //String min1,max1,average;
 				
 			 String jsonString = HttpUtils.urlContentPost(url,"user", jsonSEND.toString());
 //			 JSONObject jsonResult = new JSONObject(jsonString);
 			 
 			 JSONObject jsonResult = new JSONObject(jsonString);
-			 min = jsonResult.getString("min");
 			 
-			 max = jsonResult.getString("max");
-		
-			// txtMsg.append("\n" + min +"\n" +  max  +"\n"+  average);
-			 
-			 Toast.makeText(this, "recievied" + min + "\nrecievied" + max , Toast.LENGTH_LONG).show();
-			 
-				// SendInfo info = new SendInfo(startTime,finishTime,breakIn,breakOut);
+			 if (recieve == 1)
+			 {
+				 st = jsonResult.getString("start");
 				 
-				// Toast.makeText(this, "recievied" + , Toast.LENGTH_LONG).show();
-//			 ft = jsonResult.getString("finishTime");
-//			// Toast.makeText(this, "recievied" + ft, Toast.LENGTH_LONG).show();
-//				 st = jsonResult.getString("startTime");
-//				// Toast.makeText(this, "recievied" + st, Toast.LENGTH_LONG).show();
-//				 ft = jsonResult.getString("finishTime");
-//			
-//				 bi = jsonResult.getString("breakIn");
-//				 bo = jsonResult.getString("breakOut");	 
-//				 Toast.makeText(this, "recievied" + jsonResult.getString("startTime"), Toast.LENGTH_LONG).show();
-//				 Toast.makeText(this, "st" +st + "\nft"+ ft +"\nbi" + bi + "\nbo" +bo, Toast.LENGTH_LONG).show();
+				 ft = jsonResult.getString("finish");
+				 
+				 bi = jsonResult.getString("breakI");	
+				 bo = jsonResult.getString("breakO");	
+				 Toast.makeText(this, "recievied" + st + "\nrecievied" + ft +"\nrecievied" + bi +"\nrecievied" + bo, Toast.LENGTH_LONG).show();
+					breakIn.append(bi);
+					breakOut.append(bo);
+					timeOut.append(ft);
+					timeIn.append(st);
+				 
+				 recieve = 0;
+				 
+			 
+			 } 
+
 			 
 		 }catch (JSONException e) {
 			 Toast.makeText(this, "JSONEEXCEPTION" + e, Toast.LENGTH_LONG).show();
@@ -269,6 +427,7 @@ public class StaffHours extends Activity {
 			
 		}
 	}
+	
 //	public void inserTime()
 //	{
 //			

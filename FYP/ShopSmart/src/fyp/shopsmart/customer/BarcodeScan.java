@@ -176,6 +176,8 @@ public class BarcodeScan extends Activity {
         } else {
             Toast.makeText(this, "Rear Facing Camera Unavailable", Toast.LENGTH_LONG).show();
         }
+        
+        
     }
 
 
