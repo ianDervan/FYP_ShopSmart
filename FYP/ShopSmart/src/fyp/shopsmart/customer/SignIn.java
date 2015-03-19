@@ -70,11 +70,7 @@ public class SignIn extends Activity {
 	   
 	    
 	 //   flag = new Flags();
-	    
-	   
-	    	    
-		
-	
+
 	    
 	    btnSignIn = (Button) findViewById(R.id.signIn);
 	    btnSignIn.setOnClickListener(new OnClickListener() {

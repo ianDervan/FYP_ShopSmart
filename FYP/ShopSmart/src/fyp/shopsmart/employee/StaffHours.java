@@ -2,6 +2,7 @@ package fyp.shopsmart.employee;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
@@ -14,6 +15,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 
 
@@ -23,14 +25,21 @@ import fyp.shopsmart.R.layout;
 import fyp.shopsmart.R.menu;
 import fyp.shopsmart.customer.BarcodeScan;
 import fyp.shopsmart.customer.MainActivity;
+import fyp.shopsmart.customer.SignIn;
 import android.R.string;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,10 +58,16 @@ public class StaffHours extends Activity {
 	TextView breakIn;
 	TextView breakOut;
 	
+	SQLiteDatabase db;
 
 	String timeC;
 	String name;
 	String senduser;
+	
+	String start;
+	String finish;
+	String bIn;
+	String bOut;
 	
 	int recieve = 0;
 	
@@ -68,6 +83,12 @@ public class StaffHours extends Activity {
 	Button btnTO;
 	Button btnBI;
 	Button btnBO;
+	Button btnView;
+	TextView txtMsg;
+	
+	ArrayList<String> days;
+	
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,13 +100,17 @@ public class StaffHours extends Activity {
 		 timeOut = (TextView) findViewById(R.id.timeOut);
 		 breakIn = (TextView) findViewById(R.id.breakIn);
 		 breakOut = (TextView) findViewById(R.id.breakOut);
+		 txtMsg = (TextView) findViewById(R.id.txtMsg);
 		 
 		 btnTI  = (Button) findViewById(R.id.btnTI);
 		 btnTO  = (Button) findViewById(R.id.btnTO);
 		 btnBI  = (Button) findViewById(R.id.btnBI);
 		 btnBO  = (Button) findViewById(R.id.btnBO);
+		 btnView  = (Button) findViewById(R.id.viewHours);
 		 
 		 time  = new HashMap<String,String>(); 
+		 days = new ArrayList<String>();
+
 		 
 		 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
@@ -93,64 +118,63 @@ public class StaffHours extends Activity {
 		 
 		 Intent intent = getIntent();	
 			check = intent.getIntExtra("SignedIn",0);
+				
+			if(check == 1)
+			{
+				time.put("userName","John (Manager)");
+				time.put("TimeIn" ,"2");
+				time.put("TimeOut" ,"2");
+				time.put("BreakIn" ,"2");
+				time.put("BreakOut" ,"2");
+
+				recieve=1;
+				
+				send();
+
+			}		
 			
 			if(check == 2)
 			{
 				time.put("userName","Ian");
-				time.put("TimeIn" ,null);
-				time.put("TimeOut" ,null);
-				time.put("BreakIn" ,null);
-				time.put("BreakOut" ,null);
+				time.put("TimeIn" ,"2");
+				time.put("TimeOut" ,"2");
+				time.put("BreakIn" ,"2");
+				time.put("BreakOut" ,"2");
+
 				recieve=1;
 				
 				send();
 				
 				 
 			}		
-			if(check == 1)
-			{
-				time.put("userName","John (Manager)");
-				time.put("TimeIn" ,null);
-				time.put("TimeOut" ,null);
-				time.put("BreakIn" ,null);
-				time.put("BreakOut" ,null);
-				recieve=1;
-				
-				send();
-
-			}		
+		
 			if(check == 3)
 			{
 				time.put("userName","Sarah");
-				time.put("TimeIn" ,null);
-				time.put("TimeOut" ,null);
-				time.put("BreakIn" ,null);
-				time.put("BreakOut" ,null);
+				time.put("TimeIn" ,"2");
+				time.put("TimeOut" ,"2");
+				time.put("BreakIn" ,"2");
+				time.put("BreakOut" ,"2");
+		
 				recieve=1;
 				
 				send();
-
 			}		
-			if(check == 3)
+			if(check == 4)
 			{
 				time.put("userName","Aishling");
-				time.put("TimeIn" ,null);
-				time.put("TimeOut" ,null);
-				time.put("BreakIn" ,null);
-				time.put("BreakOut" ,null);
+				time.put("TimeIn" ,"2");
+				time.put("TimeOut" ,"2");
+				time.put("BreakIn" ,"2");
+				time.put("BreakOut" ,"2");
+
 				recieve=1;
 				
 				send();
-
 			}		
-			
-			
-			
-		
-		 
 		  btnTI.setOnClickListener(new OnClickListener() {	
 	    		public void onClick(View v) {
-	    			
+	
 	    			if(check == 1)
 	    			{
 	    				time.put("userName","John (Manager)");
@@ -160,6 +184,7 @@ public class StaffHours extends Activity {
 	    			{
 	    				time.put("userName","Ian");
 	    				insertTime(1);
+	    			
 	    			}
 	    			if(check == 3)
 	    			{
@@ -171,41 +196,37 @@ public class StaffHours extends Activity {
 	    				time.put("userName","Aishling");
 	    				insertTime(1);
 	    			}
-	    			
-
-	    			
 	    		}
 	    	});
 		  btnTO.setOnClickListener(new OnClickListener() {	
 	    		public void onClick(View v) {
+
 	    				
 	    			if(check == 1)
 	    			{
 	    				time.put("userName","John (Manager)");
 	    				insertTime(2);
-	    				alertDialog("John (Manager)");
+	    				//alertDialog("John (Manager)");
 	    			}	
 	    			if(check == 2)
 	    			{
 	    				time.put("userName","Ian");
 	    				insertTime(2);
-	    				alertDialog("Ian");
+
 	    			}
 	    			if(check == 3)
 	    			{
 	    				time.put("userName","Sarah");
 	    				insertTime(2);
-	    				alertDialog("Sarah");
+	    				//alertDialog("Sarah");
 	    			}
 	    			if(check == 4)
 	    			{
 	    				time.put("userName","Aishling");
 	    				insertTime(2);
-	    				alertDialog("Aishling");
+	    				//alertDialog("Aishling");
 	    			}
-	    			
-	    			
-	    			
+	    				    		
 	    		}
 	    	});
 		  btnBI.setOnClickListener(new OnClickListener() {	
@@ -231,7 +252,6 @@ public class StaffHours extends Activity {
 	    				time.put("userName","Aishling");
 	    				insertTime(3);
 	    			}
-
 	    			
 	    		}
 	    	});
@@ -243,7 +263,6 @@ public class StaffHours extends Activity {
 	    				time.put("userName","John (Manager)");
 	    				insertTime(4);
 	    			}	
-	    			
 	    			if(check == 2)
 	    			{
 	    				time.put("userName","Ian");
@@ -262,78 +281,87 @@ public class StaffHours extends Activity {
 		
 	    		}
 	    	});
+		  btnView.setOnClickListener(new OnClickListener() {	
+		      	public void onClick(View v) {
+		      		
+		      		txtMsg.setText("");
+
+					
+		      		}		
+		 		});
 	}
 	
 	public void insertTime(int field)
 	{
+
 		if(field == 1 && timeIn.getText().toString().equals(""))
 		{
 			getTime();
 			timeIn.append(timeC);
-			Toast.makeText(this, "time", Toast.LENGTH_LONG).show();
-			
+			start= timeC;
+
 			time.put("TimeIn" ,timeC);
-			time.put("TimeOut" ,null);
-			time.put("BreakIn" ,null);
-			time.put("BreakOut" ,null);
+			time.put("TimeOut" ,"1");
+			time.put("BreakIn" ,"1");
+			time.put("BreakOut" ,"1");
+			recieve=2;
 			send();
-			
-			
+				
 		}
-		if(field == 2 &&breakIn.getText().toString().equals(""))
+		if(field == 2 &&timeOut.getText().toString().equals(""))
 		{
 			getTime();
 			timeOut.append(timeC);
-			
-			time.put("TimeIn" ,null);
+			finish= timeC;
+
+			time.put("TimeIn" ,"1");
 			time.put("TimeOut" ,timeC);
-			time.put("BreakIn" ,null);
-			time.put("BreakOut" ,null);
+			time.put("BreakIn" ,"1");
+			time.put("BreakOut" ,"1");
+			recieve=2;
 			send();
-			
-		//	breakIn.setText("");
-		//	breakOut.setText("");
-		//	timeOut.setText("");
-		//	timeIn.setText("");
-		
-			
+
+			alertDialog();
+
 		}
 		if(field == 3 &&breakIn.getText().toString().equals(""))
 		{
 			getTime();
 			breakIn.append(timeC);
-			
-			
-			time.put("TimeIn" ,null);
-			time.put("TimeOut" ,null);
+			bIn = timeC;
+
+			time.put("TimeIn" ,"1");
+			time.put("TimeOut" ,"1");
 			time.put("BreakIn" ,timeC);
-			time.put("BreakOut" ,null);
+			time.put("BreakOut" ,"1");
+			recieve=2;
 			send();
 		}
 		if(field == 4 &&breakOut.getText().toString().equals(""))
 		{
 			getTime();
+		
 			breakOut.append(timeC);
-			
-			time.put("TimeIn" ,null);
-			time.put("TimeOut" ,null);
-			time.put("BreakIn" ,null);
-			time.put("BreakOut" ,timeC);
-			
-			send();
-			
+			bOut = timeC;
 
 			
+			time.put("TimeIn" ,"1");
+			time.put("TimeOut" ,"1");
+			time.put("BreakIn" ,"1");
+			time.put("BreakOut" ,timeC);
+			recieve=2;
+			
+			send();
 		}
 		
 	}
-	public void alertDialog(String user)
+
+	public void alertDialog()
 	{
 		
-		senduser =user;
+
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 				context);
-
 
 		alertDialogBuilder.setTitle("Sign Out");
 
@@ -348,15 +376,13 @@ public class StaffHours extends Activity {
 					breakOut.setText("");
 					timeOut.setText("");
 					timeIn.setText("");
-					
-					time.put("userName","Ian");
-					time.put("TimeIn" ,"1");
-					time.put("TimeOut" ,);
-					time.put("BreakIn" ,"1");
-					time.put("BreakOut" ,"1");
+
+					time.put("TimeIn" ,"3");
+					time.put("TimeOut" ,"3");
+					time.put("BreakIn" ,"3");
+					time.put("BreakOut" ,"3");
 					
 					send();
-
 			}
 		})
 		.setNegativeButton("No",new DialogInterface.OnClickListener() {
@@ -381,9 +407,9 @@ public class StaffHours extends Activity {
 	public void send()
 	{
 		
-		 String st,ft,bi,bo;
+		 String st = null,ft=null,bi = null,bo = null;
 		
-		String url=  "http://192.168.0.29:8080/NetworkingSupport/servlet";
+		String url=  "http://192.168.1.103:8080/NetworkingSupport/servlet";
 		JSONObject jsonSEND = new JSONObject(time);
 
 		 try{
@@ -392,28 +418,31 @@ public class StaffHours extends Activity {
 			 String jsonString = HttpUtils.urlContentPost(url,"user", jsonSEND.toString());
 //			 JSONObject jsonResult = new JSONObject(jsonString);
 			 
-			 JSONObject jsonResult = new JSONObject(jsonString);
-			 
 			 if (recieve == 1)
 			 {
-				 st = jsonResult.getString("start");
+				 JSONObject jsonResult = new JSONObject(jsonString);
 				 
-				 ft = jsonResult.getString("finish");
-				 
-				 bi = jsonResult.getString("breakI");	
-				 bo = jsonResult.getString("breakO");	
-				 Toast.makeText(this, "recievied" + st + "\nrecievied" + ft +"\nrecievied" + bi +"\nrecievied" + bo, Toast.LENGTH_LONG).show();
-					breakIn.append(bi);
-					breakOut.append(bo);
-					timeOut.append(ft);
-					timeIn.append(st);
-				 
-				 recieve = 0;
-				 
-			 
-			 } 
-
-			 
+				 if( jsonResult!= null)
+				 {
+						 st = jsonResult.getString("start");
+						 
+						 ft = jsonResult.getString("finish");
+						 
+						 bi = jsonResult.getString("breakI");	
+						 bo = jsonResult.getString("breakO");	
+						 Toast.makeText(this, "RECIEVING", Toast.LENGTH_LONG).show();
+							breakIn.append(bi);
+							bIn= bi;
+							breakOut.append(bo);
+							bOut= bo;
+							timeOut.append(ft);
+							finish = ft;
+							timeIn.append(st);
+							start = st;
+						 
+						 recieve = 0;
+				 }
+			 }
 		 }catch (JSONException e) {
 			 Toast.makeText(this, "JSONEEXCEPTION" + e, Toast.LENGTH_LONG).show();
 		 } catch (ClientProtocolException e) {
@@ -427,91 +456,17 @@ public class StaffHours extends Activity {
 			
 		}
 	}
-	
-//	public void inserTime()
-//	{
-//			
-//			Toast.makeText(this, "check" + check, Toast.LENGTH_LONG).show();
-//			if(check == 1)
-//			{
-//				setTitle("ShopSmart"+ "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+"John");
-//				if( checkIsEntered == 0)
-//				{
-//					if( checkIsEntered1 == 1 || checkIsEntered2 == 1 || checkIsEntered3 == 1)
-//					{
-//						timeIn.setText("");
-//					}
-//					
-//						
-//				}
-//				
-//				checkIsEntered =1;
-//			}		
-//			if(check == 2)
-//			{
-//				setTitle("ShopSmart"+ "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  "+"Ian");
-//				
-//				if( checkIsEntered1 == 0)
-//				{
-//					if(checkIsEntered == 1  || checkIsEntered2 == 1 || checkIsEntered3 == 1)
-//					{
-//						timeIn.setText("");
-//					}
-//					
-//						
-//				}
-//				checkIsEntered1=1;	
-//				
-//			}	
-//			if(check == 3)
-//			{
-//				setTitle("ShopSmart"+ "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+"Sarah");
-//				if( checkIsEntered2 == 0)
-//				{
-//					if(checkIsEntered == 1  || checkIsEntered1 == 1 || checkIsEntered3 == 1)
-//					{
-//						timeIn.setText("");
-//					}
-//	
-//					
-//					
-//				}
-//				
-//				checkIsEntered2=1;
-//	
-//			}		
-//			if(check == 4)
-//			{
-//				setTitle("ShopSmart"+ "\t\t\t\t\t\t\t\t\t\t\t\t\t"+"Aishling");
-//				if( checkIsEntered3 == 0)
-//				{
-//					if(checkIsEntered == 1  || checkIsEntered1 == 1 || checkIsEntered2 == 1)
-//					{
-//						timeIn.setText("");
-//					}
-//
-//	
-//				}
-//				checkIsEntered3 = 1;
-//			}
-//			
-//			
-//			
-//		}
 	public String getTime()
 	{
 		 Calendar cal = Calendar.getInstance(TimeZone.getDefault());
 		 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
 		 timeC=sdf.format(cal.getTime());
-		 
-		 return timeC;
-		  	  
+		 return timeC;	  	  
 	}
-	
+
 	@Override
 	public void onBackPressed()
 	{
-
 	    finish();  
 	}
 

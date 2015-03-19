@@ -25,23 +25,29 @@ public final class R {
         public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
-        public static final int custom_toast_border=0x7f020000;
-        public static final int custombutton=0x7f020001;
-        public static final int custombutton_lr=0x7f020002;
-        public static final int customeditext=0x7f020003;
-        public static final int customtxtview=0x7f020004;
-        public static final int download=0x7f020005;
-        public static final int grocery1=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int launcher=0x7f020008;
-        public static final int layout=0x7f020009;
+        public static final int cell_shape=0x7f020000;
+        public static final int custom_toast_border=0x7f020001;
+        public static final int custombutton=0x7f020002;
+        public static final int custombutton_lr=0x7f020003;
+        public static final int customeditext=0x7f020004;
+        public static final int customtxtview=0x7f020005;
+        public static final int download=0x7f020006;
+        public static final int grocery1=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int launcher=0x7f020009;
+        public static final int layout=0x7f02000a;
     }
     public static final class id {
+        public static final int Friday=0x7f0a004f;
         public static final int LinearLayout01=0x7f0a0008;
+        public static final int Saturday=0x7f0a0055;
         public static final int ScrollView01=0x7f0a0009;
+        public static final int Sunday=0x7f0a005b;
         public static final int TextView01=0x7f0a0021;
         public static final int TextView02=0x7f0a001f;
-        public static final int action_settings=0x7f0a0033;
+        public static final int Thursday=0x7f0a0049;
+        public static final int Wednesday=0x7f0a0043;
+        public static final int action_settings=0x7f0a0062;
         public static final int addItem=0x7f0a0005;
         public static final int autocomplete=0x7f0a0013;
         public static final int breakIn=0x7f0a0029;
@@ -60,6 +66,10 @@ public final class R {
         public static final int editText1=0x7f0a0020;
         public static final int editText2=0x7f0a001c;
         public static final int exit=0x7f0a0022;
+        public static final int fri1=0x7f0a0050;
+        public static final int fri2=0x7f0a0051;
+        public static final int fri3=0x7f0a0052;
+        public static final int fri4=0x7f0a0053;
         public static final int hide=0x7f0a0017;
         public static final int imageView1=0x7f0a0014;
         public static final int item=0x7f0a0001;
@@ -67,11 +77,20 @@ public final class R {
         public static final int linearLayout1=0x7f0a0004;
         public static final int linearLayout2=0x7f0a0018;
         public static final int linearLayout3=0x7f0a002c;
+        public static final int mon1=0x7f0a0038;
+        public static final int mon2=0x7f0a0039;
+        public static final int mon3=0x7f0a003a;
+        public static final int mon4=0x7f0a003b;
+        public static final int monday=0x7f0a0037;
         public static final int options=0x7f0a0007;
         public static final int quantity=0x7f0a0015;
         public static final int remove=0x7f0a0023;
         public static final int removeAll=0x7f0a001a;
         public static final int removeOne=0x7f0a0019;
+        public static final int sat1=0x7f0a0056;
+        public static final int sat2=0x7f0a0057;
+        public static final int sat3=0x7f0a0058;
+        public static final int sat4=0x7f0a0059;
         public static final int scan=0x7f0a000b;
         public static final int scanBarcode=0x7f0a0000;
         public static final int search=0x7f0a000c;
@@ -80,15 +99,44 @@ public final class R {
         public static final int signIn=0x7f0a000f;
         public static final int spending=0x7f0a001b;
         public static final int staffhours=0x7f0a0010;
+        public static final int sun1=0x7f0a005c;
+        public static final int sun2=0x7f0a005d;
+        public static final int sun3=0x7f0a005e;
+        public static final int sun4=0x7f0a005f;
+        public static final int tableRow1=0x7f0a0031;
+        public static final int tableRow2=0x7f0a0036;
+        public static final int tableRow3=0x7f0a003c;
+        public static final int tableRow4=0x7f0a0042;
+        public static final int tableRow5=0x7f0a0048;
+        public static final int tableRow6=0x7f0a004e;
+        public static final int tableRow7=0x7f0a0054;
+        public static final int tableRow8=0x7f0a005a;
         public static final int textView3=0x7f0a001d;
         public static final int textView4=0x7f0a001e;
+        public static final int textView5=0x7f0a0032;
+        public static final int textView6=0x7f0a0033;
+        public static final int textView7=0x7f0a0034;
+        public static final int textView8=0x7f0a0035;
+        public static final int thurs1=0x7f0a004a;
+        public static final int thurs2=0x7f0a004b;
+        public static final int thurs3=0x7f0a004c;
+        public static final int thurs4=0x7f0a004d;
         public static final int timeIn=0x7f0a0025;
         public static final int timeOut=0x7f0a0027;
-        public static final int toast_layout_root=0x7f0a0031;
-        public static final int toasttext=0x7f0a0032;
+        public static final int toast_layout_root=0x7f0a0060;
+        public static final int toasttext=0x7f0a0061;
+        public static final int tues1=0x7f0a003e;
+        public static final int tues2=0x7f0a003f;
+        public static final int tues3=0x7f0a0040;
+        public static final int tues4=0x7f0a0041;
+        public static final int tuesday=0x7f0a003d;
         public static final int txtMsg=0x7f0a000a;
         public static final int view1=0x7f0a0003;
         public static final int viewHours=0x7f0a002f;
+        public static final int wed1=0x7f0a0044;
+        public static final int wed2=0x7f0a0045;
+        public static final int wed3=0x7f0a0046;
+        public static final int wed4=0x7f0a0047;
     }
     public static final class layout {
         public static final int activity_barcode_scan=0x7f030000;
@@ -100,6 +148,7 @@ public final class R {
         public static final int activity_spending=0x7f030006;
         public static final int activity_staff_hours=0x7f030007;
         public static final int customtoast=0x7f030008;
+        public static final int text=0x7f030009;
     }
     public static final class menu {
         public static final int barcode_scan=0x7f090000;
