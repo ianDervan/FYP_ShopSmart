@@ -48,7 +48,6 @@ public class SignIn extends Activity {
 	public static int checkIsSignedIn3 = 0;
 	
 	//public Flags flag;
-
 	
 	 EditText username;
 	 EditText password;
@@ -164,9 +163,7 @@ public class SignIn extends Activity {
 			menu.putExtra("aishling", 1);
 			menu.putExtra("atime", timeC);
 
-			startActivity(menu);
-			
-
+			startActivity(menu);	
 		}
 		else
 		{

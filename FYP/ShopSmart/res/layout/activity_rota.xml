@@ -6,244 +6,36 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fyp.shopsmart.employee.StaffHours" >
+    tools:context="fyp.shopsmart.Rota" >
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="0dp"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/btnTI"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_weight=".9"
-            android:layout_marginLeft="0dp"
-            android:background="@drawable/custombutton_lr"
-            android:text="Time In"
-            android:textColor="#FFFFFF" />
-
-         <TextView
-            android:id="@+id/timeIn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".5"
-            android:gravity="center_vertical"
-            android:paddingLeft="5dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/customeditext"
-            android:ems="15" />
-
-        <Button
-            android:id="@+id/btnTO"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginLeft="10dp"
-            android:layout_weight=".9"
-            android:background="@drawable/custombutton_lr"
-           	android:duration="0"
-            android:text="Time Out"
-            android:textColor="#FFFFFF" />
-        
-           <TextView
-            android:id="@+id/timeOut"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".5"
-            android:paddingLeft="5dp"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/customeditext"
-            android:ems="10" >
-
-            <requestFocus />
-        </TextView>
-    </LinearLayout>
-    
-     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout1"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="0dp"
-        android:orientation="horizontal"
-         >
-           
-        <Button
-            android:id="@+id/btnBI"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_weight=".9"
-            android:layout_marginLeft="0dp"
-            android:background="@drawable/custombutton_lr"
-            android:text="Break In"
-            android:textColor="#FFFFFF" />
-
-        <TextView
-            android:id="@+id/breakIn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".5"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:paddingLeft="5dp"
-            android:background="@drawable/customeditext"
-            android:ems="10" >
-
-        </TextView>
-
-        <Button
-            android:id="@+id/btnBO"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginLeft="10dp"
-            android:layout_weight=".9"
-            android:background="@drawable/custombutton_lr"
-           	android:duration="0"
-            android:text="Break Out"
-            android:textColor="#FFFFFF" />
-        
-           <TextView
-            android:id="@+id/breakOut"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".5"
-             android:gravity="center_vertical"
-            android:paddingLeft="5dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/customeditext"
-            android:ems="10" >
-        </TextView>
-    </LinearLayout>
-    
-     <TextView
-        android:id="@+id/shoplist"
+    <TextView
+        android:id="@+id/thisweeksrota"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_marginTop="15dp"
-        android:text="Hours Worked"
+        android:layout_alignParentLeft="true"
+        android:text="This Weeks Rota"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-        <View
-        android:id="@+id/view1"
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-         android:layout_below="@+id/shoplist"
-        android:layout_marginTop="15dp"
-        android:background="#ED6F26" />
-        
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view1"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="0dp"
-        android:orientation="horizontal"
-         >
 
-        <TextView
-            android:id="@+id/dailyhours"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:hint= "Daily.."
-            android:gravity="center_vertical"
-            android:background="@drawable/customeditext"
-            android:ems="15" >
-
-            <requestFocus />
-        </TextView>
-
-        
-           <TextView
-            android:id="@+id/edit"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_weight="1"
-            android:hint= "Weekly..."
-            android:gravity="center_vertical"
-            android:paddingLeft="15dp"
-            android:layout_marginLeft="40dp"
-            android:background="@drawable/customeditext"
-            android:ems="15" >
-
-            <requestFocus />
-        </TextView>
-    </LinearLayout>
-
-         <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="210dp"
-        android:layout_marginLeft="5dp"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/refresh"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.4"
-            android:background="@drawable/custombutton_lr"
-            android:text="Refresh"
-            android:textColor="#FFFFFF" />
-
-        <Button
-            android:id="@+id/btnclearday"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.5"
-            android:background="@drawable/custombutton_lr"
-            android:text="Clear Hours"
-            android:textColor="#FFFFFF" />
-
-        <Button
-            android:id="@+id/btncleartable"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.5"
-            android:background="@drawable/custombutton_lr"
-           	android:duration="0"
-            android:text="Clear Table"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
-        
-        <View
+    <View
         android:id="@+id/line"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-         android:layout_below="@+id/linearLayout4"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/thisweeksrota"
+        android:layout_marginTop="5dp"
         android:background="#ED6F26" />
 
-       <LinearLayout 
-        android:id="@+id/LinearLayout01"
-		android:layout_width="fill_parent" 
-		android:layout_height="fill_parent"
-		android:layout_below="@+id/line"
-		android:layout_marginTop="20dp"
-		android:orientation="vertical">
+      <LinearLayout
+          android:id="@+id/LinearLayout01"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/line"
+          android:layout_marginTop="10dp"
+          android:orientation="vertical" >
 		
 			 <TableLayout
-
-        android:layout_width="fill_parent"
-
-        android:layout_height="fill_parent"
-
-        android:stretchColumns="*">
+			     android:layout_width="fill_parent"
+			     android:layout_height="wrap_content"
+			     android:stretchColumns="*" >
 
         <TableRow
             android:id="@+id/tableRow1"
@@ -267,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
-                android:text="Start"
+                android:text="John"
                 android:textSize="16sp" />
 
             <TextView
@@ -276,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
-                android:text="Br_In"
+                android:text="Ian"
                 android:textSize="16sp" />
 
             <TextView
@@ -285,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
-                android:text="Br_Out"
+                android:text="Sarah"
                 android:textSize="16sp" />
 
             <TextView
@@ -293,9 +85,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
+                android:layout_marginLeft="0px"
+                 android:layout_marginRight="0px"
                 android:background="#FFFFFF"
-                android:text="Finish"
+                android:text="Aishling"
                 android:textSize="16sp" />
+            
+            
         </TableRow>
          <TableRow
             android:id="@+id/tableRow2"
@@ -316,6 +112,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
+                android:paddingLeft="10dp"
                 android:background="#FFFFFF"
                 android:textSize="16sp" />
 
@@ -324,6 +121,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
+                 android:paddingLeft="10dp"
                 android:background="#FFFFFF"
                 android:textSize="16sp" />
 
@@ -332,12 +130,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
+                 android:paddingLeft="10dp"
                 android:background="#FFFFFF"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/mon4"
                 android:layout_width="0dp"
+                 android:paddingLeft="10dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
@@ -364,13 +164,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
+                android:paddingLeft="10dp"
                 android:textSize="16sp" />
-
             <TextView
                 android:id="@+id/tues2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
+                android:paddingLeft="10dp"
                 android:background="#FFFFFF"
                 android:textSize="16sp" />
 
@@ -380,6 +181,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
+                android:paddingLeft="10dp"
                 android:textSize="16sp" />
 
             <TextView
@@ -388,6 +190,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
+                android:paddingLeft="10dp"
                 android:textSize="16sp" />
         </TableRow>
         
@@ -411,6 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
+                android:paddingLeft="10dp"
                 android:textSize="16sp" />
 
             <TextView
@@ -419,6 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
+                android:paddingLeft="10dp"
                 android:textSize="16sp" />
 
             <TextView
@@ -427,6 +232,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
+                android:paddingLeft="10dp"
                 android:textSize="16sp" />
 
             <TextView
@@ -434,6 +240,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
+                android:paddingLeft="10dp"
                 android:background="#FFFFFF"
                 android:textSize="16sp" />
         </TableRow>
@@ -455,6 +262,7 @@
                 android:id="@+id/thurs1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
                 android:textSize="16sp" />
@@ -465,6 +273,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
+                android:paddingLeft="10dp"
                 android:textSize="16sp" />
 
             <TextView
@@ -473,6 +282,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
+                android:paddingLeft="10dp"
                 android:textSize="16sp" />
 
             <TextView
@@ -480,6 +290,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
+                android:paddingLeft="10dp"
                 android:background="#FFFFFF"
                 android:textSize="16sp" />
         </TableRow>
@@ -500,6 +311,7 @@
             <TextView
                 android:id="@+id/fri1"
                 android:layout_width="0dp"
+                android:paddingLeft="10dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
@@ -509,6 +321,7 @@
                 android:id="@+id/fri2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
                 android:textSize="16sp" />
@@ -518,6 +331,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
+                android:paddingLeft="10dp"
                 android:background="#FFFFFF"
                 android:textSize="16sp" />
 
@@ -526,6 +340,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
+                android:paddingLeft="10dp"
                 android:background="#FFFFFF"
                 android:textSize="16sp" />
         </TableRow>
@@ -548,6 +363,7 @@
                 android:id="@+id/sat1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
                 android:textSize="16sp" />
@@ -558,6 +374,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
+                android:paddingLeft="10dp"
                 android:textSize="16sp" />
 
             <TextView
@@ -566,6 +383,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
+                android:paddingLeft="10dp"
                 android:textSize="16sp" />
 
             <TextView
@@ -574,6 +392,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
+                android:paddingLeft="10dp"
                 android:textSize="16sp" />
         </TableRow>
                  
@@ -594,6 +413,7 @@
             <TextView
                 android:id="@+id/sun1"
                 android:layout_width="0dp"
+                android:paddingLeft="10dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
@@ -602,6 +422,7 @@
             <TextView
                 android:id="@+id/sun2"
                 android:layout_width="0dp"
+                android:paddingLeft="10dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
@@ -610,14 +431,17 @@
             <TextView
                 android:id="@+id/sun3"
                 android:layout_width="0dp"
+                android:paddingLeft="10dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
                 android:textSize="16sp" />
+            
 
             <TextView
                 android:id="@+id/sun4"
                 android:layout_width="0dp"
+                android:paddingLeft="10dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1px"
                 android:background="#FFFFFF"
@@ -626,4 +450,42 @@
                 
     </TableLayout>
 	  </LinearLayout>
+	    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+          android:layout_below="@+id/LinearLayout01"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal" >
+			 
+	    
+    <TextView
+        android:id="@+id/swap"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+         android:layout_weight="0.3"
+        android:text="Swap"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+	        
+
+ 
+    <Spinner
+        android:id="@+id/spinner1"
+        android:drawSelectorOnTop="true"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+         android:entries="@array/days_array"
+        android:prompt="@string/day" />
+
+         <TextView
+        android:id="@+id/with"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+         android:layout_weight="0.3"
+          android:layout_marginLeft="10dp"
+        android:text="With"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
+
 </RelativeLayout>

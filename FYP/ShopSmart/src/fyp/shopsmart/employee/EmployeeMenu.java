@@ -18,13 +18,9 @@ import android.widget.Toast;
 public class EmployeeMenu extends Activity {
 	
 	Button btnStaffH;
+	Button btnRota;
 	int check;
-	
-
 	int john;
-	
-	String time;
-	
 	int ian;
 	int sarah;
 	int aishling;
@@ -36,7 +32,8 @@ public class EmployeeMenu extends Activity {
 		
 		check = 0;
 		
-		btnStaffH = (Button) findViewById(R.id.staffhours);
+		 btnStaffH = (Button) findViewById(R.id.staffhours);
+		 btnRota = (Button) findViewById(R.id.rota);
 		 Intent intent = getIntent();	
 	  	 ian = intent.getIntExtra("ian",0);
 	  	 john = intent.getIntExtra("john",0);
@@ -86,25 +83,49 @@ public class EmployeeMenu extends Activity {
 					if(check == 1)
 					{
 						staffHours.putExtra("SignedIn" , 1);
-						staffHours.putExtra("jt" , time);
 						startActivity(staffHours);		
 					}
 					if(check == 2)
 					{
 						staffHours.putExtra("SignedIn" , 2);
-						staffHours.putExtra("it" , time);
 						startActivity(staffHours);		
 					}
 					if(check == 3)
 					{
 						staffHours.putExtra("SignedIn" , 3);
-						staffHours.putExtra("st" , time);
 						startActivity(staffHours);		
 					}
 					if(check == 4)
 					{
 						staffHours.putExtra("SignedIn" , 4);
-						staffHours.putExtra("at" , time);
+						startActivity(staffHours);		
+					}
+						
+		    }		
+		 });
+		 
+		 btnRota.setOnClickListener(new OnClickListener() {	
+		      	public void onClick(View v) {
+		      		
+					Intent staffHours = new Intent (EmployeeMenu.this,Rota.class);
+					if(check == 1)
+					{
+						staffHours.putExtra("SignedIn" , 1);
+						startActivity(staffHours);		
+					}
+					if(check == 2)
+					{
+						staffHours.putExtra("SignedIn" , 2);
+						startActivity(staffHours);		
+					}
+					if(check == 3)
+					{
+						staffHours.putExtra("SignedIn" , 3);
+						startActivity(staffHours);		
+					}
+					if(check == 4)
+					{
+						staffHours.putExtra("SignedIn" , 4);
 						startActivity(staffHours);		
 					}
 						

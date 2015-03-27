@@ -26,7 +26,20 @@
     <string name="title_activity_database">Database</string>
     <string name="title_activity_search">Search</string>
     <string name="title_activity_read_xml">ReadXML</string>
-        <string name="title_activity_check_signed_in">CheckSignedIn</string>
+    <string name="title_activity_check_signed_in">CheckSignedIn</string>
+    <string name="title_activity_rota">Rota</string>
+    <string name="day">Day</string>
+
+    <string-array name="days_array">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
+    <string name="title_activity_custom_on_item_selected_listener">CustomOnItemSelectedListener</string>
 
 </resources>
-

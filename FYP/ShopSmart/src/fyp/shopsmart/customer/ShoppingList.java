@@ -43,8 +43,6 @@ public class ShoppingList extends Activity {
 	
 
 	public static int shopListOk = 0;
-	
-	
 	AutoCompleteTextView textView;
 	TextView txtMsg;
 	EditText inputQuantity;

@@ -13,6 +13,7 @@ import java.util.TimeZone;
 
 
 
+
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -105,6 +106,9 @@ public class StaffHours extends Activity {
 	Button btnBO;
 	Button btnView;
 	
+	Button btnClearTable;
+	Button btnClearHours;
+	
 	
 	ArrayList<String> days;
 	Map<String,String> time;
@@ -153,12 +157,14 @@ public class StaffHours extends Activity {
 		 sun2 = (TextView) findViewById(R.id.sun2);
 		 sun3 = (TextView) findViewById(R.id.sun3);
 		 sun4 = (TextView) findViewById(R.id.sun4); 
+		 
 		 btnTI  = (Button) findViewById(R.id.btnTI);
 		 btnTO  = (Button) findViewById(R.id.btnTO);
 		 btnBI  = (Button) findViewById(R.id.btnBI);
 		 btnBO  = (Button) findViewById(R.id.btnBO);
-		 btnView  = (Button) findViewById(R.id.viewHours);
-		 
+		 btnView  = (Button) findViewById(R.id.refresh);
+		 btnClearHours = (Button) findViewById(R.id.btnclearday);
+		 btnClearTable = (Button) findViewById(R.id.btncleartable);
 		 time  = new HashMap<String,String>(); 
 		 days = new ArrayList<String>();
 
@@ -166,13 +172,12 @@ public class StaffHours extends Activity {
 		 //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			//StrictMode.setThreadPolicy(policy);
 
-		 
 		 Intent intent = getIntent();	
 			check = intent.getIntExtra("SignedIn",0);
 				
 			if(check == 1)
 			{
-				time.put("userName","John (Manager)");
+				time.put("userName","john(manager)");
 				time.put("TimeIn" ,"2");
 				time.put("TimeOut" ,"2");
 				time.put("BreakIn" ,"2");
@@ -187,7 +192,7 @@ public class StaffHours extends Activity {
 			
 			if(check == 2)
 			{
-				time.put("userName","Ian");
+				time.put("userName","ian");
 				time.put("TimeIn" ,"2");
 				time.put("TimeOut" ,"2");
 				time.put("BreakIn" ,"2");
@@ -196,14 +201,12 @@ public class StaffHours extends Activity {
 				recieve=1;
 				
 				Send s = new Send();
-				 s.execute();
-				
-				 
+				 s.execute();	 
 			}		
 		
 			if(check == 3)
 			{
-				time.put("userName","Sarah");
+				time.put("userName","sarah");
 				time.put("TimeIn" ,"2");
 				time.put("TimeOut" ,"2");
 				time.put("BreakIn" ,"2");
@@ -216,7 +219,7 @@ public class StaffHours extends Activity {
 			}		
 			if(check == 4)
 			{
-				time.put("userName","Aishling");
+				time.put("userName","aishling");
 				time.put("TimeIn" ,"2");
 				time.put("TimeOut" ,"2");
 				time.put("BreakIn" ,"2");
@@ -232,23 +235,23 @@ public class StaffHours extends Activity {
 	
 	    			if(check == 1)
 	    			{
-	    				time.put("userName","John (Manager)");
+	    				time.put("userName","john(manager)");
 	    				insertTime(1);
 	    			}	
 	    			if(check == 2)
 	    			{
-	    				time.put("userName","Ian");
+	    				time.put("userName","ian");
 	    				insertTime(1);
 	    			
 	    			}
 	    			if(check == 3)
 	    			{
-	    				time.put("userName","Sarah");
+	    				time.put("userName","sarah");
 	    				insertTime(1);
 	    			}
 	    			if(check == 4)
 	    			{
-	    				time.put("userName","Aishling");
+	    				time.put("userName","aishling");
 	    				insertTime(1);
 	    			}
 	    		}
@@ -259,25 +262,25 @@ public class StaffHours extends Activity {
 	    				
 	    			if(check == 1)
 	    			{
-	    				time.put("userName","John (Manager)");
+	    				time.put("userName","john(manager)");
 	    				insertTime(2);
 	    				//alertDialog("John (Manager)");
 	    			}	
 	    			if(check == 2)
 	    			{
-	    				time.put("userName","Ian");
+	    				time.put("userName","ian");
 	    				insertTime(2);
 
 	    			}
 	    			if(check == 3)
 	    			{
-	    				time.put("userName","Sarah");
+	    				time.put("userName","sarah");
 	    				insertTime(2);
 	    				//alertDialog("Sarah");
 	    			}
 	    			if(check == 4)
 	    			{
-	    				time.put("userName","Aishling");
+	    				time.put("userName","aishling");
 	    				insertTime(2);
 	    				//alertDialog("Aishling");
 	    			}
@@ -289,22 +292,22 @@ public class StaffHours extends Activity {
 	    			
 	    			if(check == 1)
 	    			{
-	    				time.put("userName","John (Manager)");
+	    				time.put("userName","john(manager)");
 	    				insertTime(3);
 	    			}		
 	    			if(check == 2)
 	    			{
-	    				time.put("userName","Ian");
+	    				time.put("userName","ian");
 	    				insertTime(3);
 	    			}
 	    			if(check == 3)
 	    			{
-	    				time.put("userName","Sarah");
+	    				time.put("userName","sarah");
 	    				insertTime(3);
 	    			}
 	    			if(check == 4)
 	    			{
-	    				time.put("userName","Aishling");
+	    				time.put("userName","aishling");
 	    				insertTime(3);
 	    			}
 	    			
@@ -315,22 +318,22 @@ public class StaffHours extends Activity {
 	    			
 	    			if(check == 1)
 	    			{
-	    				time.put("userName","John (Manager)");
+	    				time.put("userName","john(manager)");
 	    				insertTime(4);
 	    			}	
 	    			if(check == 2)
 	    			{
-	    				time.put("userName","Ian");
+	    				time.put("userName","ian");
 	    				insertTime(4);
 	    			}
 	    			if(check == 3)
 	    			{
-	    				time.put("userName","Sarah");
+	    				time.put("userName","sarah");
 	    				insertTime(4);
 	    			}
 	    			if(check == 4)
 	    			{
-	    				time.put("userName","Aishling");
+	    				time.put("userName","aishling");
 	    				insertTime(4);
 	    			}
 		
@@ -339,12 +342,32 @@ public class StaffHours extends Activity {
 		  btnView.setOnClickListener(new OnClickListener() {	
 		      	public void onClick(View v) {
 		      		
-		      		txtMsg.setText("");
+		      		finish();
+		      		startActivity(getIntent());
+		      		}		
+		 		});
+		  
+		  btnClearTable.setOnClickListener(new OnClickListener() {	
 
+				public void onClick(View v) {
+		      		
+		      		time.put("TimeIn" ,"4");
+					time.put("TimeOut" ,"4");
+					time.put("BreakIn" ,"4");
+					time.put("BreakOut" ,"4");
 					
+					recieve=2;
+					//timeIn.append("IN");
+					Send s = new Send();
+					 s.execute();
+					 
+					 finish();
+			      		startActivity(getIntent());
+							 
 		      		}		
 		 		});
 	}
+	
 	
 	public void insertTime(int field)
 	{
@@ -367,7 +390,7 @@ public class StaffHours extends Activity {
 		if(field == 2 &&timeOut.getText().toString().equals(""))
 		{
 			getTime();
-			timeOut.append(timeC);
+			
 
 
 			time.put("TimeIn" ,"1");
@@ -392,7 +415,6 @@ public class StaffHours extends Activity {
 			time.put("BreakIn" ,timeC);
 			time.put("BreakOut" ,"1");
 			recieve=2;
-			
 			Send s = new Send();
 			 s.execute();
 		}
@@ -432,6 +454,8 @@ public class StaffHours extends Activity {
 		.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog,int id) {
 				
+				timeOut.append(timeC);
+				
 					breakIn.setText("");
 					breakOut.setText("");
 					timeOut.setText("");
@@ -442,8 +466,10 @@ public class StaffHours extends Activity {
 					time.put("BreakIn" ,"3");
 					time.put("BreakOut" ,"3");
 					
-					new Send().execute();
-			    	
+					recieve=2;
+					Send s = new Send();
+					 s.execute();
+					    	
 			}
 		})
 		.setNegativeButton("No",new DialogInterface.OnClickListener() {
@@ -472,7 +498,8 @@ public class StaffHours extends Activity {
 		String st = null,ft=null,bi = null,bo = null;
 		String smon1;
 
-		String url=  "http://192.168.0.29:8080/NetworkingSupport/servlet";
+		
+		String url=  "http://10.12.2.47:8080/NetworkingSupport/servlet";
 		JSONObject jsonSEND = new JSONObject(time);
 
 		protected Map<String, String> doInBackground(ArrayList<HashMap<String, String>>...params) 
@@ -480,7 +507,6 @@ public class StaffHours extends Activity {
 			 Map<String,String> rTime  = new HashMap<String,String>(); 
 			try{
 				//String min1,max1,average;
-				
 				String jsonString = HttpUtils.urlContentPost(url,"user", jsonSEND.toString());
 				//			 JSONObject jsonResult = new JSONObject(jsonString);
 				if (recieve == 1)
@@ -490,7 +516,6 @@ public class StaffHours extends Activity {
 					if( jsonResult!= null)
 					{
 						st = jsonResult.getString("start");
-
 						ft = jsonResult.getString("finish");
 
 						bi = jsonResult.getString("breakI");	
@@ -500,12 +525,10 @@ public class StaffHours extends Activity {
 						//recieve = 0;
 						//jsonResult.getJSONArray(name)
 
-//						rTime.put("st", st);
-//						rTime.put("ft", ft);
-//						rTime.put("bi", bi);
-//						rTime.put("bo", bo);
-						
-						
+						rTime.put("st", st);
+						rTime.put("ft", ft);
+						rTime.put("bi", bi);
+						rTime.put("bo", bo);
 						
 						rTime.put("mon1",jsonResult.getString("mon1"));
 						rTime.put("mon2",jsonResult.getString("mon2"));
@@ -569,11 +592,13 @@ public class StaffHours extends Activity {
     		//super.onPostExecute(result);
     		if(!result.isEmpty())
     		{
-//	    		timeIn.append(result.get("st"));
-//	    		timeIn.append(result.get("ft"));
-//	    		timeIn.append(result.get("bi"));
-//	    		timeIn.append(result.get("bo"));
-	    		
+    			if(!result.get("st").equals("5") && !result.get("ft").equals("5"));
+    			{
+		    		timeIn.append(result.get("st"));
+		    		timeOut.append(result.get("ft"));
+		    		breakIn.append(result.get("bi"));
+		    		breakOut.append(result.get("bo"));
+    			}
 	 		     mon1.append(result.get("mon1"));
 	    		 mon2.append(result.get("mon2"));
 	    		 mon3.append(result.get("mon3"));
@@ -594,7 +619,8 @@ public class StaffHours extends Activity {
 	    		 fri2.append(result.get("fri2"));
 	    		 fri3.append(result.get("fri3"));
 	    		 fri4.append(result.get("fri4"));
-	    		 sat1.append(result.get("sat1"));///////.append(result.get("sat2"));
+	    		 sat1.append(result.get("sat1"));
+	    		 sat2.append(result.get("sat2"));
 	    		 sat3.append(result.get("sat3"));
 	    		 sat4.append(result.get("sat4"));
 	    		 sun1.append(result.get("sun1"));
@@ -603,9 +629,7 @@ public class StaffHours extends Activity {
 	    		 sun4.append(result.get("sun4")); 
 	    			
     		}
-
     	}
-
 	}
 	public String getTime()
 	{
@@ -620,6 +644,5 @@ public class StaffHours extends Activity {
 	{
 	    finish();  
 	}
-
 
 }

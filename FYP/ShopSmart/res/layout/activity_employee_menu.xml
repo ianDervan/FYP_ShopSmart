@@ -55,7 +55,7 @@
        
        
         <Button
-      android:id="@+id/button5"
+      android:id="@+id/rota"
       android:layout_width="200dp"
       android:layout_height="60dp"
       android:layout_centerHorizontal="true"
@@ -71,7 +71,7 @@
       android:layout_width="200dp"
       android:layout_height="60dp"
       android:layout_centerHorizontal="true"
-      android:layout_below="@+id/button5"
+      android:layout_below="@+id/rota"
       android:layout_marginTop="15dp"
       android:background="@drawable/custombutton"
       android:text="@string/messages"

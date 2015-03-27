@@ -11,8 +11,8 @@
         android:required="false" />
 
     <uses-sdk
-        android:minSdkVersion="19"
-        android:targetSdkVersion="19" />
+        android:minSdkVersion="18"
+        android:targetSdkVersion="18" />
 
     <application
         android:allowBackup="true"
@@ -65,13 +65,19 @@
             android:name=".customer.ReadXML"
             android:label="@string/title_activity_read_xml" >
         </activity>
-        <activity
-            android:name=".employee.StaffHours"
-             >
+        <activity android:name=".employee.StaffHours" >
         </activity>
         <activity
-            android:name="fyp.shopsmart.employee.CheckSignedIn"
+            android:name=".employee.CheckSignedIn"
             android:label="@string/title_activity_check_signed_in" >
+        </activity>
+        <activity
+            android:name=".employee.Rota"
+            android:label="@string/title_activity_rota" >
+        </activity>
+        <activity
+            android:name=".CustomOnItemSelectedListener"
+            android:label="@string/title_activity_custom_on_item_selected_listener" >
         </activity>
     </application>
 

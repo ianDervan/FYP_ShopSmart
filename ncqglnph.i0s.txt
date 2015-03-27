@@ -1,0 +1,56 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch Features
+# Your branch is up-to-date with 'origin/Features'.
+#
+# Changes to be committed:
+#	modified:   FYP/ShopSmart/AndroidManifest.xml
+#	modified:   FYP/ShopSmart/bin/AndroidManifest.xml
+#	modified:   FYP/ShopSmart/bin/R.txt
+#	modified:   FYP/ShopSmart/bin/ShopSmart.apk
+#	modified:   FYP/ShopSmart/bin/classes.dex
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/R$array.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/R$attr.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/R$dimen.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/R$drawable.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/R$id.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/R$layout.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/R$menu.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/R$string.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/R$style.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/R$xml.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/customer/MainActivity.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/customer/Search.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/customer/ShoppingList$1.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/customer/ShoppingList$2.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/customer/ShoppingList$3.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/customer/ShoppingList$4.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/customer/ShoppingList$5.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/customer/ShoppingList$6.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/customer/ShoppingList.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/customer/SignIn$1.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/customer/SignIn.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/customer/Spending.class
+#	modified:   FYP/ShopSmart/bin/classes/fyp/shopsmart/employee/EmployeeMenu.class
+#	modified:   FYP/ShopSmart/bin/dexedLibs/zbarscannerlibrary-c6175962547dfad859565138aa92c897.jar
+#	modified:   FYP/ShopSmart/bin/resources.ap_
+#	modified:   FYP/ShopSmart/gen/fyp/shopsmart/R.java
+#	new file:   FYP/ShopSmart/res/layout/activity_custom_on_item_selected_listener.xml
+#	modified:   FYP/ShopSmart/res/layout/activity_customer_menu.xml
+#	modified:   FYP/ShopSmart/res/layout/activity_employee_menu.xml
+#	new file:   FYP/ShopSmart/res/layout/activity_rota.xml
+#	modified:   FYP/ShopSmart/res/layout/activity_staff_hours.xml
+#	new file:   FYP/ShopSmart/res/menu/custom_on_item_selected_listener.xml
+#	new file:   FYP/ShopSmart/res/menu/rota.xml
+#	new file:   FYP/ShopSmart/res/values/days.xml
+#	modified:   FYP/ShopSmart/res/values/strings.xml
+#	modified:   FYP/ShopSmart/src/fyp/shopsmart/customer/ShoppingList.java
+#	modified:   FYP/ShopSmart/src/fyp/shopsmart/customer/SignIn.java
+#	new file:   FYP/ShopSmart/src/fyp/shopsmart/employee/CustomOnItemSelectedListener.java
+#	modified:   FYP/ShopSmart/src/fyp/shopsmart/employee/EmployeeMenu.java
+#	new file:   FYP/ShopSmart/src/fyp/shopsmart/employee/Rota.java
+#	modified:   FYP/ShopSmart/src/fyp/shopsmart/employee/StaffHours.java
+#	modified:   FYP/ZBarScannerLibrary/bin/zbarscannerlibrary.jar
+#
+
