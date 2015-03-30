@@ -599,6 +599,7 @@ public class StaffHours extends Activity {
 		    		breakIn.append(result.get("bi"));
 		    		breakOut.append(result.get("bo"));
     			}
+    			
 	 		     mon1.append(result.get("mon1"));
 	    		 mon2.append(result.get("mon2"));
 	    		 mon3.append(result.get("mon3"));

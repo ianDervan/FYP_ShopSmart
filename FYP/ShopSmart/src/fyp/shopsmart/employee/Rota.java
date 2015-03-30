@@ -15,20 +15,25 @@ import fyp.shopsmart.R.layout;
 import fyp.shopsmart.R.menu;
 import fyp.shopsmart.employee.StaffHours.Send;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.SyncStateContract.Constants;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Rota extends Activity {
-	
+
 	AutoCompleteTextView textView;
 
 	TextView mon1;
@@ -59,13 +64,50 @@ public class Rota extends Activity {
 	TextView sun2;
 	TextView sun3;
 	TextView sun4;
+	
+	TextView mon1R;
+	TextView mon2R;
+	TextView mon3R;
+	TextView mon4R;
+	TextView tues1R;
+	TextView tues2R;
+	TextView tues3R;
+	TextView tues4R;
+	TextView wed1R;
+	TextView wed2R;
+	TextView wed3R;
+	TextView wed4R;
+	TextView thurs1R;
+	TextView thurs2R;
+	TextView thurs3R;
+	TextView thurs4R;
+	TextView fri1R;
+	TextView fri2R;
+	TextView fri3R;
+	TextView fri4R;
+	TextView sat1R;
+	TextView sat2R;
+	TextView sat3R;
+	TextView sat4R;
+	TextView sun1R;
+	TextView sun2R;
+	TextView sun3R;
+	TextView sun4R;
 	Spinner spinner1;
+	Spinner spinner2;
+	Spinner spinner3;
+	Spinner spinner4;
 
+	Button btnSS;
+	Button btnBO;
 	Map<String,String> rota;
+	int check;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		
 		setContentView(R.layout.activity_rota);
 
 		mon1 = (TextView) findViewById(R.id.mon1);
@@ -97,34 +139,217 @@ public class Rota extends Activity {
 		sun3 = (TextView) findViewById(R.id.sun3);
 		sun4 = (TextView) findViewById(R.id.sun4); 
 		
+		mon1R = (TextView) findViewById(R.id.mon1R);
+		mon2R = (TextView) findViewById(R.id.mon2R);
+		mon3R = (TextView) findViewById(R.id.mon3R);
+		mon4R = (TextView) findViewById(R.id.mon4R);
+		tues1R = (TextView) findViewById(R.id.tues1R);
+		tues2R = (TextView) findViewById(R.id.tues2R);
+		tues3R = (TextView) findViewById(R.id.tues3R);
+		tues4R = (TextView) findViewById(R.id.tues4R);
+		wed1R = (TextView) findViewById(R.id.wed1R);
+		wed2R = (TextView) findViewById(R.id.wed2R);
+		wed3R = (TextView) findViewById(R.id.wed3R);
+		wed4R = (TextView) findViewById(R.id.wed4R);
+		thurs1R = (TextView) findViewById(R.id.thurs1R);
+		thurs2R = (TextView) findViewById(R.id.thurs2R);
+		thurs3R = (TextView) findViewById(R.id.thurs3R);
+		thurs4R = (TextView) findViewById(R.id.thurs4R);
+		fri1R = (TextView) findViewById(R.id.fri1R);
+		fri2R = (TextView) findViewById(R.id.fri2R);
+		fri3R = (TextView) findViewById(R.id.fri3R);
+		fri4R = (TextView) findViewById(R.id.fri4R);
+		sat1R = (TextView) findViewById(R.id.sat1R);
+		sat2R = (TextView) findViewById(R.id.sat2R);
+		sat3R = (TextView) findViewById(R.id.sat3R);
+		sat4R = (TextView) findViewById(R.id.sat4R);
+		sun1R = (TextView) findViewById(R.id.sun1R);
+		sun2R = (TextView) findViewById(R.id.sun2R);
+		sun3R = (TextView) findViewById(R.id.sun3R);
+		sun4R = (TextView) findViewById(R.id.sun4R); 
+		
+		btnSS  = (Button) findViewById(R.id.btnsendswap);
+		btnBO  = (Button) findViewById(R.id.btnbookoff);
 
-		addListenerOnSpinnerItemSelection();
+		check = 0;
+		
+		spinner1 = (Spinner) findViewById(R.id.spinner1);
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+				this, R.array.days_array, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner1.setAdapter(adapter);
+
+		spinner2 = (Spinner) findViewById(R.id.spinner2);
+		ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(
+				this, R.array.users_array, android.R.layout.simple_spinner_item);
+		adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner2.setAdapter(adapter1);
+
+		spinner3 = (Spinner) findViewById(R.id.spinner3);
+		ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(
+				this, R.array.days_array, android.R.layout.simple_spinner_item);
+		adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner3.setAdapter(adapter3);
+		
+		spinner4 = (Spinner) findViewById(R.id.dayoff);
+		ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(
+				this, R.array.days_array, android.R.layout.simple_spinner_item);
+		adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner4.setAdapter(adapter4);
+
+
+		 Intent intent = getIntent();	
+			check = intent.getIntExtra("SignedIn",0);
+			
+//			if(check == 1)
+//			{
+//				setContentView(R.layout.activity_rota_john);
+//				Toast.makeText(Rota.this,
+//						"OnClickListener : " + 
+//								"\nSpinner 1 : "+ String.valueOf(spinner1.getSelectedItem()) 
+//								
+//								,
+//								Toast.LENGTH_SHORT).show();
+//			}	
+
 
 		rota  = new HashMap<String,String>();
-		
-		
 		rota.put("rotaRequested", "1");
 
 		Send s = new Send();
 		s.execute();
+
+
+		btnSS.setOnClickListener(new OnClickListener() {	
+			public void onClick(View v) {
+
+				
+				if(check == 1)
+				{
+					rota.put("userNameFR","John");
+					sendDetails();
+				}		
+				
+				if(check == 2)
+				{
+					rota.put("userNameFR","Ian");
+					
+					sendDetails();
+				}		
+			
+				if(check == 3)
+				{
+					rota.put("userNameFR","Sarah");
+			
+					sendDetails();
+					
+				}		
+				if(check == 4)
+				{
+					rota.put("userNameFR","aishling");
+
+					sendDetails();
+				}		
+			}		
+		});
+		btnBO.setOnClickListener(new OnClickListener() {	
+			public void onClick(View v) {
+
+			
+				if(check == 1)
+				{
+					rota.put("userNameFR","John");
+					rota.put("rotaRequested", "3");
+					rota.put("Day",spinner4.getSelectedItem().toString());
+					
+					Send s = new Send();
+					 s.execute();
+					 
+					 finish();
+				   		startActivity(getIntent());
+				   		
+				}		
+				
+				if(check == 2)
+				{
+					rota.put("userNameFR","Ian");
+					rota.put("rotaRequested", "3");
+					rota.put("Day",spinner4.getSelectedItem().toString());
+					
+					Send s = new Send();
+					 s.execute();
+					 
+					 finish();
+				   		startActivity(getIntent());
+					
+					
+				}		
+			
+				if(check == 3)
+				{
+					rota.put("userNameFR","Sarah");
+					rota.put("rotaRequested", "3");
+					rota.put("Day",spinner4.getSelectedItem().toString());
+					
+					Send s = new Send();
+					 s.execute();
+					 
+					 finish();
+				   		startActivity(getIntent());
+			
+					
+					
+				}		
+				if(check == 4)
+				{
+					rota.put("userNameFR","aishling");
+					rota.put("rotaRequested", "3");
+					rota.put("Day",spinner3.getSelectedItem().toString());
+					
+					Send s = new Send();
+					 s.execute();
+
+					 finish();
+				   		startActivity(getIntent());
+					
+				}		
+				
+			}		
+		});
+
 	}
-	 public void addListenerOnSpinnerItemSelection() {
-			spinner1 = (Spinner) findViewById(R.id.spinner1);
-			spinner1.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+
+	
+	
+	public void sendDetails()
+	{
+		rota.put("swapDay",spinner1.getSelectedItem().toString());
+		rota.put("withUser",spinner2.getSelectedItem().toString());
+		rota.put("forUsersDay",spinner3.getSelectedItem().toString());
+		rota.put("rotaRequested", "2");
+		Send s = new Send();
+		 s.execute();
+		 
+		 finish();
+   		startActivity(getIntent());
+		 	
 	}
+
+
 
 	public class Send extends
 	AsyncTask< ArrayList<HashMap<String,String>>,Void,Map<String, String>>
 	{
 
 		Map<String,String> rRota;
-
-		String url=  "http://10.12.2.47:8080/NetworkingSupport/servlet";
+		
+		String url=  "http://192.168.0.29:8080/NetworkingSupport/servlet";
 		JSONObject jsonSEND = new JSONObject(rota);
 
 		protected Map<String, String> doInBackground(ArrayList<HashMap<String, String>>...params) 
 		{
 			rRota  = new HashMap<String,String>(); 
+			
 			try{
 
 				String jsonString = HttpUtils.urlContentPost(url,"rota", jsonSEND.toString());
@@ -172,6 +397,47 @@ public class Rota extends Activity {
 					rRota.put("sun2",jsonResult.getString("sunI"));
 					rRota.put("sun3",jsonResult.getString("sunS"));
 					rRota.put("sun4",jsonResult.getString("sunA"));
+					
+					rRota.put("mon1NW",jsonResult.getString("monJNW"));
+					rRota.put("mon2NW",jsonResult.getString("monINW"));
+					rRota.put("mon3NW",jsonResult.getString("monSNW"));
+					rRota.put("mon4NW",jsonResult.getString("monANW"));
+
+					rRota.put("tues1NW",jsonResult.getString("tuesJNW"));
+					rRota.put("tues2NW",jsonResult.getString("tuesINW"));
+					rRota.put("tues3NW",jsonResult.getString("tuesSNW"));
+					rRota.put("tues4NW",jsonResult.getString("tuesANW"));
+
+					rRota.put("wed1NW",jsonResult.getString("wedJNW"));
+					rRota.put("wed2NW",jsonResult.getString("wedINW"));
+					rRota.put("wed3NW",jsonResult.getString("wedSNW"));
+					rRota.put("wed4NW",jsonResult.getString("wedANW"));
+
+					rRota.put("thurs1NW",jsonResult.getString("thursJNW"));
+					rRota.put("thurs2NW",jsonResult.getString("thursINW"));
+					rRota.put("thurs3NW",jsonResult.getString("thursSNW"));
+					rRota.put("thurs4NW",jsonResult.getString("thursANW"));
+
+					rRota.put("fri1NW",jsonResult.getString("friJNW"));
+					rRota.put("fri2NW",jsonResult.getString("friINW"));
+					rRota.put("fri3NW",jsonResult.getString("friSNW"));
+					rRota.put("fri4NW",jsonResult.getString("friANW"));
+
+					rRota.put("fri1NW",jsonResult.getString("friJNW"));
+					rRota.put("fri2NW",jsonResult.getString("friINW"));
+					rRota.put("fri3NW",jsonResult.getString("friSNW"));
+					rRota.put("fri4NW",jsonResult.getString("friANW"));
+
+					rRota.put("sat1NW",jsonResult.getString("satJNW"));
+					rRota.put("sat2NW",jsonResult.getString("satINW"));
+					rRota.put("sat3NW",jsonResult.getString("satSNW"));
+					rRota.put("sat4NW",jsonResult.getString("satANW"));
+
+					rRota.put("sun1NW",jsonResult.getString("sunJNW"));
+					rRota.put("sun2NW",jsonResult.getString("sunINW"));
+					rRota.put("sun3NW",jsonResult.getString("sunSNW"));
+					rRota.put("sun4NW",jsonResult.getString("sunANW"));
+					
 
 				}
 
@@ -222,9 +488,48 @@ public class Rota extends Activity {
 				sun2.append(result.get("sun2"));
 				sun3.append(result.get("sun3"));
 				sun4.append(result.get("sun4"));
+				
+				
+				
+				mon1R.append(result.get("mon1NW"));
+				mon2R.append(result.get("mon2NW"));
+				mon3R.append(result.get("mon3NW"));
+				mon4R.append(result.get("mon4NW"));
+				tues1R.append(result.get("tues1NW"));
+				tues2R.append(result.get("tues2NW"));
+				tues3R.append(result.get("tues3NW"));
+				tues4R.append(result.get("tues4NW"));
+				wed1R.append(result.get("wed1NW"));
+				wed2R.append(result.get("wed2NW"));
+				wed3R.append(result.get("wed3NW"));
+				wed4R.append(result.get("wed4NW"));
+				thurs1R.append(result.get("thurs1NW"));
+				thurs2R.append(result.get("thurs2NW"));
+				thurs3R.append(result.get("thurs3NW"));
+				thurs4R.append(result.get("thurs4NW"));
+				fri1R.append(result.get("fri1NW"));
+				fri2R.append(result.get("fri2NW"));
+				fri3R.append(result.get("fri3NW"));
+				fri4R.append(result.get("fri4NW"));
+				sat1R.append(result.get("sat1NW"));
+				sat2R.append(result.get("sat2NW"));
+				sat3R.append(result.get("sat3NW"));
+				sat4R.append(result.get("sat4NW"));
+				sun1R.append(result.get("sun1NW"));
+				sun2R.append(result.get("sun2NW"));
+				sun3R.append(result.get("sun3NW"));
+				sun4R.append(result.get("sun4NW"));
 
+				
 			}
 		}
 
+	}
+
+
+	@Override
+	public void onBackPressed()
+	{
+		finish();  
 	}
 }

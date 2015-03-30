@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="0dp"
-        android:text="This Weeks Rota"
+        android:text="johns Weeks Rota"
         android:textSize="22dp"
         android:textStyle="bold" />
 
@@ -829,7 +829,7 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/wed3R"
+                        android:id="@+id/wedR"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="1px"

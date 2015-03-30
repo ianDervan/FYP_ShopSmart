@@ -16,7 +16,6 @@ import org.json.JSONObject;
 import fyp.shopsmart.R;
 import fyp.shopsmart.employee.EmployeeMenu;
 import fyp.shopsmart.employee.HttpUtils;
-import fyp.shopsmart.employee.Users;
 import android.R.layout;
 import android.app.Activity;
 import android.content.Context;
@@ -40,14 +39,7 @@ import android.widget.Toast;
 import android.view.View.OnClickListener;
 
 public class SignIn extends Activity {
-	
-	
-	public static int checkIsSignedIn = 0;
-	public static int checkIsSignedIn1 = 0;
-	public static int checkIsSignedIn2 = 0;
-	public static int checkIsSignedIn3 = 0;
-	
-	//public Flags flag;
+
 	
 	 EditText username;
 	 EditText password;
@@ -61,8 +53,7 @@ public class SignIn extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sign);
-			
-		//setTitle("ARE YA WELL");
+
 		username = (EditText)findViewById(R.id.editText1);
 	    password = (EditText)findViewById(R.id.editText2);
 	    

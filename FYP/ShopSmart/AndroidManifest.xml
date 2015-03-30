@@ -48,28 +48,15 @@
             android:name=".customer.BarcodeScan"
             android:label="@string/title_activity_barcode_scan" >
         </activity>
-        <activity
-            android:name="com.dm.zbar.android.scanner.ZBarScannerActivity"
-            android:label="@string/app_name1"
-            android:screenOrientation="landscape" >
-        </activity>
-        <activity
-            android:name=".customer.Database"
-            android:label="@string/title_activity_database" >
-        </activity>
+ 
         <activity
             android:name=".customer.Search"
             android:label="@string/title_activity_search" >
         </activity>
+      
         <activity
-            android:name=".customer.ReadXML"
-            android:label="@string/title_activity_read_xml" >
-        </activity>
-        <activity android:name=".employee.StaffHours" >
-        </activity>
-        <activity
-            android:name=".employee.CheckSignedIn"
-            android:label="@string/title_activity_check_signed_in" >
+             android:name=".employee.StaffHours" 
+              android:label="@string/title_staffhours">
         </activity>
         <activity
             android:name=".employee.Rota"
