@@ -19,6 +19,8 @@ public class MainActivity extends Activity {
 	 Button btnScan;
 	 Button btnSearch;
 	 
+	 
+	 
 	 int ok;
 	 int backOk;
     @Override

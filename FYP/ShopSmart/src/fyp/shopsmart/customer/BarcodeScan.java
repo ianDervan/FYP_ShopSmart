@@ -194,6 +194,7 @@ public class BarcodeScan extends Activity {
     		//Toast.makeText(this, "Scan Result = " + data.getStringExtra(ZBarConstants.SCAN_RESULT), Toast.LENGTH_LONG).show();
     		
     		resultBarcode = data.getStringExtra(ZBarConstants.SCAN_RESULT);
+    		Toast.makeText(this, "Server Error" + resultBarcode, Toast.LENGTH_LONG).show();
 
     		startXml();
 

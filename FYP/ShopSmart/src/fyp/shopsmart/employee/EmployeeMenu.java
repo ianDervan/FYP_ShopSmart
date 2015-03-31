@@ -19,6 +19,7 @@ public class EmployeeMenu extends Activity {
 	
 	Button btnStaffH;
 	Button btnRota;
+	Button btnPricing;
 	int check;
 	int john;
 	int ian;
@@ -33,6 +34,7 @@ public class EmployeeMenu extends Activity {
 		check = 0;
 		
 		 btnStaffH = (Button) findViewById(R.id.staffhours);
+		 btnPricing  = (Button) findViewById(R.id.btnpricing);
 		 btnRota = (Button) findViewById(R.id.rota);
 		 Intent intent = getIntent();	
 	  	 ian = intent.getIntExtra("ian",0);
@@ -128,6 +130,18 @@ public class EmployeeMenu extends Activity {
 						staffHours.putExtra("SignedIn" , 4);
 						startActivity(staffHours);		
 					}
+						
+		    }		
+		 });
+		 
+		 btnPricing.setOnClickListener(new OnClickListener() {	
+		      	public void onClick(View v) {
+		      		
+					Intent pricing= new Intent (EmployeeMenu.this,Pricing.class);
+
+						
+						startActivity(pricing);		
+
 						
 		    }		
 		 });

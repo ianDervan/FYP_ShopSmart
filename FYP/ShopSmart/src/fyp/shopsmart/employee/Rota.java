@@ -343,7 +343,7 @@ public class Rota extends Activity {
 
 		Map<String,String> rRota;
 		
-		String url=  "http://192.168.0.29:8080/NetworkingSupport/servlet";
+		String url=  "http://10.12.2.47:8080/NetworkingSupport/servlet";
 		JSONObject jsonSEND = new JSONObject(rota);
 
 		protected Map<String, String> doInBackground(ArrayList<HashMap<String, String>>...params) 

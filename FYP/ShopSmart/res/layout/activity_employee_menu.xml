@@ -41,7 +41,7 @@
       android:textSize="30sp" />
       
        <Button
-      android:id="@+id/button4"
+      android:id="@+id/btnpricing"
       android:layout_width="200dp"
       android:layout_height="60dp"
       android:layout_centerHorizontal="true"
@@ -59,7 +59,7 @@
       android:layout_width="200dp"
       android:layout_height="60dp"
       android:layout_centerHorizontal="true"
-      android:layout_below="@+id/button4"
+      android:layout_below="@+id/btnpricing"
       android:layout_marginTop="15dp"
       android:background="@drawable/custombutton"
       android:text="@string/rota"

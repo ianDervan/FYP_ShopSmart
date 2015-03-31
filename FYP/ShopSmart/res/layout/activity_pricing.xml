@@ -1,0 +1,324 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="fyp.shopsmart.employee.Pricing" >
+
+    <TextView
+        android:id="@+id/checkchangeprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:text="Check/Change Price"
+        android:textSize="22dp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/checkchangeprice"
+        android:layout_marginTop="2dp"
+        android:background="#ED6F26" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autocompleteitem"
+        android:layout_width="275dp"
+        android:layout_height="34dp"
+        android:layout_below="@+id/line"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/customeditext"
+        android:dropDownWidth="340dp"
+        android:hint="Enter or Scan Item"
+        android:inputType="text|textMultiLine"
+        android:paddingLeft="10dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/autocompleteitem"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/scanitem"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/custombutton_lr"
+            android:text="Scan Item"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/checkprice"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/custombutton_lr"
+            android:text="Check Price"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        
+
+        <TextView
+            android:id="@+id/priceout"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_weight=".3"
+             android:gravity="center_vertical"
+            android:background="@drawable/customeditext"
+            android:hint="Price Is €"
+            android:paddingLeft="5dp" />
+        
+         <TextView
+            android:id="@+id/changepriceto"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="0.4"
+            android:text="New Price"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/changeprice"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_weight=".2"
+            android:gravity="center_vertical"
+            android:background="@drawable/customeditext"
+            android:hint="€"
+            android:paddingLeft="5dp" />
+        
+         <Button
+            android:id="@+id/btnchange"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_weight=".3"
+            android:background="@drawable/custombutton_lr"
+            android:text="Change"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_marginTop="15dp"
+        android:background="#ED6F26" />
+
+    <TextView
+        android:id="@+id/setupprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:text="Set Up Item"
+        android:textSize="22dp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/setupprice"
+        android:layout_marginTop="2dp"
+        android:background="#ED6F26" />
+
+    <EditText
+        android:id="@+id/enteritemname"
+        android:layout_width="275dp"
+        android:layout_height="34dp"
+        android:layout_below="@+id/line2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/customeditext"
+        android:hint="Enter Items Name..."
+        android:inputType="text|textMultiLine"
+        android:paddingLeft="10dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/enteritemname"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/enteritembarcode"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_below="@+id/line2"
+            android:layout_centerHorizontal="true"
+            android:layout_weight=".7"
+            android:background="@drawable/customeditext"
+            android:hint="Enter or Scan Barcode"
+            android:inputType="text|textMultiLine"
+            android:paddingLeft="5dp" />
+
+        <Button
+            android:id="@+id/btnscanbar"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_weight=".3"
+            android:background="@drawable/custombutton_lr"
+            android:text="Scan"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/enterpricetxt"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="0.3"
+            android:text="Price"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/enterprice"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_weight=".35"
+            android:background="@drawable/customeditext"
+            android:hint="€"
+            android:inputType="text|textMultiLine"
+            android:paddingLeft="2dp" />
+
+        <TextView
+            android:id="@+id/enterquantitytxt"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+              android:layout_marginLeft="10dp"
+            android:layout_weight="0.35"
+            android:text="Stock"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/enterquantity"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_weight=".2"
+            android:background="@drawable/customeditext"
+            android:hint="#"
+            android:inputType="text|textMultiLine"
+            android:paddingLeft="5dp" />
+
+         <Button
+            android:id="@+id/btnsubitsetup"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_weight=".55"
+            android:background="@drawable/custombutton_lr"
+            android:text="Submit"
+            android:textColor="#FFFFFF" />
+       
+    </LinearLayout>
+    
+    <View
+        android:id="@+id/line4"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_marginTop="15dp"
+        android:background="#ED6F26" />
+    
+    
+    
+    
+     <TextView
+        android:id="@+id/deleteItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:layout_below="@+id/line4"
+        android:text="Delete Item"
+        android:textSize="22dp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/line5"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/deleteItem"
+        android:layout_marginTop="2dp"
+        android:background="#ED6F26" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autocompleted"
+        android:layout_width="275dp"
+        android:layout_height="34dp"
+        android:layout_below="@+id/line5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/customeditext"
+        android:dropDownWidth="340dp"
+        android:hint="Enter or Scan Item"
+        android:inputType="text|textMultiLine"
+        android:paddingLeft="10dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/autocompleted"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/scanitem1"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/custombutton_lr"
+            android:text="Scan Item"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/deleteitem"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/custombutton_lr"
+            android:text="Delete Item"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</RelativeLayout>
