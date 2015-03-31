@@ -480,7 +480,7 @@ public class StaffHours extends Activity {
 		});
 
 		AlertDialog alertDialog = alertDialogBuilder.create();
-		alertDialog.setTitle( Html.fromHtml("<font color='#ED6F26'>Set IP Address</font>"));
+		alertDialog.setTitle( Html.fromHtml("<font color='#ED6F26'>Sign Out</font>"));
 		alertDialog.show();
 
 
@@ -583,6 +583,8 @@ public class StaffHours extends Activity {
 				//Toast.makeText(this, "Server Error", Toast.LENGTH_LONG).show();
 
 			}
+			
+			
 		
 				return rTime;
 		
@@ -592,13 +594,13 @@ public class StaffHours extends Activity {
     		//super.onPostExecute(result);
     		if(!result.isEmpty())
     		{
-    			if(!result.get("st").equals("5") && !result.get("ft").equals("5"));
-    			{
+    			//if(!result.get("st").equals("5") && !result.get("ft").equals("5"));
+    			//{
 		    		timeIn.append(result.get("st"));
 		    		timeOut.append(result.get("ft"));
 		    		breakIn.append(result.get("bi"));
 		    		breakOut.append(result.get("bo"));
-    			}
+    			//}
     			
 	 		     mon1.append(result.get("mon1"));
 	    		 mon2.append(result.get("mon2"));

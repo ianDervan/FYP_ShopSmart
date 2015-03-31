@@ -21,57 +21,68 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".customer.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-          <activity
-					android:name="com.dm.zbar.android.scanner.ZBarScannerActivity"
-                  android:screenOrientation="landscape"
-                  android:label="@string/app_name1">
-          </activity>
+        <activity
+            android:name="com.dm.zbar.android.scanner.ZBarScannerActivity"
+            android:label="@string/app_name1"
+            android:screenOrientation="landscape" >
+        </activity>
         <activity
             android:name=".customer.SignIn"
-            android:label="@string/title_activity_sign_in" >
+            android:label="@string/title_activity_sign_in"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".employee.EmployeeMenu"
-            android:label="@string/title_activity_employee_menu" >
+            android:label="@string/title_activity_employee_menu"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".customer.ShoppingList"
-            android:label="@string/title_activity_shopping_list" >
+            android:label="@string/title_activity_shopping_list"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".customer.Spending"
-            android:label="@string/title_activity_spending" >
+            android:label="@string/title_activity_spending"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".customer.BarcodeScan"
-            android:label="@string/title_activity_barcode_scan" >
+            android:label="@string/title_activity_barcode_scan"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".customer.Search"
-            android:label="@string/title_activity_search" >
+            android:label="@string/title_activity_search"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".employee.StaffHours"
-            android:label="@string/title_staffhours" >
+            android:label="@string/title_staffhours"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".employee.Rota"
-            android:label="@string/title_activity_rota" >
+            android:label="@string/title_activity_rota"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".CustomOnItemSelectedListener"
-            android:label="@string/title_activity_custom_on_item_selected_listener" >
+            android:label="@string/title_activity_custom_on_item_selected_listener"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="fyp.shopsmart.employee.Pricing"
-            android:label="@string/title_activity_pricing" >
+            android:label="@string/title_activity_pricing"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

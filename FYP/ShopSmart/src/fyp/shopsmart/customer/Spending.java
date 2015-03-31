@@ -223,8 +223,11 @@ public class Spending extends Activity {
 				if (i<cursor.getColumnCount()-1) 
 					cursorRow +=  ", ";
 			}
+			
 			cursorData += cursorRow + "";
 		}
+		
+		
 		return cursorData + "\n";
 	}
 	private String getColumnType(Cursor cursor, int i) {

@@ -28,7 +28,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/autocompleteitem"
-        android:layout_width="275dp"
+        android:layout_width="fill_parent"
         android:layout_height="34dp"
         android:layout_below="@+id/line"
         android:layout_centerHorizontal="true"
@@ -71,49 +71,41 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:layout_below="@+id/linearLayout1"
         android:layout_marginTop="10dp"
         android:orientation="horizontal" >
-
-        
 
         <TextView
             android:id="@+id/priceout"
             android:layout_width="0dp"
             android:layout_height="34dp"
-            android:layout_weight=".3"
-             android:gravity="center_vertical"
+            android:layout_weight=".15"
             android:background="@drawable/customeditext"
+            android:gravity="center_vertical"
+			android:textSize = "16dp"
             android:hint="Price Is €"
-            android:paddingLeft="5dp" />
-        
-         <TextView
-            android:id="@+id/changepriceto"
-            android:layout_width="0dp"
-            android:layout_height="34dp"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="0.4"
-            android:text="New Price"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold" />
+            android:paddingLeft="5dp"
+            />
 
-        <TextView
+        <EditText
             android:id="@+id/changeprice"
             android:layout_width="0dp"
             android:layout_height="34dp"
             android:layout_weight=".2"
+            android:layout_marginLeft="30dp"
+             android:layout_marginTop="1dp"
             android:gravity="center_vertical"
             android:background="@drawable/customeditext"
-            android:hint="€"
+            android:hint="New Price"
             android:paddingLeft="5dp" />
         
          <Button
             android:id="@+id/btnchange"
             android:layout_width="0dp"
+             android:layout_marginLeft="10dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="15dp"
-            android:layout_weight=".3"
+            android:layout_weight=".2"
             android:background="@drawable/custombutton_lr"
             android:text="Change"
             android:textColor="#FFFFFF" />
@@ -148,7 +140,7 @@
 
     <EditText
         android:id="@+id/enteritemname"
-        android:layout_width="275dp"
+        android:layout_width="fill_parent"
         android:layout_height="34dp"
         android:layout_below="@+id/line2"
         android:layout_centerHorizontal="true"
@@ -237,7 +229,7 @@
             android:paddingLeft="5dp" />
 
          <Button
-            android:id="@+id/btnsubitsetup"
+            android:id="@+id/btnsubmitsetup"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_marginLeft="15dp"
@@ -280,7 +272,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/autocompleted"
-        android:layout_width="275dp"
+        android:layout_width="fill_parent"
         android:layout_height="34dp"
         android:layout_below="@+id/line5"
         android:layout_centerHorizontal="true"
