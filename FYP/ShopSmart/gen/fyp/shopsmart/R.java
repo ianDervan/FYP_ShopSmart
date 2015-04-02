@@ -59,8 +59,6 @@ public final class R {
         public static final int action_settings=0x7f0a00c0;
         public static final int addItem=0x7f0a0005;
         public static final int autocomplete=0x7f0a00a2;
-        public static final int autocompleted=0x7f0a002d;
-        public static final int autocompleteitem=0x7f0a0016;
         public static final int book=0x7f0a006c;
         public static final int breakIn=0x7f0a00b6;
         public static final int breakOut=0x7f0a00b8;
@@ -108,6 +106,8 @@ public final class R {
         public static final int hide=0x7f0a00a6;
         public static final int imageView1=0x7f0a00a3;
         public static final int item=0x7f0a0001;
+        public static final int itemname=0x7f0a0016;
+        public static final int itemnamed=0x7f0a002d;
         public static final int line=0x7f0a0015;
         public static final int line1=0x7f0a001d;
         public static final int line2=0x7f0a001f;

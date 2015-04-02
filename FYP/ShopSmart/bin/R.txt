@@ -33,8 +33,6 @@ int id WednesdayR 0x7f0a0084
 int id action_settings 0x7f0a00c0
 int id addItem 0x7f0a0005
 int id autocomplete 0x7f0a00a2
-int id autocompleted 0x7f0a002d
-int id autocompleteitem 0x7f0a0016
 int id book 0x7f0a006c
 int id breakIn 0x7f0a00b6
 int id breakOut 0x7f0a00b8
@@ -82,6 +80,8 @@ int id fri4R 0x7f0a0094
 int id hide 0x7f0a00a6
 int id imageView1 0x7f0a00a3
 int id item 0x7f0a0001
+int id itemname 0x7f0a0016
+int id itemnamed 0x7f0a002d
 int id line 0x7f0a0015
 int id line1 0x7f0a001d
 int id line2 0x7f0a001f

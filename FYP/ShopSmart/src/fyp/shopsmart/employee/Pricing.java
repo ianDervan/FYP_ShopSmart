@@ -30,9 +30,11 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -43,29 +45,43 @@ import android.widget.Toast;
 
 public class Pricing extends Activity {
 
-	
+
 	Button btnScan;
 	Button btnCheckP;
 	Button btnChangeP;
-	EditText itemName;
+//	EditText itemName;
 	TextView priceOut;
 	EditText newPrice;
 	
+	Button btnScanFD;
+	Button btnDelete;
+	EditText itemTxt;
+	EditText itemTxtFD;
 	String storeInput;
 	String storeInput1;
-	
+
 	Button btnGetBar;
 	Button btnSubmit;
 	EditText enterBar;
 	EditText enterName;
 	EditText enterQuantity;
 	EditText enterPrice;
-	
+
+	String inputBar;
+	String inputName;
+	String inputQuantity;
+	String inputPrice;
+
+
+
 	int recieve;
+	int checkScan;
+	String deleteTxt;
 	String resultBarcode;
 	Map<String,String> price;
-	AutoCompleteTextView itemTxt;
+	
 	Context context = this;
+	int checkAlert;
 
 	private static final int ZBAR_SCANNER_REQUEST = 0;
 
@@ -73,49 +89,108 @@ public class Pricing extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pricing);
-		
+
 		recieve = 0;
+		checkScan = 0;
+	
 
 		btnScan  = (Button) findViewById(R.id.scanitem);
+		btnScanFD  = (Button) findViewById(R.id.scanitem1);
+		btnDelete  = (Button) findViewById(R.id.deleteitem);
 		btnCheckP  = (Button) findViewById(R.id.checkprice);
 		btnChangeP  = (Button) findViewById(R.id.btnchange);
-		itemName = (EditText) findViewById(R.id.enteritemname);
+		itemTxt = (EditText) findViewById(R.id.itemname);
+		itemTxtFD = (EditText) findViewById(R.id.itemnamed);
 		priceOut = (TextView) findViewById(R.id.priceout);
 		newPrice = (EditText) findViewById(R.id.changeprice);
-		
+
 		btnGetBar  = (Button) findViewById(R.id.btnscanbar);
 		btnSubmit  = (Button) findViewById(R.id.btnsubmitsetup);
 		enterBar = (EditText) findViewById(R.id.enteritembarcode);
 		enterName = (EditText) findViewById(R.id.enteritemname);
 		enterPrice = (EditText) findViewById(R.id.enterprice);
 		enterQuantity = (EditText) findViewById(R.id.enterquantity);
-		
-		
-		
+
+
+
 		price  = new HashMap<String,String>();
 
-		itemTxt = (AutoCompleteTextView) findViewById(R.id.autocompleteitem);
-		String[] suggestedItems = getResources().getStringArray(R.array.suggestions_array);
-		ArrayAdapter<String> adapter = 
-				new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, suggestedItems);
-		itemTxt.setAdapter(adapter);
 
 
+
+		btnSubmit.setOnClickListener(new OnClickListener() {	
+			public void onClick(View v) {
+
+				inputName =enterName.getText().toString();
+				inputBar =enterBar.getText().toString();
+				inputQuantity =enterQuantity.getText().toString();
+				inputPrice =enterPrice.getText().toString();
+
+				if(!inputName.trim().equals("") && !inputBar.trim().equals("") && !inputQuantity.trim().equals("") && !inputPrice.trim().equals(""))
+				{	
+					alertDialog("Click yes to setup " +inputName,2);
+
+				}
+				else
+				{
+					toast("All fields must be filled");
+				}
+
+
+			}
+		});
 		btnGetBar.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
 
-				startScanner();
-				
 				recieve = 1;
+
+				storeInput1 =itemTxt.getText().toString();
+
+
+				startScanner();
+
+
 
 			}
 		});
 		btnScan.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
 
+				
+				checkScan = 1;
+
 				startScanner();
+
+			}
+		});
+		btnScanFD.setOnClickListener(new OnClickListener() {	
+			public void onClick(View v) {
+
+				recieve = 5;
+				checkScan = 2;
+
+				startScanner();
+
+			}
+		});
+		btnDelete.setOnClickListener(new OnClickListener() {	
+			public void onClick(View v) {
+
 				
-				
+				deleteTxt =itemTxtFD.getText().toString();
+
+				if(!deleteTxt.trim().equals(""))
+				{	
+					alertDialog("Delete " +deleteTxt +" From Database?",3);
+					
+					
+
+				}
+				else
+				{
+					toast("Please Enter An Item To Be Deleted");
+				}
+
 
 			}
 		});
@@ -124,11 +199,15 @@ public class Pricing extends Activity {
 
 				storeInput =newPrice.getText().toString();
 				storeInput1 =itemTxt.getText().toString();
-				
+
 				if(!storeInput.trim().equals("") && !storeInput.trim().equals(""))
 				{	
-					alertDialog();
-					
+					alertDialog("Change " +storeInput1 +" price to " + storeInput + "?",1);
+
+				}
+				else
+				{
+					toast("Please scan an item and enter a price");
 				}
 			}
 		});
@@ -141,14 +220,22 @@ public class Pricing extends Activity {
 					Log.d( "storeinput not null aa", "storeinput not null aa");
 					price.put("checkPrice", "1");
 					price.put("barcode", "N");
+					price.put("setUpPrice", "N");
 					price.put("checkPriceTxt",  storeInput);
 					price.put("newPrice",  "N");
-				
 					
+					
+
+					recieve = 2;
+
 					SendP sp = new SendP();
 					sp.execute();
-					
-					
+
+
+				}
+				else
+				{
+					toast("No item scanned");
 				}
 
 
@@ -164,6 +251,7 @@ public class Pricing extends Activity {
 		}
 
 
+		
 	}
 
 
@@ -186,29 +274,67 @@ public class Pricing extends Activity {
 
 			price.put("barcode", resultBarcode);
 			price.put("checkPrice", "1");
+			price.put("setUpPrice", "N");
+			price.put("deleteItem", "N");
 			price.put("checkPriceTxt", "N");
 			price.put("newPrice",  "N");
 
 			SendP sp = new SendP();
 			sp.execute();
-			
-			send();
-			//Toast.makeText(this, "aftersend", Toast.LENGTH_LONG).show();
+
+
 
 		} else if(resultCode == RESULT_CANCELED && data != null) {
 			String error = data.getStringExtra(ZBarConstants.ERROR_INFO);
 			if(!TextUtils.isEmpty(error)) {
 				Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+				
+				
 			}
 		}
 	}
 	public void send()
 	{
+
+
+		String store;
+		String store1;
+		
 		if(recieve== 1)
 		{
+			store =itemTxt.getText().toString();
 			enterBar.append(resultBarcode);
+
+			if(!store.trim().equals(""))
+			{
+				toast(store);
+				toast("Is Already In Database");
+				toast("Please Scan Different Item");
+				enterBar.setText("");
+
+				//itemTxt.clearComposingText();
+				//itemTxt.setText("");
+
+			}
+			else if(store.trim().equals(""))
+			{
+				toast("Item Isnt Already in database");
+
+			}
+		}
+		if(recieve== 5)
+		{
+			//enterBar.append(resultBarcode);
+			store1 =itemTxtFD.getText().toString();
+
+			if(store1.trim().equals(""))
+			{
+				toast("Item Isnt In The Database");
+
+			}
 		}
 		
+
 	}
 	public class SendP extends
 	AsyncTask< ArrayList<HashMap<String,String>>,Void,Map<String, String>>
@@ -219,16 +345,15 @@ public class Pricing extends Activity {
 
 		String s1,s2;
 
-		String url=  "http://192.168.1.103:8080/NetworkingSupport/servlet";
+		String url=  "http://10.12.2.47:8080/NetworkingSupport/servlet";
 		JSONObject jsonSEND = new JSONObject(price);
 
 		protected Map<String, String> doInBackground(ArrayList<HashMap<String, String>>...params) 
 		{
+		
 			rPrice  = new HashMap<String,String>(); 
 
 			try{
-
-
 
 				String jsonString = HttpUtils.urlContentPost(url,"price", jsonSEND.toString());
 
@@ -237,9 +362,12 @@ public class Pricing extends Activity {
 				if( jsonResult!= null)
 				{	
 
-			
-					rPrice.put("itemTxt",jsonResult.getString("itemTxt"));
-					rPrice.put("itemPrice",jsonResult.getString("itemPrice"));
+
+						rPrice.put("itemTxt",jsonResult.getString("itemTxt"));
+						rPrice.put("itemPrice",jsonResult.getString("itemPrice"));
+					
+						
+						
 
 				}
 
@@ -260,32 +388,51 @@ public class Pricing extends Activity {
 			return rPrice;
 
 		}
+		
 		protected void onPostExecute(Map<String, String> result) {
 			super.onPostExecute(result);
 
 
-
 			if(!result.isEmpty())
 			{
-				
 				if(!result.get("itemTxt").equals("N"))
 				{
-					itemTxt.append(result.get("itemTxt"));
+				
+					if(checkScan == 1)
+					{
+						itemTxt.append(result.get("itemTxt"));
+					}
+					if(checkScan == 2)
+					{
+						itemTxtFD.append(result.get("itemTxt"));
+					}
+					
 				}
-			
+
 				if(!result.get("itemPrice").equals("N"))
 				{
-					  priceOut.append("€"+result.get("itemPrice"));
-						
+					priceOut.append("€"+result.get("itemPrice"));
+
 				}
 			}
+			if(recieve == 1)
+			{
 
+				send();
+
+			}
+			if(recieve == 5)
+			{
+
+				send();
+
+			}
 		}
 
 	}
-	public void alertDialog()
+	public void alertDialog(String message,int check)
 	{
-		
+		checkAlert = check;
 
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 				context);
@@ -294,28 +441,71 @@ public class Pricing extends Activity {
 
 		alertDialogBuilder
 
-		.setMessage("Click yes to Change Price")
+		.setMessage(message)
 		.setCancelable(false)
 		.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog,int id) {
-				
-	
+
+				if(checkAlert== 1)
+				{
+
+					price.put("checkPrice", "1");
+					price.put("setUpPrice", "N");
+					price.put("deleteItem", "N");
+					price.put("barcode", "N");
+					price.put("checkPriceTxt",  storeInput1);
+					price.put("newPrice", storeInput);
 					
-				price.put("checkPrice", "1");
-				price.put("barcode", "N");
-				price.put("checkPriceTxt",  storeInput1);
-				price.put("newPrice", storeInput);
-				Log.d( "storeinput not null", "storeinput not null");
-				
-				SendP sp = new SendP();
-				sp.execute();
-				
-				newPrice.setText("");
-				priceOut.setText("");
-				
-				
-					    	
-				
+					SendP sp = new SendP();
+					sp.execute();
+
+					newPrice.setText("");
+					priceOut.setText("");
+					itemTxt.setText("");
+
+					toast(storeInput1 + " price changed to " + storeInput);
+				}
+				else if(checkAlert== 2)
+				{
+					price.put("checkPrice", "N");
+					price.put("deleteItem", "N");
+					price.put("setUpPrice", "1");
+					price.put("inputName",inputName);
+					price.put("inputBar",inputBar);
+					price.put("inputQuantity",inputQuantity);
+					price.put("inputPrice",inputPrice);
+					recieve = 2;
+
+					SendP sp = new SendP();
+					sp.execute();
+					
+					toast(enterName + "is now setup");
+					
+					enterBar.setText("");
+					enterName.setText("");
+					enterQuantity.setText("");
+					enterPrice.setText("");
+
+				}	    
+				else if(checkAlert== 3)
+				{
+					price.put("checkPrice", "N");
+					price.put("setUpPrice", "N");
+					price.put("deleteItem", "1");
+					price.put("deleteTxt", deleteTxt);
+					
+					recieve = 2;
+
+					SendP sp = new SendP();
+					sp.execute();
+					
+					toast(deleteTxt + "is now deleted");
+					
+					itemTxtFD.setText("");
+					
+
+				}	    
+
 			}
 		})
 		.setNegativeButton("No",new DialogInterface.OnClickListener() {
@@ -334,8 +524,20 @@ public class Pricing extends Activity {
 		View titleDivider = alertDialog.findViewById(titleDividerId);
 		if (titleDivider != null)
 			titleDivider.setBackgroundColor(Color.parseColor("#ED6F26"));
-		
 
+
+	}
+	public void toast(String message)
+	{
+		LayoutInflater inflater = getLayoutInflater();
+		View layout = inflater.inflate(R.layout.customtoast, (ViewGroup)
+				findViewById(R.id.toast_layout_root));
+		TextView text = (TextView) layout.findViewById(R.id.toasttext);
+		text.setText(message);
+		Toast t = new Toast(getApplicationContext());
+		t.setDuration(Toast.LENGTH_LONG);
+		t.setView(layout);
+		t.show();     
 	}
 
 

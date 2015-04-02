@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="0dp"
         android:text="Check/Change Price"
-        android:textSize="22dp"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <View
@@ -26,8 +26,8 @@
         android:layout_marginTop="2dp"
         android:background="#ED6F26" />
 
-    <AutoCompleteTextView
-        android:id="@+id/autocompleteitem"
+    <EditText
+        android:id="@+id/itemname"
         android:layout_width="fill_parent"
         android:layout_height="34dp"
         android:layout_below="@+id/line"
@@ -36,7 +36,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/customeditext"
         android:dropDownWidth="340dp"
-        android:hint="Enter or Scan Item"
+        android:hint="Please Scan Item"
         android:inputType="text|textMultiLine"
         android:paddingLeft="10dp" />
 
@@ -44,7 +44,7 @@
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/autocompleteitem"
+        android:layout_below="@+id/itemname"
         android:layout_marginTop="10dp"
         android:orientation="horizontal" >
 
@@ -80,7 +80,7 @@
             android:id="@+id/priceout"
             android:layout_width="0dp"
             android:layout_height="34dp"
-            android:layout_weight=".15"
+            android:layout_weight=".2"
             android:background="@drawable/customeditext"
             android:gravity="center_vertical"
 			android:textSize = "16dp"
@@ -202,7 +202,7 @@
             android:id="@+id/enterprice"
             android:layout_width="0dp"
             android:layout_height="34dp"
-            android:layout_weight=".35"
+            android:layout_weight=".3"
             android:background="@drawable/customeditext"
             android:hint="€"
             android:inputType="text|textMultiLine"
@@ -222,11 +222,15 @@
             android:id="@+id/enterquantity"
             android:layout_width="0dp"
             android:layout_height="34dp"
-            android:layout_weight=".2"
+            android:layout_weight=".3"
             android:background="@drawable/customeditext"
+            android:ems="10"
             android:hint="#"
             android:inputType="text|textMultiLine"
-            android:paddingLeft="5dp" />
+            android:paddingLeft="5dp" >
+
+            <requestFocus />
+        </EditText>
 
          <Button
             android:id="@+id/btnsubmitsetup"
@@ -270,8 +274,8 @@
         android:layout_marginTop="2dp"
         android:background="#ED6F26" />
 
-    <AutoCompleteTextView
-        android:id="@+id/autocompleted"
+    <EditText
+        android:id="@+id/itemnamed"
         android:layout_width="fill_parent"
         android:layout_height="34dp"
         android:layout_below="@+id/line5"
@@ -280,7 +284,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/customeditext"
         android:dropDownWidth="340dp"
-        android:hint="Enter or Scan Item"
+        android:hint="Please Scan Item"
         android:inputType="text|textMultiLine"
         android:paddingLeft="10dp" />
 
@@ -288,7 +292,7 @@
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/autocompleted"
+        android:layout_below="@+id/itemnamed"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal" >
