@@ -356,7 +356,9 @@ public class Pricing extends Activity {
 
 		String s1,s2;
 
-		String url=  "http://10.12.2.47:8080/NetworkingSupport/servlet";
+		IPAddress ip = new IPAddress();
+
+		String url=  ip.getIPAddress();
 		JSONObject jsonSEND = new JSONObject(price);
 
 		protected Map<String, String> doInBackground(ArrayList<HashMap<String, String>>...params) 

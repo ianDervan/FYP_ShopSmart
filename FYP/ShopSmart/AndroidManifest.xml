@@ -86,8 +86,12 @@
         </activity>
         <activity
             android:name=".employee.UpdateStock"
-            android:label="@string/title_activity_update_stock" 
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_update_stock"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".employee.Manage"
+            android:label="@string/title_activity_manage" >
         </activity>
     </application>
 

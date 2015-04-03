@@ -292,7 +292,9 @@ public class UpdateStock extends Activity {
 
 		String s1,s2;
 
-		String url=  "http://192.168.0.29:8080/NetworkingSupport/servlet";
+		IPAddress ip = new IPAddress();
+
+		String url=  ip.getIPAddress();
 		JSONObject jsonSEND = new JSONObject(stock);
 		StoreArray s = new StoreArray();
 
@@ -493,7 +495,7 @@ public class UpdateStock extends Activity {
 				if(check == 3)
 				{
 
-					
+
 					stock.put("updateStock", "3");
 					stock.put("addItem", "3");
 

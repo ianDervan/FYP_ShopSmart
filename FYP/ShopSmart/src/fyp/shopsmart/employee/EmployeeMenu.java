@@ -21,6 +21,7 @@ public class EmployeeMenu extends Activity {
 	Button btnRota;
 	Button btnStock;
 	Button btnPricing;
+	Button btnManage;
 	int check;
 	int john;
 	int ian;
@@ -38,6 +39,7 @@ public class EmployeeMenu extends Activity {
 		 btnPricing  = (Button) findViewById(R.id.btnpricing);
 		 btnRota = (Button) findViewById(R.id.rota);
 		 btnStock = (Button) findViewById(R.id.updatestock);
+		 btnManage = (Button) findViewById(R.id.btnmanage);
 		 Intent intent = getIntent();	
 	  	 ian = intent.getIntExtra("ian",0);
 	  	 john = intent.getIntExtra("john",0);
@@ -131,6 +133,33 @@ public class EmployeeMenu extends Activity {
 					{
 						staffHours.putExtra("SignedIn" , 4);
 						startActivity(staffHours);		
+					}
+						
+		    }		
+		 });
+		 btnManage.setOnClickListener(new OnClickListener() {	
+		      	public void onClick(View v) {
+		      		
+					Intent manage = new Intent (EmployeeMenu.this,Manage.class);
+					if(check == 1)
+					{
+						manage.putExtra("SignedIn" , 1);
+						startActivity(manage);		
+					}
+					if(check == 2)
+					{
+						manage.putExtra("SignedIn" , 2);
+						startActivity(manage);		
+					}
+					if(check == 3)
+					{
+						manage.putExtra("SignedIn" , 3);
+						startActivity(manage);		
+					}
+					if(check == 4)
+					{
+						manage.putExtra("SignedIn" , 4);
+						startActivity(manage);		
 					}
 						
 		    }		

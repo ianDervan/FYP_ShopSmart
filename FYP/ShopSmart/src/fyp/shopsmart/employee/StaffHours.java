@@ -14,6 +14,7 @@ import java.util.TimeZone;
 
 
 
+
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -500,7 +501,9 @@ public class StaffHours extends Activity {
 		String smon1;
 
 		
-		String url=  "http://10.12.2.47:8080/NetworkingSupport/servlet";
+		IPAddress ip = new IPAddress();
+		
+		String url=  ip.getIPAddress();
 		JSONObject jsonSEND = new JSONObject(time);
 
 		protected Map<String, String> doInBackground(ArrayList<HashMap<String, String>>...params) 

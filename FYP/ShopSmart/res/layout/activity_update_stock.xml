@@ -987,7 +987,7 @@
                         android:layout_margin="1px"
                         android:layout_weight="0.1"
                         android:background="#FFFFFF"
-                        android:paddingStart="2dp"
+                        android:paddingLeft="2dp"
                         android:textSize="16sp" />
                 </TableRow>
             </TableLayout>
