@@ -46,5 +46,6 @@
 
     <string name="title_activity_custom_on_item_selected_listener">CustomOnItemSelectedListener</string>
     <string name="title_activity_pricing">Pricing</string>
+    <string name="title_activity_update_stock">UpdateStock</string>
 
 </resources>

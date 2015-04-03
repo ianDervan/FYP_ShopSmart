@@ -49,10 +49,10 @@ public class Pricing extends Activity {
 	Button btnScan;
 	Button btnCheckP;
 	Button btnChangeP;
-//	EditText itemName;
+	//	EditText itemName;
 	TextView priceOut;
 	EditText newPrice;
-	
+
 	Button btnScanFD;
 	Button btnDelete;
 	EditText itemTxt;
@@ -79,7 +79,7 @@ public class Pricing extends Activity {
 	String deleteTxt;
 	String resultBarcode;
 	Map<String,String> price;
-	
+
 	Context context = this;
 	int checkAlert;
 
@@ -92,7 +92,6 @@ public class Pricing extends Activity {
 
 		recieve = 0;
 		checkScan = 0;
-	
 
 		btnScan  = (Button) findViewById(R.id.scanitem);
 		btnScanFD  = (Button) findViewById(R.id.scanitem1);
@@ -156,9 +155,9 @@ public class Pricing extends Activity {
 		btnScan.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
 
-				
-				checkScan = 1;
 
+				checkScan = 1;
+				recieve = 6;
 				startScanner();
 
 			}
@@ -176,14 +175,14 @@ public class Pricing extends Activity {
 		btnDelete.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
 
-				
+
 				deleteTxt =itemTxtFD.getText().toString();
 
 				if(!deleteTxt.trim().equals(""))
 				{	
 					alertDialog("Delete " +deleteTxt +" From Database?",3);
-					
-					
+
+
 
 				}
 				else
@@ -217,14 +216,14 @@ public class Pricing extends Activity {
 				storeInput =itemTxt.getText().toString();
 				if(!storeInput.trim().equals(""))
 				{
-					Log.d( "storeinput not null aa", "storeinput not null aa");
+
 					price.put("checkPrice", "1");
 					price.put("barcode", "N");
 					price.put("setUpPrice", "N");
 					price.put("checkPriceTxt",  storeInput);
 					price.put("newPrice",  "N");
-					
-					
+
+
 
 					recieve = 2;
 
@@ -251,7 +250,7 @@ public class Pricing extends Activity {
 		}
 
 
-		
+
 	}
 
 
@@ -288,8 +287,8 @@ public class Pricing extends Activity {
 			String error = data.getStringExtra(ZBarConstants.ERROR_INFO);
 			if(!TextUtils.isEmpty(error)) {
 				Toast.makeText(this, error, Toast.LENGTH_LONG).show();
-				
-				
+
+
 			}
 		}
 	}
@@ -299,7 +298,8 @@ public class Pricing extends Activity {
 
 		String store;
 		String store1;
-		
+		String store2;
+
 		if(recieve== 1)
 		{
 			store =itemTxt.getText().toString();
@@ -333,7 +333,18 @@ public class Pricing extends Activity {
 
 			}
 		}
-		
+		if(recieve== 6)
+		{
+			//enterBar.append(resultBarcode);
+			store2 =itemTxt.getText().toString();
+
+			if(store2.trim().equals(""))
+			{
+				toast("Item Isnt In The Database");
+
+			}
+		}
+
 
 	}
 	public class SendP extends
@@ -350,7 +361,7 @@ public class Pricing extends Activity {
 
 		protected Map<String, String> doInBackground(ArrayList<HashMap<String, String>>...params) 
 		{
-		
+
 			rPrice  = new HashMap<String,String>(); 
 
 			try{
@@ -363,11 +374,11 @@ public class Pricing extends Activity {
 				{	
 
 
-						rPrice.put("itemTxt",jsonResult.getString("itemTxt"));
-						rPrice.put("itemPrice",jsonResult.getString("itemPrice"));
-					
-						
-						
+					rPrice.put("itemTxt",jsonResult.getString("itemTxt"));
+					rPrice.put("itemPrice",jsonResult.getString("itemPrice"));
+
+
+
 
 				}
 
@@ -388,7 +399,7 @@ public class Pricing extends Activity {
 			return rPrice;
 
 		}
-		
+
 		protected void onPostExecute(Map<String, String> result) {
 			super.onPostExecute(result);
 
@@ -397,7 +408,7 @@ public class Pricing extends Activity {
 			{
 				if(!result.get("itemTxt").equals("N"))
 				{
-				
+
 					if(checkScan == 1)
 					{
 						itemTxt.append(result.get("itemTxt"));
@@ -406,7 +417,7 @@ public class Pricing extends Activity {
 					{
 						itemTxtFD.append(result.get("itemTxt"));
 					}
-					
+
 				}
 
 				if(!result.get("itemPrice").equals("N"))
@@ -427,6 +438,14 @@ public class Pricing extends Activity {
 				send();
 
 			}
+			if(recieve == 6)
+			{
+
+				send();
+
+
+
+			}
 		}
 
 	}
@@ -437,7 +456,7 @@ public class Pricing extends Activity {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 				context);
 
-		alertDialogBuilder.setTitle("Sign Out");
+
 
 		alertDialogBuilder
 
@@ -455,7 +474,7 @@ public class Pricing extends Activity {
 					price.put("barcode", "N");
 					price.put("checkPriceTxt",  storeInput1);
 					price.put("newPrice", storeInput);
-					
+
 					SendP sp = new SendP();
 					sp.execute();
 
@@ -478,9 +497,9 @@ public class Pricing extends Activity {
 
 					SendP sp = new SendP();
 					sp.execute();
-					
+
 					toast(enterName + "is now setup");
-					
+
 					enterBar.setText("");
 					enterName.setText("");
 					enterQuantity.setText("");
@@ -493,16 +512,16 @@ public class Pricing extends Activity {
 					price.put("setUpPrice", "N");
 					price.put("deleteItem", "1");
 					price.put("deleteTxt", deleteTxt);
-					
+
 					recieve = 2;
 
 					SendP sp = new SendP();
 					sp.execute();
-					
+
 					toast(deleteTxt + "is now deleted");
-					
+
 					itemTxtFD.setText("");
-					
+
 
 				}	    
 
@@ -516,9 +535,21 @@ public class Pricing extends Activity {
 		});
 
 		AlertDialog alertDialog = alertDialogBuilder.create();
-		alertDialog.setTitle( Html.fromHtml("<font color='#ED6F26'>Change Price</font>"));
-		alertDialog.show();
-
+		if(checkAlert== 1)
+		{
+			alertDialog.setTitle( Html.fromHtml("<font color='#ED6F26'>Change Price</font>"));
+			alertDialog.show();
+		}
+		if(checkAlert== 2)
+		{
+			alertDialog.setTitle( Html.fromHtml("<font color='#ED6F26'>Setup Item</font>"));
+			alertDialog.show();
+		}
+		if(checkAlert== 3)
+		{
+			alertDialog.setTitle( Html.fromHtml("<font color='#ED6F26'>Delete Item</font>"));
+			alertDialog.show();
+		}
 
 		int titleDividerId = getResources().getIdentifier("android:id/titleDivider", "id", "android");
 		View titleDivider = alertDialog.findViewById(titleDividerId);

@@ -406,6 +406,7 @@ public class StaffHours extends Activity {
 		}
 		if(field == 3 &&breakIn.getText().toString().equals(""))
 		{
+			
 			getTime();
 			breakIn.append(timeC);
 

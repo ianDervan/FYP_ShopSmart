@@ -80,9 +80,14 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="fyp.shopsmart.employee.Pricing"
+            android:name=".employee.Pricing"
             android:label="@string/title_activity_pricing"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".employee.UpdateStock"
+            android:label="@string/title_activity_update_stock" 
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
