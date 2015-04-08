@@ -47,6 +47,8 @@ public class SignIn extends Activity {
 	 String temp,temp1;
 	 
 	 String timeC;
+	 
+	 
 		 
 	
 	@Override

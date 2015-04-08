@@ -500,7 +500,6 @@ public class StaffHours extends Activity {
 		String st = null,ft=null,bi = null,bo = null;
 		String smon1;
 
-		
 		IPAddress ip = new IPAddress();
 		
 		String url=  ip.getIPAddress();

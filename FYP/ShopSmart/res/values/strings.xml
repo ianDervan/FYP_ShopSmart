@@ -27,6 +27,7 @@
     <string name="title_staffhours">StaffHours</string>
     <string name="title_activity_rota">Rota</string>
     <string name="day">Day</string>
+      <string name="fruit">Fruit+Veg</string>
 
     <string-array name="days_array">
         <item>Monday</item>
@@ -37,11 +38,28 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
+    
+     <string-array name="days_array1">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+    </string-array>
     <string-array name="users_array">
         <item>John</item>
         <item>Ian</item>
         <item>Aishling</item>
         <item>Sarah</item>
+    </string-array>
+    
+     <string-array name="delivery_array">
+        <item>Fruit+Veg</item>
+        <item>Dairy</item>
+        <item>Frozen</item>
+        <item>Minerals</item>
+        <item>Alcohol</item>
+         <item>Clear All</item>
     </string-array>
     
     <string-array name="operations_array">

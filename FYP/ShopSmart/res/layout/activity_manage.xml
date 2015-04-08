@@ -5,7 +5,6 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="fyp.shopsmart.employee.Manage" >
 
     <TextView
@@ -13,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="5dp"
         android:text="Staff Operations"
         android:textSize="22dp"
         android:textStyle="bold" />
@@ -129,8 +128,8 @@
                     android:id="@+id/staffop3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="1px"
                     android:background="#FFFFFF"
-                     android:layout_margin="1px"
                     android:paddingLeft="20dp"
                     android:textSize="16sp" />
 
@@ -192,7 +191,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="1px"
                     android:background="#FFFFFF"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="20dp"
                     android:textSize="16sp" />
             </TableRow>
 
@@ -235,7 +234,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="1px"
                     android:background="#FFFFFF"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="20dp"
                     android:textSize="16sp" />
 
                 <TextView
@@ -244,10 +243,10 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="1px"
                     android:background="#FFFFFF"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="20dp"
                     android:textSize="16sp" />
             </TableRow>
-            
+
             <TableRow
                 android:id="@+id/tableRow5"
                 android:layout_width="wrap_content"
@@ -269,7 +268,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="1px"
                     android:background="#FFFFFF"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="20dp"
                     android:textSize="16sp" />
 
                 <TextView
@@ -278,7 +277,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="1px"
                     android:background="#FFFFFF"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="20dp"
                     android:textSize="16sp" />
 
                 <TextView
@@ -287,7 +286,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="1px"
                     android:background="#FFFFFF"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="20dp"
                     android:textSize="16sp" />
 
                 <TextView
@@ -296,25 +295,24 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="1px"
                     android:background="#FFFFFF"
-                    android:paddingLeft="10dp"
+                    android:paddingLeft="20dp"
                     android:textSize="16sp" />
             </TableRow>
         </TableLayout>
     </LinearLayout>
-    
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/LinearLayout1"
-         android:layout_marginTop="10dp"
         android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/Put"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="4dp"
             android:layout_weight="0.3"
             android:text="Put"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -324,16 +322,15 @@
             android:id="@+id/spinner1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight=".6"
-            />
+            android:layout_marginLeft="5dp"
+            android:layout_weight=".6" />
 
         <TextView
             android:id="@+id/on"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="13dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="4dp"
             android:layout_weight="0.3"
             android:text="On"
             android:textSize="16dp" />
@@ -342,11 +339,10 @@
             android:id="@+id/spinner2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".6"
-          />
+            android:layout_weight=".6" />
     </LinearLayout>
-    
-        <LinearLayout
+
+    <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -357,16 +353,534 @@
         <Button
             android:id="@+id/submitm"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="27dp"
             android:layout_weight="0.5"
             android:background="@drawable/custombutton_lr"
             android:text="Submit"
             android:textColor="#FFFFFF" />
 
         <Button
-            android:id="@+id/Clear"
+            android:id="@+id/clear"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="27dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/custombutton_lr"
+            android:text="Clear"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line1M"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_marginTop="20dp"
+        android:background="#ED6F26" />
+
+    <TextView
+        android:id="@+id/deliverytimes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line1M"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:text="Delivery Times"
+        android:textSize="22dp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/lineM"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/deliverytimes"
+        android:layout_marginTop="2dp"
+        android:background="#ED6F26" />
+
+    <LinearLayout
+        android:id="@+id/LinearLayout4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lineM"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical" >
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:stretchColumns="*" >
+
+            <TableRow
+                android:id="@+id/tableRow1M"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="#27160e" >
+
+                <TextView
+                    android:id="@+id/textView4M"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".35"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:text="Delivery"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView5M"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:text="Mon"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView6M"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:text="Tues"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView7M"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:text="Wed"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView8M"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:text="Thur"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView9M"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:text="Fri"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow1D"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#27160e" >
+
+                <TextView
+                    android:id="@+id/deliveryname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".35"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:text="@string/fruit"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow2D"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#27160e" >
+
+                <TextView
+                    android:id="@+id/deliveryname1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".35"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:text="Dairy"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow3D"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#27160e" >
+
+                <TextView
+                    android:id="@+id/deliveryname2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".35"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:text="Frozen"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery11"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery13"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery14"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow4D"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#27160e" >
+
+                <TextView
+                    android:id="@+id/deliveryname3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".35"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:text="Minerals"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery16"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery17"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery18"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery19"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery20"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow5D"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#27160e" >
+
+                <TextView
+                    android:id="@+id/deliveryname4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".35"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:text="Alcohol"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery21"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery22"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="2dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery23"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery24"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/delivery25"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1px"
+                    android:layout_weight=".2"
+                    android:background="#FFFFFF"
+                    android:paddingLeft="1dp"
+                    android:textSize="16sp" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LinearLayout4"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal" >
+
+        <Spinner
+            android:id="@+id/spinner3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".55"
+            android:paddingTop="5dp" />
+
+        <TextView
+            android:id="@+id/on1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="0.5"
+            android:text="Delivery On"
+            android:textSize="16dp" />
+        
+
+        <Spinner
+            android:id="@+id/spinner4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".6"
+            android:paddingTop="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout5"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/submitmfd"
+            android:layout_width="0dp"
+            android:layout_height="27dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/custombutton_lr"
+            android:text="Submit"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/clearfd"
+            android:layout_width="0dp"
+            android:layout_height="27dp"
             android:layout_marginLeft="10dp"
             android:layout_weight="0.5"
             android:background="@drawable/custombutton_lr"
