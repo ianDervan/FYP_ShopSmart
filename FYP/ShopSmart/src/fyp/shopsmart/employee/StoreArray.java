@@ -10,6 +10,9 @@ public class StoreArray {
 	public ArrayList<String> storeManageArray = new ArrayList<String>();
 	public ArrayList<String> storeDeliveryArray = new ArrayList<String>();
 	
+	public ArrayList<String> storeRotaArray = new ArrayList<String>();
+	public ArrayList<String> storeRotaNWArray = new ArrayList<String>();
+	
 	public String itemN;
 	public String itemS;
 

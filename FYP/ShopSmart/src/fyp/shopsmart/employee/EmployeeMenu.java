@@ -33,6 +33,8 @@ public class EmployeeMenu extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_employee_menu);
 		
+		
+		
 		check = 0;
 		
 		 btnStaffH = (Button) findViewById(R.id.staffhours);

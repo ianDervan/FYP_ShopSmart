@@ -39,6 +39,18 @@
         <item>Sunday</item>
     </string-array>
     
+    <string-array name="days_arrayR">
+         <item></item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+         <item>All Days</item>
+    </string-array>
+    
      <string-array name="days_array1">
         <item>Monday</item>
         <item>Tuesday</item>
@@ -51,6 +63,21 @@
         <item>Ian</item>
         <item>Aishling</item>
         <item>Sarah</item>
+    </string-array>
+    
+    <string-array name="users_arrayR">
+         <item></item>
+        <item>John</item>
+        <item>Ian</item>
+        <item>Aishling</item>
+        <item>Sarah</item>
+    </string-array>
+    
+     <string-array name="shifts_arrayR">
+          <item></item>
+        <item>9-6</item>
+        <item>11-8</item>
+        <item>1-10</item>
     </string-array>
     
      <string-array name="delivery_array">

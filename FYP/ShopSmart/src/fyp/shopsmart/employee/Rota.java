@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.http.client.ClientProtocolException;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,21 +14,31 @@ import fyp.shopsmart.R;
 import fyp.shopsmart.R.id;
 import fyp.shopsmart.R.layout;
 import fyp.shopsmart.R.menu;
+import fyp.shopsmart.employee.Manage.SendM;
 import fyp.shopsmart.employee.StaffHours.Send;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.SyncStateContract.Constants;
+import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,35 +47,7 @@ public class Rota extends Activity {
 
 	AutoCompleteTextView textView;
 
-	TextView mon1;
-	TextView mon2;
-	TextView mon3;
-	TextView mon4;
-	TextView tues1;
-	TextView tues2;
-	TextView tues3;
-	TextView tues4;
-	TextView wed1;
-	TextView wed2;
-	TextView wed3;
-	TextView wed4;
-	TextView thurs1;
-	TextView thurs2;
-	TextView thurs3;
-	TextView thurs4;
-	TextView fri1;
-	TextView fri2;
-	TextView fri3;
-	TextView fri4;
-	TextView sat1;
-	TextView sat2;
-	TextView sat3;
-	TextView sat4;
-	TextView sun1;
-	TextView sun2;
-	TextView sun3;
-	TextView sun4;
-	
+
 	TextView mon1R;
 	TextView mon2R;
 	TextView mon3R;
@@ -93,86 +76,85 @@ public class Rota extends Activity {
 	TextView sun2R;
 	TextView sun3R;
 	TextView sun4R;
+
+	TextView shift;
+	TextView swap;
+	TextView with;
+
+	TextView[] rotaList;
+	TextView[] rotanwList;
+
+	String rotaListID;
+	String rotanwListID;
 	Spinner spinner1;
 	Spinner spinner2;
 	Spinner spinner3;
 	Spinner spinner4;
 
+
+	Spinner spinner5;
+	Spinner spinner6;
+	Spinner spinner7;
+	Spinner spinner8;
+	Spinner spinner9;
+	Spinner spinner10;
+	Spinner spinner11;
+	Spinner spinner12;
+	Spinner spinner13;
+
 	Button btnSS;
+	Button btnClear;
+	Button btnSubmit;
 	Button btnBO;
 	Map<String,String> rota;
-	int check;
+	int checkS;
+	
+	Context context = this;
+	
+	int checkAlert;
+
+	int notEmpty;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		
+
+
 		setContentView(R.layout.activity_rota);
 
-		mon1 = (TextView) findViewById(R.id.mon1);
-		mon2 = (TextView) findViewById(R.id.mon2);
-		mon3 = (TextView) findViewById(R.id.mon3);
-		mon4 = (TextView) findViewById(R.id.mon4);
-		tues1 = (TextView) findViewById(R.id.tues1);
-		tues2 = (TextView) findViewById(R.id.tues2);
-		tues3 = (TextView) findViewById(R.id.tues3);
-		tues4 = (TextView) findViewById(R.id.tues4);
-		wed1 = (TextView) findViewById(R.id.wed1);
-		wed2 = (TextView) findViewById(R.id.wed2);
-		wed3 = (TextView) findViewById(R.id.wed3);
-		wed4 = (TextView) findViewById(R.id.wed4);
-		thurs1 = (TextView) findViewById(R.id.thurs1);
-		thurs2 = (TextView) findViewById(R.id.thurs2);
-		thurs3 = (TextView) findViewById(R.id.thurs3);
-		thurs4 = (TextView) findViewById(R.id.thurs4);
-		fri1 = (TextView) findViewById(R.id.fri1);
-		fri2 = (TextView) findViewById(R.id.fri2);
-		fri3 = (TextView) findViewById(R.id.fri3);
-		fri4 = (TextView) findViewById(R.id.fri4);
-		sat1 = (TextView) findViewById(R.id.sat1);
-		sat2 = (TextView) findViewById(R.id.sat2);
-		sat3 = (TextView) findViewById(R.id.sat3);
-		sat4 = (TextView) findViewById(R.id.sat4);
-		sun1 = (TextView) findViewById(R.id.sun1);
-		sun2 = (TextView) findViewById(R.id.sun2);
-		sun3 = (TextView) findViewById(R.id.sun3);
-		sun4 = (TextView) findViewById(R.id.sun4); 
-		
-		mon1R = (TextView) findViewById(R.id.mon1R);
-		mon2R = (TextView) findViewById(R.id.mon2R);
-		mon3R = (TextView) findViewById(R.id.mon3R);
-		mon4R = (TextView) findViewById(R.id.mon4R);
-		tues1R = (TextView) findViewById(R.id.tues1R);
-		tues2R = (TextView) findViewById(R.id.tues2R);
-		tues3R = (TextView) findViewById(R.id.tues3R);
-		tues4R = (TextView) findViewById(R.id.tues4R);
-		wed1R = (TextView) findViewById(R.id.wed1R);
-		wed2R = (TextView) findViewById(R.id.wed2R);
-		wed3R = (TextView) findViewById(R.id.wed3R);
-		wed4R = (TextView) findViewById(R.id.wed4R);
-		thurs1R = (TextView) findViewById(R.id.thurs1R);
-		thurs2R = (TextView) findViewById(R.id.thurs2R);
-		thurs3R = (TextView) findViewById(R.id.thurs3R);
-		thurs4R = (TextView) findViewById(R.id.thurs4R);
-		fri1R = (TextView) findViewById(R.id.fri1R);
-		fri2R = (TextView) findViewById(R.id.fri2R);
-		fri3R = (TextView) findViewById(R.id.fri3R);
-		fri4R = (TextView) findViewById(R.id.fri4R);
-		sat1R = (TextView) findViewById(R.id.sat1R);
-		sat2R = (TextView) findViewById(R.id.sat2R);
-		sat3R = (TextView) findViewById(R.id.sat3R);
-		sat4R = (TextView) findViewById(R.id.sat4R);
-		sun1R = (TextView) findViewById(R.id.sun1R);
-		sun2R = (TextView) findViewById(R.id.sun2R);
-		sun3R = (TextView) findViewById(R.id.sun3R);
-		sun4R = (TextView) findViewById(R.id.sun4R); 
-		
+		notEmpty=0;
+
+		rotaList  = new TextView[28];
+		for(int i=0; i<rotaList.length; i++) 
+		{
+			rotaListID = "rota" + (i+1);
+
+			int resID = getResources().getIdentifier(rotaListID, "id", getPackageName());
+			rotaList[i] = ((TextView) findViewById(resID));
+
+		}
+
+		rotanwList  = new TextView[28];
+		for(int i=0; i<rotanwList.length; i++) 
+		{
+			rotanwListID = "rotanw" + (i+1);
+
+			int resID = getResources().getIdentifier(rotanwListID, "id", getPackageName());
+			rotanwList[i] = ((TextView) findViewById(resID));
+
+		}
+
+		shift = (TextView) findViewById(R.id.shift); 
+		with = (TextView) findViewById(R.id.with); 
+		swap = (TextView) findViewById(R.id.swap); 
+
 		btnSS  = (Button) findViewById(R.id.btnsendswap);
 		btnBO  = (Button) findViewById(R.id.btnbookoff);
+		btnSubmit  = (Button) findViewById(R.id.submit);
+		btnClear  = (Button) findViewById(R.id.clear);
 
-		check = 0;
-		
+		checkS = 0;
+
 		spinner1 = (Spinner) findViewById(R.id.spinner1);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
 				this, R.array.days_array, android.R.layout.simple_spinner_item);
@@ -190,27 +172,91 @@ public class Rota extends Activity {
 				this, R.array.days_array, android.R.layout.simple_spinner_item);
 		adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner3.setAdapter(adapter3);
-		
+
 		spinner4 = (Spinner) findViewById(R.id.dayoff);
 		ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(
 				this, R.array.days_array, android.R.layout.simple_spinner_item);
 		adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner4.setAdapter(adapter4);
 
+		spinner5 = (Spinner) findViewById(R.id.spinner5);
+		ArrayAdapter<CharSequence> adapter5 = ArrayAdapter.createFromResource(
+				this, R.array.users_arrayR, android.R.layout.simple_spinner_item);
+		adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner5.setAdapter(adapter5);
 
-		 Intent intent = getIntent();	
-			check = intent.getIntExtra("SignedIn",0);
-			
-//			if(check == 1)
-//			{
-//				setContentView(R.layout.activity_rota_john);
-//				Toast.makeText(Rota.this,
-//						"OnClickListener : " + 
-//								"\nSpinner 1 : "+ String.valueOf(spinner1.getSelectedItem()) 
-//								
-//								,
-//								Toast.LENGTH_SHORT).show();
-//			}	
+		spinner6 = (Spinner) findViewById(R.id.spinner6);
+		ArrayAdapter<CharSequence> adapter6 = ArrayAdapter.createFromResource(
+				this, R.array.shifts_arrayR, android.R.layout.simple_spinner_item);
+		adapter6.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner6.setAdapter(adapter6);
+
+		spinner7 = (Spinner) findViewById(R.id.spinner7);
+		ArrayAdapter<CharSequence> adapter7 = ArrayAdapter.createFromResource(
+				this, R.array.days_arrayR, android.R.layout.simple_spinner_item);
+		adapter7.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner7.setAdapter(adapter7);
+
+		spinner8 = (Spinner) findViewById(R.id.spinner8);
+		ArrayAdapter<CharSequence> adapter8 = ArrayAdapter.createFromResource(
+				this, R.array.users_arrayR, android.R.layout.simple_spinner_item);
+		adapter8.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner8.setAdapter(adapter8);
+
+
+		spinner9 = (Spinner) findViewById(R.id.spinner9);
+		ArrayAdapter<CharSequence> adapter9 = ArrayAdapter.createFromResource(
+				this, R.array.shifts_arrayR, android.R.layout.simple_spinner_item);
+		adapter9.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner9.setAdapter(adapter9);
+
+		spinner10 = (Spinner) findViewById(R.id.spinner10);
+		ArrayAdapter<CharSequence> adapter10 = ArrayAdapter.createFromResource(
+				this, R.array.days_arrayR, android.R.layout.simple_spinner_item);
+		adapter10.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner10.setAdapter(adapter10);
+
+		spinner11 = (Spinner) findViewById(R.id.spinner11);
+		ArrayAdapter<CharSequence> adapter11 = ArrayAdapter.createFromResource(
+				this, R.array.users_arrayR, android.R.layout.simple_spinner_item);
+		adapter11.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner11.setAdapter(adapter11);
+
+		spinner12 = (Spinner) findViewById(R.id.spinner12);
+		ArrayAdapter<CharSequence> adapter12 = ArrayAdapter.createFromResource(
+				this, R.array.shifts_arrayR, android.R.layout.simple_spinner_item);
+		adapter12.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner12.setAdapter(adapter12);
+
+		spinner13 = (Spinner) findViewById(R.id.spinner13);
+		ArrayAdapter<CharSequence> adapter13 = ArrayAdapter.createFromResource(
+				this, R.array.days_arrayR, android.R.layout.simple_spinner_item);
+		adapter13.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner13.setAdapter(adapter13);
+
+
+		Intent intent = getIntent();	
+		checkS = intent.getIntExtra("SignedIn",0);
+
+		if(checkS == 1)
+		{
+			shift.setVisibility(View.GONE);
+			swap.setVisibility(View.GONE);
+			with.setVisibility(View.GONE);
+			spinner1.setVisibility(View.GONE);
+			spinner2.setVisibility(View.GONE);
+			spinner3.setVisibility(View.GONE);
+			btnSS.setVisibility(View.GONE);
+		}	
+		else
+		{
+			LinearLayout users = (LinearLayout) findViewById(R.id.linearLayout3);
+			users.setVisibility(View.GONE);
+
+			ScrollView scroll= (ScrollView) findViewById(R.id.ScrollViewJ);
+			scroll.setVisibility(View.GONE);
+
+		}
 
 
 		rota  = new HashMap<String,String>();
@@ -223,135 +269,182 @@ public class Rota extends Activity {
 		btnSS.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
 
-				
-				if(check == 1)
-				{
-					rota.put("userNameFR","John");
-					sendDetails();
-				}		
-				
-				if(check == 2)
-				{
-					rota.put("userNameFR","Ian");
-					
-					sendDetails();
-				}		
-			
-				if(check == 3)
-				{
-					rota.put("userNameFR","Sarah");
-			
-					sendDetails();
-					
-				}		
-				if(check == 4)
-				{
-					rota.put("userNameFR","aishling");
 
-					sendDetails();
-				}		
+				alertDialog("Swap "+spinner1.getSelectedItem().toString()+"'s shift" + " with " + 
+				spinner2.getSelectedItem().toString()+"'s shift" + " on " + spinner3.getSelectedItem().toString(),1);
 			}		
 		});
-		btnBO.setOnClickListener(new OnClickListener() {	
+		btnSubmit.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
 
-			
-				if(check == 1)
+				for(int i=0; i<28; i++) 
 				{
-					rota.put("userNameFR","John");
-					rota.put("rotaRequested", "3");
-					rota.put("Day",spinner4.getSelectedItem().toString());
-					
-					Send s = new Send();
-					 s.execute();
-					 
-					 finish();
-				   		startActivity(getIntent());
-				   		
-				}		
-				
-				if(check == 2)
-				{
-					rota.put("userNameFR","Ian");
-					rota.put("rotaRequested", "3");
-					rota.put("Day",spinner4.getSelectedItem().toString());
-					
-					Send s = new Send();
-					 s.execute();
-					 
-					 finish();
-				   		startActivity(getIntent());
-					
-					
-				}		
-			
-				if(check == 3)
-				{
-					rota.put("userNameFR","Sarah");
-					rota.put("rotaRequested", "3");
-					rota.put("Day",spinner4.getSelectedItem().toString());
-					
-					Send s = new Send();
-					 s.execute();
-					 
-					 finish();
-				   		startActivity(getIntent());
-			
-					
-					
-				}		
-				if(check == 4)
-				{
-					rota.put("userNameFR","aishling");
-					rota.put("rotaRequested", "3");
-					rota.put("Day",spinner3.getSelectedItem().toString());
-					
-					Send s = new Send();
-					 s.execute();
 
-					 finish();
-				   		startActivity(getIntent());
-					
-				}		
+					rotaList[i].setText("");
+
+				}
+
+				rota.put("rotaRequested", "4");
+
+				getItemSelected();
+			}
+		});
+
+		btnClear.setOnClickListener(new OnClickListener() {	
+			public void onClick(View v) {
+
+				for(int i=0; i<28; i++) 
+				{
+
+					rotaList[i].setText("");
+
+				}
+
+				rota.put("rotaRequested", "5");
+
+				getItemSelected();
+			}
+		});
+
+
+
+		btnBO.setOnClickListener(new OnClickListener() {	
+			public void onClick(View v) {
+				
+				for(int i=0; i<28; i++) 
+				{
+
+					rotanwList[i].setText("");
+
+				}
+				
+				alertDialog("Book "+spinner4.getSelectedItem().toString()+" off",2);
+
+
 				
 			}		
 		});
 
 	}
 
-	
-	
+	public void getItemSelected()
+	{
+		String user1 = spinner5.getSelectedItem().toString();
+		String shift1 = spinner6.getSelectedItem().toString();
+		String day1 = spinner7.getSelectedItem().toString();
+
+		String user2 = spinner8.getSelectedItem().toString();
+		String shift2 = spinner9.getSelectedItem().toString();
+		String day2 = spinner10.getSelectedItem().toString();
+
+		String user3 = spinner11.getSelectedItem().toString();
+		String shift3 = spinner12.getSelectedItem().toString();
+		String day3 =spinner13.getSelectedItem().toString();
+
+		if(!user1.trim().equals("") &&!shift1.trim().equals("") && !day1.trim().equals(""))
+		{
+			rota.put("user1",user1);
+			rota.put("shift1",shift1);
+			rota.put("day1",day1);
+
+			notEmpty = 1;	
+
+		}
+		else
+		{
+			rota.put("user1","N");
+			rota.put("shift1","N");
+			rota.put("day1","N");
+		}
+		if(!user2.trim().equals("") &&!shift2.trim().equals("") && !day2.trim().equals(""))
+		{
+			rota.put("user2",user2);
+			rota.put("shift2",shift2);
+			rota.put("day2",day2);
+
+			notEmpty = 1;	
+
+		}
+		else
+		{
+			rota.put("user2","N");
+			rota.put("shift2","N");
+			rota.put("day2","N");
+		}
+		if(!user3.trim().equals("") &&!shift3.trim().equals("") && !day3.trim().equals(""))
+		{
+			rota.put("user3",user3);
+			rota.put("shift3",shift3);
+			rota.put("day3",day3);
+
+			notEmpty = 1;	
+
+		}
+		else
+		{
+			rota.put("user3","N");
+			rota.put("shift3","N");
+			rota.put("day3","N");
+
+		}
+
+		if(notEmpty == 1)
+		{
+
+
+			Send s = new Send();
+			s.execute();
+
+		}
+
+
+	}
+
+
 	public void sendDetails()
 	{
+		
+		for(int i=0; i<28; i++) 
+		{
+
+			rotaList[i].setText("");
+
+		}
+
 		rota.put("swapDay",spinner1.getSelectedItem().toString());
 		rota.put("withUser",spinner2.getSelectedItem().toString());
 		rota.put("forUsersDay",spinner3.getSelectedItem().toString());
 		rota.put("rotaRequested", "2");
 		Send s = new Send();
-		 s.execute();
-		 
-		 finish();
-   		startActivity(getIntent());
-		 	
+		s.execute();
+
+
 	}
 
 
 
 	public class Send extends
-	AsyncTask< ArrayList<HashMap<String,String>>,Void,Map<String, String>>
+	AsyncTask< ArrayList<HashMap<String,String>>,Void,StoreArray>
 	{
 
-		Map<String,String> rRota;
-		
+
 		IPAddress ip = new IPAddress();
-		
+
 		String url=  ip.getIPAddress();
+
+		JSONArray jsArray = new JSONArray();
+		JSONArray jsArray1 = new JSONArray();
+		ArrayList<String> stringArray = new ArrayList<String>();
+		ArrayList<String> stringArray1 = new ArrayList<String>();
+
 		JSONObject jsonSEND = new JSONObject(rota);
 
-		protected Map<String, String> doInBackground(ArrayList<HashMap<String, String>>...params) 
+		StoreArray s = new StoreArray();
+
+		protected StoreArray doInBackground(ArrayList<HashMap<String, String>>...params) 
 		{
-			rRota  = new HashMap<String,String>(); 
-			
+
+
 			try{
 
 				String jsonString = HttpUtils.urlContentPost(url,"rota", jsonSEND.toString());
@@ -360,174 +453,223 @@ public class Rota extends Activity {
 
 				if( jsonResult!= null)
 				{
-					rRota.put("mon1",jsonResult.getString("monJ"));
-					rRota.put("mon2",jsonResult.getString("monI"));
-					rRota.put("mon3",jsonResult.getString("monS"));
-					rRota.put("mon4",jsonResult.getString("monA"));
 
-					rRota.put("tues1",jsonResult.getString("tuesJ"));
-					rRota.put("tues2",jsonResult.getString("tuesI"));
-					rRota.put("tues3",jsonResult.getString("tuesS"));
-					rRota.put("tues4",jsonResult.getString("tuesA"));
+					jsArray = jsonResult.getJSONArray("rota");
+					jsArray1 = jsonResult.getJSONArray("rotaNW");
 
-					rRota.put("wed1",jsonResult.getString("wedJ"));
-					rRota.put("wed2",jsonResult.getString("wedI"));
-					rRota.put("wed3",jsonResult.getString("wedS"));
-					rRota.put("wed4",jsonResult.getString("wedA"));
+					for (int i=0;i<jsArray.length();i++){ 
 
-					rRota.put("thurs1",jsonResult.getString("thursJ"));
-					rRota.put("thurs2",jsonResult.getString("thursI"));
-					rRota.put("thurs3",jsonResult.getString("thursS"));
-					rRota.put("thurs4",jsonResult.getString("thursA"));
+						try {
+							stringArray.add(jsArray.get(i).toString());
+						} catch (JSONException e) {
 
-					rRota.put("fri1",jsonResult.getString("friJ"));
-					rRota.put("fri2",jsonResult.getString("friI"));
-					rRota.put("fri3",jsonResult.getString("friS"));
-					rRota.put("fri4",jsonResult.getString("friA"));
+							Log.e( "JSONException", e.toString());
+						} 
+					}
+					for (int i=0;i<jsArray1.length();i++){ 
 
-					rRota.put("fri1",jsonResult.getString("friJ"));
-					rRota.put("fri2",jsonResult.getString("friI"));
-					rRota.put("fri3",jsonResult.getString("friS"));
-					rRota.put("fri4",jsonResult.getString("friA"));
+						try {
+							stringArray1.add(jsArray1.get(i).toString());
+						} catch (JSONException e) {
 
-					rRota.put("sat1",jsonResult.getString("satJ"));
-					rRota.put("sat2",jsonResult.getString("satI"));
-					rRota.put("sat3",jsonResult.getString("satS"));
-					rRota.put("sat4",jsonResult.getString("satA"));
+							Log.e( "JSONException", e.toString());
+						} 
 
-					rRota.put("sun1",jsonResult.getString("sunJ"));
-					rRota.put("sun2",jsonResult.getString("sunI"));
-					rRota.put("sun3",jsonResult.getString("sunS"));
-					rRota.put("sun4",jsonResult.getString("sunA"));
-					
-					rRota.put("mon1NW",jsonResult.getString("monJNW"));
-					rRota.put("mon2NW",jsonResult.getString("monINW"));
-					rRota.put("mon3NW",jsonResult.getString("monSNW"));
-					rRota.put("mon4NW",jsonResult.getString("monANW"));
+					}
 
-					rRota.put("tues1NW",jsonResult.getString("tuesJNW"));
-					rRota.put("tues2NW",jsonResult.getString("tuesINW"));
-					rRota.put("tues3NW",jsonResult.getString("tuesSNW"));
-					rRota.put("tues4NW",jsonResult.getString("tuesANW"));
-
-					rRota.put("wed1NW",jsonResult.getString("wedJNW"));
-					rRota.put("wed2NW",jsonResult.getString("wedINW"));
-					rRota.put("wed3NW",jsonResult.getString("wedSNW"));
-					rRota.put("wed4NW",jsonResult.getString("wedANW"));
-
-					rRota.put("thurs1NW",jsonResult.getString("thursJNW"));
-					rRota.put("thurs2NW",jsonResult.getString("thursINW"));
-					rRota.put("thurs3NW",jsonResult.getString("thursSNW"));
-					rRota.put("thurs4NW",jsonResult.getString("thursANW"));
-
-					rRota.put("fri1NW",jsonResult.getString("friJNW"));
-					rRota.put("fri2NW",jsonResult.getString("friINW"));
-					rRota.put("fri3NW",jsonResult.getString("friSNW"));
-					rRota.put("fri4NW",jsonResult.getString("friANW"));
-
-					rRota.put("fri1NW",jsonResult.getString("friJNW"));
-					rRota.put("fri2NW",jsonResult.getString("friINW"));
-					rRota.put("fri3NW",jsonResult.getString("friSNW"));
-					rRota.put("fri4NW",jsonResult.getString("friANW"));
-
-					rRota.put("sat1NW",jsonResult.getString("satJNW"));
-					rRota.put("sat2NW",jsonResult.getString("satINW"));
-					rRota.put("sat3NW",jsonResult.getString("satSNW"));
-					rRota.put("sat4NW",jsonResult.getString("satANW"));
-
-					rRota.put("sun1NW",jsonResult.getString("sunJNW"));
-					rRota.put("sun2NW",jsonResult.getString("sunINW"));
-					rRota.put("sun3NW",jsonResult.getString("sunSNW"));
-					rRota.put("sun4NW",jsonResult.getString("sunANW"));
-					
-
+					s.storeRotaArray = stringArray;
+					s.storeRotaNWArray=stringArray1;
 				}
+
+
 
 			}catch (JSONException e) {
 
-				Log.d( "JSONEXCEPTION", "JSONEXCEPTION");
+				Log.e( "JSONEXCEPTION", e.toString());
 			} catch (ClientProtocolException e) {
-				Log.d( "ClientProtocolException ", "ClientProtocolException ");
+				Log.e( "ClientProtocolException ", e.toString());
 
 
 			} catch (IOException e) {
-				Log.d( "IOException", "IOException");
+				Log.e( "IOException", e.toString());
 
 			}
 
-			return rRota;
 
+
+			return s;
 		}
-		protected void onPostExecute(Map<String, String> result) {
-			//super.onPostExecute(result);
-			if(!result.isEmpty())
+		protected void onPostExecute(StoreArray result) {
+			super.onPostExecute(result);
+			if(result != null)
 			{
-				mon1.append(result.get("mon1"));
-				mon2.append(result.get("mon2"));
-				mon3.append(result.get("mon3"));
-				mon4.append(result.get("mon4"));
-				tues1.append(result.get("tues1"));
-				tues2.append(result.get("tues2"));
-				tues3.append(result.get("tues3"));
-				tues4.append(result.get("tues4"));
-				wed1.append(result.get("wed1"));
-				wed2.append(result.get("wed2"));
-				wed3.append(result.get("wed3"));
-				wed4.append(result.get("wed4"));
-				thurs1.append(result.get("thurs1"));
-				thurs2.append(result.get("thurs2"));
-				thurs3.append(result.get("thurs3"));
-				thurs4.append(result.get("thurs4"));
-				fri1.append(result.get("fri1"));
-				fri2.append(result.get("fri2"));
-				fri3.append(result.get("fri3"));
-				fri4.append(result.get("fri4"));
-				sat1.append(result.get("sat1"));
-				sat2.append(result.get("sat2"));
-				sat3.append(result.get("sat3"));
-				sat4.append(result.get("sat4"));
-				sun1.append(result.get("sun1"));
-				sun2.append(result.get("sun2"));
-				sun3.append(result.get("sun3"));
-				sun4.append(result.get("sun4"));
-				
-				
-				
-				mon1R.append(result.get("mon1NW"));
-				mon2R.append(result.get("mon2NW"));
-				mon3R.append(result.get("mon3NW"));
-				mon4R.append(result.get("mon4NW"));
-				tues1R.append(result.get("tues1NW"));
-				tues2R.append(result.get("tues2NW"));
-				tues3R.append(result.get("tues3NW"));
-				tues4R.append(result.get("tues4NW"));
-				wed1R.append(result.get("wed1NW"));
-				wed2R.append(result.get("wed2NW"));
-				wed3R.append(result.get("wed3NW"));
-				wed4R.append(result.get("wed4NW"));
-				thurs1R.append(result.get("thurs1NW"));
-				thurs2R.append(result.get("thurs2NW"));
-				thurs3R.append(result.get("thurs3NW"));
-				thurs4R.append(result.get("thurs4NW"));
-				fri1R.append(result.get("fri1NW"));
-				fri2R.append(result.get("fri2NW"));
-				fri3R.append(result.get("fri3NW"));
-				fri4R.append(result.get("fri4NW"));
-				sat1R.append(result.get("sat1NW"));
-				sat2R.append(result.get("sat2NW"));
-				sat3R.append(result.get("sat3NW"));
-				sat4R.append(result.get("sat4NW"));
-				sun1R.append(result.get("sun1NW"));
-				sun2R.append(result.get("sun2NW"));
-				sun3R.append(result.get("sun3NW"));
-				sun4R.append(result.get("sun4NW"));
 
-				
+				if(result.storeRotaArray!= null)
+				{
+					for(int i=0; i<result.storeRotaArray.size(); i++) 
+					{
+						if(i < 28)
+						{
+							if(rotaList[i].getText().toString().trim().equals(""))
+							{
+								rotaList[i].append((result.storeRotaArray.get(i)).toString());
+							}
+						}
+					}
+				}
+				if(result.storeRotaNWArray!= null)
+				{
+					for(int i=0; i<result.storeRotaNWArray.size(); i++) 
+					{
+						if(i < 28)
+						{
+							if(rotanwList[i].getText().toString().trim().equals(""))
+							{
+								rotanwList[i].append((result.storeRotaNWArray.get(i)).toString());
+							}
+						}
+					}
+				}
+
+
 			}
 		}
 
 	}
+	public void alertDialog(String message,int check)
+	{
+		checkAlert = check;
 
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				context);
+
+		alertDialogBuilder
+
+		.setMessage(message)
+		.setCancelable(false)
+		.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+
+				if(checkAlert== 1)
+				{
+					if(checkS == 1)
+					{
+						rota.put("userNameFR","John");
+						sendDetails();
+					}		
+
+					if(checkS == 2)
+					{
+						rota.put("userNameFR","Ian");
+
+						sendDetails();
+					}		
+
+					if(checkS == 3)
+					{
+						rota.put("userNameFR","Sarah");
+
+						sendDetails();
+
+					}		
+					if(checkS == 4)
+					{
+						rota.put("userNameFR","aishling");
+
+						sendDetails();
+					}		
+
+				
+				}
+				else if(checkAlert== 2)
+				{
+					if(checkS == 1)
+					{
+						rota.put("userNameFR","John");
+						rota.put("rotaRequested", "3");
+						rota.put("Day",spinner4.getSelectedItem().toString());
+
+						Send s = new Send();
+						s.execute();
+
+					}		
+
+					if(checkS == 2)
+					{
+						rota.put("userNameFR","Ian");
+						rota.put("rotaRequested", "3");
+						rota.put("Day",spinner4.getSelectedItem().toString());
+
+						Send s = new Send();
+						s.execute();
+
+					}		
+
+					if(checkS == 3)
+					{
+						rota.put("userNameFR","Sarah");
+						rota.put("rotaRequested", "3");
+						rota.put("Day",spinner4.getSelectedItem().toString());
+
+						Send s = new Send();
+						s.execute();
+
+					}		
+					if(checkS == 4)
+					{
+						rota.put("userNameFR","aishling");
+						rota.put("rotaRequested", "3");
+						rota.put("Day",spinner3.getSelectedItem().toString());
+						Send s = new Send();
+						s.execute();
+
+					}		
+
+
+				}	    
+			}
+		})
+		.setNegativeButton("No",new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+
+				dialog.cancel();
+			}
+		});
+
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		
+		if(checkAlert== 1)
+		{
+			alertDialog.setTitle( Html.fromHtml("<font color='#ED6F26'>Swap</font>"));
+			alertDialog.show();
+			
+		}
+		else if(checkAlert== 2)
+		{
+			alertDialog.setTitle( Html.fromHtml("<font color='#ED6F26'>Book Off</font>"));
+			alertDialog.show();
+		}	    
+
+		
+
+		int titleDividerId = getResources().getIdentifier("android:id/titleDivider", "id", "android");
+		View titleDivider = alertDialog.findViewById(titleDividerId);
+		if (titleDivider != null)
+			titleDivider.setBackgroundColor(Color.parseColor("#ED6F26"));
+	}
+
+	public void toast(String message)
+	{
+		LayoutInflater inflater = getLayoutInflater();
+		View layout = inflater.inflate(R.layout.customtoast, (ViewGroup)
+				findViewById(R.id.toast_layout_root));
+		TextView text = (TextView) layout.findViewById(R.id.toasttext);
+		text.setText(message);
+		Toast t = new Toast(getApplicationContext());
+		t.setDuration(Toast.LENGTH_LONG);
+		t.setView(layout);
+		t.show();     
+	}
 
 	@Override
 	public void onBackPressed()
