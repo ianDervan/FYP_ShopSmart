@@ -21,11 +21,15 @@ public class StoreArray {
 	public String itemN;
 	public String itemS;
 	
+	public static int  backpressed = 0;
+	
 	public String st;
 	public String ft;
 	public String bi;
 	public String bo;
 	
+	public String xCoord;
+	public String yCoord;
 	public String barcodeTxt;
 	public String barcodePrice;
 	public String tNameCheck;

@@ -126,6 +126,8 @@ public class Manage extends Activity {
 		put =   (TextView) findViewById(R.id.put);
 		on =   (TextView) findViewById(R.id.on);
 		deliveryOn =   (TextView) findViewById(R.id.deliveryon);
+		
+		
 
 		//btnSubmit.setVisibility(View.GONE);
 
@@ -162,7 +164,6 @@ public class Manage extends Activity {
 		{
 
 			btnRefresh.setVisibility(View.GONE);
-			btnRefresh1.setVisibility(View.GONE);
 
 		}
 		else

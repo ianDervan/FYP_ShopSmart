@@ -82,15 +82,7 @@
         android:layout_marginTop="120dp"
         android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/removeOne"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.5"
-            android:background="@drawable/custombutton_lr"
-            android:text="Remove 1"
-            android:textColor="#FFFFFF" />
+        
 
         <Button
             android:id="@+id/removeAll"
@@ -103,17 +95,28 @@
             android:text="Remove All"
             android:textColor="#FFFFFF" />
 
-        <Button
-            android:id="@+id/spending"
+        <TextView
+            android:id="@+id/priceout"
             android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.5"
-            android:background="@drawable/custombutton_lr"
-            android:duration="0"
-            android:text="Spending"
-            android:textColor="#FFFFFF" />
+            android:layout_height="34dp"
+            android:layout_weight=".5"
+            android:background="@drawable/customeditext"
+            android:gravity="center_vertical"
+			android:textSize = "16dp"
+            android:hint="Total price"
+            android:paddingLeft="5dp"/>
+            
+             <TextView
+            android:id="@+id/priceout1"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_weight=".5"
+            android:background="@drawable/customeditext"
+            android:gravity="center_vertical"
+			android:textSize = "16dp"
+            android:hint="Weekly Spending"
+            android:paddingLeft="5dp"/>
+            
 
     </LinearLayout>
     

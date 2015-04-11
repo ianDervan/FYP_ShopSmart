@@ -502,7 +502,7 @@ public class Pricing extends Activity {
 					SendP sp = new SendP();
 					sp.execute();
 
-					toast(enterName + "is now setup");
+					toast(inputName + "is now setup");
 
 					enterBar.setText("");
 					enterName.setText("");

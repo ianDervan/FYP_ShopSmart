@@ -139,29 +139,29 @@
             android:text="Options"
             android:textColor="#FFFFFF" />
     </LinearLayout>
-    
-    <View
-        android:id="@+id/view2"
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/linearLayout4"
-        android:layout_marginTop="15dp"
-        android:background="#ED6F26" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/view2"
-        android:orientation="vertical" >
+    <LinearLayout 
+            
+        android:id="@+id/LinearLayout01"
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent"
+		android:layout_marginTop="250dp"
+		android:orientation="vertical">
+		
+		<ScrollView
+	        android:id="@+id/ScrollView01"
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="2" 
+	        android:padding="10dp">
 
-        <ListView
-            android:id="@+id/shoplistview"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:divider="#ED6F26"
-            android:dividerHeight="0.1dp" >
-        </ListView>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/txtMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffeeeeee"  />
+    	</ScrollView>
+
+	  </LinearLayout>
 
 </RelativeLayout>

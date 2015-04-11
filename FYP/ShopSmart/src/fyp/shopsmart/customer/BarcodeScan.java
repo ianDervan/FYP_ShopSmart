@@ -66,8 +66,12 @@ public class BarcodeScan extends Activity {
 	EditText oldShopList;
 	String resultBarcode;
 
+	SQLiteDatabase db;
+
 	Button  btnAddItem;
 	Button  btnShow;
+	
+	
 
 	String getListNew;
 	String getListOld;
@@ -76,15 +80,15 @@ public class BarcodeScan extends Activity {
 
 	int check;
 	int n;
-	
-	 ListView shopListView;
-	 ArrayAdapter<String> arrayAdapter;
-	 
-	 List<String> storelist; 
-	 
+	int quantity;
+	int back;
 
-	
-//	ListView shopListView;
+
+	ArrayList<String> storeItem;
+	ArrayList<String> price;
+
+	//	ListView shopListView;
+	StoreArray s;
 
 	Map<String,String> barcode;
 
@@ -105,13 +109,21 @@ public class BarcodeScan extends Activity {
 		btnAddItem = (Button) findViewById(R.id.additem);
 		btnShow =  (Button) findViewById(R.id.show);
 		
-		 shopListView = (ListView) findViewById(R.id.shoplistview);
+		txtMsg = (TextView) findViewById(R.id.txtMsg);
 
-		 
-		storelist= new ArrayList<String>();
-		
+		quantity = 1;
+		 storeItem = new ArrayList<String>();
+	     price = new ArrayList<String>();
+	     s = new StoreArray();
+
 		barcode  = new HashMap<String,String>();
+		
+		openDatabase();
+		 Intent intent = getIntent();
+	    	
+	  	   back = intent.getIntExtra("back",0);
 
+		
 		btnScan.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
 
@@ -119,52 +131,34 @@ public class BarcodeScan extends Activity {
 
 			}
 		});
-		
+
 		btnShow.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
+				useRawQueryShowAll();
 
-				getListOld =oldShopList.getText().toString();
-				getListNew =newShopList.getText().toString();
-				
-
-				if(!getListOld.trim().equals(""))
-				{
-					check = 1;
-					barcode.put("shopListName",getListOld);
-					barcode.put("data","N");
-					barcode.put("checkTable", "N");
-					barcode.put("getItem","SHOW");
-
-					SendB sb = new SendB();
-					sb.execute();
-					
-				}
-				else
-				{
-					if(!getListNew.trim().equals(""))
-					{
-						toast("Please enter shopping list name in other field");
-					}
-					else
-					{
-						toast("Please enter a shopping list name");
-					}
-				}
-				
-				
-	
 			}
 		});
 
-		//
 		btnAddItem.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
 
-				addItem();
+				String storeInput =txtItem.getText().toString();		
+				String  storeInput1= txtPrice.getText().toString();
+
+				storeItem.add(storeInput);
+				price.add("€"+storeInput1);
+
+				if(s.backpressed != 1)
+				{
+					dropTable();
+					s.backpressed =0;
+				}
+				insertSomeDbData();
+				useRawQueryShowAll();
+
+
 			}
 		});
-
-
 	}
 
 	public void startScanner() {
@@ -178,59 +172,7 @@ public class BarcodeScan extends Activity {
 
 
 	}
-	
-	public void addItem()
-	{
-		getListNew =newShopList.getText().toString();
-		getListOld =oldShopList.getText().toString();
-		getItem =txtItem.getText().toString();
-		getPrice =txtPrice.getText().toString();
 
-		if(!getListNew.trim().equals("") && !getItem.trim().equals(""))
-		{
-			check = 1;
-			barcode.put("shopListName",getListNew);
-			barcode.put("data",getItem+" " +getPrice);
-			barcode.put("checkTable", "1");
-			barcode.put("getItem","ADD");
-
-			SendB sb = new SendB();
-			sb.execute();		
-
-		}
-		else 
-		{
-			n =1;
-		}
-		if(!getListOld.trim().equals("") && !getItem.trim().equals(""))
-		{
-			check = 1;
-			barcode.put("shopListName",getListOld);
-			barcode.put("data",getItem+" " +getPrice);
-			barcode.put("checkTable", "N");
-			barcode.put("getItem","ADD");
-
-			SendB sb = new SendB();
-			sb.execute();
-			
-		
-				
-		}
-		else 
-		{
-			n=2;
-		}
-		
-		if(n==1)
-		{
-			toast("Please scan Item and enter shopping list name");
-		}
-		if(n==2)
-		{
-			toast("Please scan Item and enter shopping list name");
-		}
-		
-	}
 
 
 
@@ -303,28 +245,7 @@ public class BarcodeScan extends Activity {
 					{
 						itemPrice = jsonResult.getString("itemPrice");
 					}
-					if(!jsonResult.getString("tableNameCheck").equals(""))
-					{
-						nameCheck = jsonResult.getString("tableNameCheck");
-					}
-					
-					
-				if(jsonResult.getJSONArray("list") != null)
-				{
-					jsArray = jsonResult.getJSONArray("list");
-					for (int i=0;i<jsArray.length();i++){ 
-						try {
-							stringArray.add(jsArray.get(i).toString());
-						} catch (JSONException e) {
 
-							Log.e( "JSONException", e.toString());
-						} 
-					}
-				}
-
-				
-					s.shoplist = stringArray;
-					s.tNameCheck = nameCheck;
 
 					s.barcodeTxt = itemName;
 					s.barcodePrice = itemPrice;
@@ -344,7 +265,6 @@ public class BarcodeScan extends Activity {
 				Log.e( "JSONException", e.toString());
 			}
 
-
 			return s;
 
 		}
@@ -361,53 +281,17 @@ public class BarcodeScan extends Activity {
 
 				if(s.barcodePrice!=null)
 				{
-					txtPrice.append(s.barcodePrice);
+					txtPrice.append("€"+ s.barcodePrice);
 				}
-				if(!s.shoplist.isEmpty() && s.shoplist != null)
-				{
-					//toast("HERE" + s.shoplist);
-					storelist= s.shoplist;
-					//toast("HERE" + storelist);
-					
-					displayList();
-					
-					//shopListView.setAdapter(arrayAdapter); 	
-				}
-				if(s.tNameCheck!= null)
-				{
-					if(s.tNameCheck.equals("nameTaken"))
-					{
-						toast("Shopping list table name taken");
-						newShopList.setText("");
-					}
-					if(s.tNameCheck.equals("noColumn"))
-					{
-						toast("No shoping List with that name found");
-						toast("Please enter new shopping list");
-						oldShopList.setText("");
-					}
-					if(s.tNameCheck.equals("noShow"))
-					{
-						toast("No shoping List with that name found");
-						oldShopList.setText("");
-					}
-				}
+
+
 
 
 			}
 		}
 
 	}
-	
-	public void displayList()
-	{
-		 arrayAdapter = new ArrayAdapter<String>(
-                 this, 
-                 android.R.layout.simple_list_item_1,
-                 storelist);
-		 
-		 shopListView.setAdapter(arrayAdapter); 
-	}
+
 
 
 	public void toast(String message)
@@ -422,18 +306,153 @@ public class BarcodeScan extends Activity {
 		t.setView(layout);
 		t.show();     
 	}
+	private void openDatabase() {
+		try {
 
+			String SDcardPath = Environment.getExternalStorageDirectory().getPath();
 
+				String myDbPath = SDcardPath + "/" + "shopingList.db";
+				db = SQLiteDatabase.openDatabase(myDbPath, null,
+						SQLiteDatabase.CREATE_IF_NECESSARY);
+			
+			
 
+		} catch (SQLiteException e) {
 
+			finish();
+		}
+	}
+	private void insertSomeDbData() {
+		
+		db.beginTransaction();
+		try {
+			// create table
+			db.execSQL("create table  if not exists shoppingList   ("
+					+ " ID integer PRIMARY KEY autoincrement, "
+					+ " Item  text, " + " Price text, "+" Quantity text);");
+			// commit your changes
+			db.setTransactionSuccessful();
+
+		} catch (SQLException e1) {
+			txtMsg.append("\nError insertSomeDbData: " + e1.getMessage());
+			finish();
+		} finally {
+			db.endTransaction();
+		}
+
+		
+		db.beginTransaction();
+		try {
+			
+			for(int i = 0; i < storeItem.size(); i++){
+				db.execSQL("insert into shoppingList (Item,Price,Quantity) "
+						+ " values ('"+ storeItem.get(i)+"', '" + price.get(i)+"', '" + quantity+"');");
+			}
+			db.setTransactionSuccessful();
+			
+			
+		} catch (SQLiteException e2) {
+			txtMsg.append("\nError insertSomeDbData: " + e2.getMessage());
+			
+		} finally {
+			db.endTransaction();
+		}
+
+	}
+
+	private void dropTable() {
+		// (clean start) action query to drop table
+
+		try {
+			db.execSQL("DROP TABLE IF EXISTS shoppingList;");
+			//txtMsg.append("\n-dropTable - dropped!!");
+		} catch (Exception e) {
+			txtMsg.append("\nError dropTable: " + e.getMessage());
+			finish();
+		}
+	}
+	private void useRawQueryShowAll() {
+		try {
+			// hard-coded SQL select with no arguments
+			String mySQL = "select * from shoppingList";
+			Cursor c1 = db.rawQuery(mySQL, null);
+			
+			txtMsg.append("" + showCursor(c1) );
+			
+		} catch (Exception e) {
+			txtMsg.append("\nShoping List is Empty");
+			
+		}
+	}// useRawQuery1
+	
+	private String showCursor( Cursor cursor) {
+		// show SCHEMA (column names & types)
+		cursor.moveToPosition(-1); //reset cursor's top		
+		String cursorData = "\n";
+		
+		try {
+			// get column names
+			String[] colName = cursor.getColumnNames();
+			for(int i=0; i<colName.length; i++){
+				String dataType = getColumnType(cursor, i);
+				cursorData += colName[i] + dataType;
+				
+				if (i<colName.length-1){
+					cursorData+= ", ";
+				}
+			}
+		} catch (Exception e) {
+			Log.e( "<<SCHEMA>>" , e.getMessage() );
+		}
+		cursorData += "";
+		
+		// now get the rows
+		cursor.moveToPosition(-1); //reset cursor's top
+		while (cursor.moveToNext()) {
+			String cursorRow = "\n";
+			for (int i = 0; i < cursor.getColumnCount(); i++) {
+				cursorRow += cursor.getString(i);
+				if (i<cursor.getColumnCount()-1) 
+					cursorRow +=  ", ";
+			}
+			cursorData += cursorRow + "";
+		}
+		return cursorData + "\n";
+	}
+	private String getColumnType(Cursor cursor, int i) {
+		try {
+			//peek at a row holding valid data 
+			cursor.moveToFirst(); 
+			int result = cursor.getType(i);
+			String[] types = { };
+			//backtrack - reset cursor's top
+			cursor.moveToPosition(-1);
+			return types[result];
+		} catch (Exception e) {
+			return " ";
+		}
+	}
+	
+	
+	private void showTable(String tableName) {
+		try {
+			String sql = "select * from " + tableName;
+			Cursor c = db.rawQuery(sql, null);
+			txtMsg.append(""  + showCursor(c));
+
+		} catch (Exception e) {
+			txtMsg.append("\nError showTable: " + e.getMessage());
+
+		}
+	}// useCursor1
+	
 	@Override
 	public void onBackPressed()
 	{
+		s.backpressed=1;
 
-		finish();  
+		
+		db.close();
+	    finish();  
 	}
-
-
-
-
 }

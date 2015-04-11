@@ -93,7 +93,7 @@
             android:label="@string/title_activity_special_offers" >
         </activity>
         <activity
-            android:name="fyp.shopsmart.customer.ImageAdapter"
+            android:name="fyp.shopsmart.customer.Image"
             android:label="@string/title_activity_image_adapter" >
         </activity>
     </application>

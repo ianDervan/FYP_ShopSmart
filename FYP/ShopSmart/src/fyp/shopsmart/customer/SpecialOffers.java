@@ -20,6 +20,6 @@ public class SpecialOffers extends Activity {
 		GridView gridView = (GridView) findViewById(R.id.grid_view);
 
 		// Instance of ImageAdapter Class
-		gridView.setAdapter(new ImageAdapter(this));
+		gridView.setAdapter(new Image(this));
 	}
 }

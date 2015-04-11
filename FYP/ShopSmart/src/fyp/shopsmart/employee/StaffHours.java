@@ -173,7 +173,7 @@ public class StaffHours extends Activity {
 
 		if(check == 1)
 		{
-			time.put("userName","john(manager)");
+			time.put("userName","john");
 			time.put("TimeIn" ,"2");
 			time.put("TimeOut" ,"2");
 			time.put("BreakIn" ,"2");
@@ -183,7 +183,6 @@ public class StaffHours extends Activity {
 
 			Send s = new Send();
 			s.execute();
-
 		}		
 
 		if(check == 2)
@@ -231,7 +230,7 @@ public class StaffHours extends Activity {
 
 				if(check == 1)
 				{
-					time.put("userName","john(manager)");
+					time.put("userName","john");
 					insertTime(1);
 				}	
 				if(check == 2)
@@ -258,7 +257,7 @@ public class StaffHours extends Activity {
 
 				if(check == 1)
 				{
-					time.put("userName","john(manager)");
+					time.put("userName","john");
 					insertTime(2);
 					//alertDialog("John (Manager)");
 				}	
@@ -288,7 +287,7 @@ public class StaffHours extends Activity {
 
 				if(check == 1)
 				{
-					time.put("userName","john(manager)");
+					time.put("userName","john");
 					insertTime(3);
 				}		
 				if(check == 2)
@@ -314,7 +313,7 @@ public class StaffHours extends Activity {
 
 				if(check == 1)
 				{
-					time.put("userName","john(manager)");
+					time.put("userName","john");
 					insertTime(4);
 				}	
 				if(check == 2)
