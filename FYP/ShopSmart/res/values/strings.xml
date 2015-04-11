@@ -27,7 +27,7 @@
     <string name="title_staffhours">StaffHours</string>
     <string name="title_activity_rota">Rota</string>
     <string name="day">Day</string>
-      <string name="fruit">Fruit+Veg</string>
+    <string name="fruit">Fruit+Veg</string>
 
     <string-array name="days_array">
         <item>Monday</item>
@@ -38,9 +38,8 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
-    
     <string-array name="days_arrayR">
-         <item></item>
+        <item></item>
         <item>Monday</item>
         <item>Tuesday</item>
         <item>Wednesday</item>
@@ -48,10 +47,9 @@
         <item>Friday</item>
         <item>Saturday</item>
         <item>Sunday</item>
-         <item>All Days</item>
+        <item>All Days</item>
     </string-array>
-    
-     <string-array name="days_array1">
+    <string-array name="days_array1">
         <item>Monday</item>
         <item>Tuesday</item>
         <item>Wednesday</item>
@@ -64,31 +62,27 @@
         <item>Aishling</item>
         <item>Sarah</item>
     </string-array>
-    
     <string-array name="users_arrayR">
-         <item></item>
+        <item></item>
         <item>John</item>
         <item>Ian</item>
         <item>Aishling</item>
         <item>Sarah</item>
     </string-array>
-    
-     <string-array name="shifts_arrayR">
-          <item></item>
+    <string-array name="shifts_arrayR">
+        <item></item>
         <item>9-6</item>
         <item>11-8</item>
         <item>1-10</item>
     </string-array>
-    
-     <string-array name="delivery_array">
+    <string-array name="delivery_array">
         <item>Fruit+Veg</item>
         <item>Dairy</item>
         <item>Frozen</item>
         <item>Minerals</item>
         <item>Alcohol</item>
-         <item>Clear All</item>
+        <item>Clear All</item>
     </string-array>
-    
     <string-array name="operations_array">
         <item>Tills</item>
         <item>Deli</item>
@@ -100,5 +94,7 @@
     <string name="title_activity_pricing">Pricing</string>
     <string name="title_activity_update_stock">UpdateStock</string>
     <string name="title_activity_manage">Manage</string>
+    <string name="title_activity_special_offers">SpecialOffers</string>
+    <string name="title_activity_image_adapter">ImageAdapter</string>
 
 </resources>

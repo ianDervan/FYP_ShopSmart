@@ -52,6 +52,8 @@ public class Pricing extends Activity {
 	//	EditText itemName;
 	TextView priceOut;
 	EditText newPrice;
+	
+	
 
 	Button btnScanFD;
 	Button btnDelete;

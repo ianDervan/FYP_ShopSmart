@@ -6,7 +6,6 @@ import fyp.shopsmart.R;
 import fyp.shopsmart.R.id;
 import fyp.shopsmart.R.layout;
 import fyp.shopsmart.R.menu;
-import fyp.shopsmart.customer.BarcodeScan.backgroundAsyncTask;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
@@ -94,8 +93,7 @@ public class Search extends Activity {
 					
 					searchItem =textView.getText().toString();
 					//Toast.makeText(getApplicationContext(), searchItem, Toast.LENGTH_SHORT).show();
-			    	Integer xmlResFile =  R.xml.barcodes;
-			    	new backgroundAsyncTask().execute(xmlResFile);
+			    	
 			    	
 			  
 					
@@ -122,139 +120,5 @@ public class Search extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-    public class backgroundAsyncTask extends
-	AsyncTask<Integer, Void, StringBuilder> {
-    	
-    	
-
-    	ProgressDialog dialog = new ProgressDialog(Search.this);
-    	
-
-    	@Override
-    	protected void onPostExecute(StringBuilder result) {
-    		super.onPostExecute(result);
-    		dialog.dismiss();
-    	//	textView1.append (result.toString());
-    		Toast.makeText(getApplicationContext(),x+y, Toast.LENGTH_SHORT).show();
-    	//	Toast.makeText(getApplicationContext(), "msg msg", Toast.LENGTH_SHORT).show();
-    		//txtItem.append( "\n" + resultBarcode);
-    	}
-
-    	@Override
-    	protected void onPreExecute() {
-    		super.onPreExecute();
-    		dialog.setMessage("Please wait...");
-    		dialog.setCancelable(false);
-    		dialog.show();
-    		
-
-    	}
-
-    	@Override
-    	protected void onProgressUpdate(Void... values) {
-    		super.onProgressUpdate(values);
-    	}
-
-    	@Override
-    	protected StringBuilder doInBackground(Integer... params) {
-    		int xmlResFile = params[0];
-    		XmlPullParser parser = getResources().getXml(xmlResFile);
-
-    		StringBuilder stringBuilder = new StringBuilder();
-    		String nodeText = "";
-    		String nodeName = "";
-    		try {
-    			int eventType = -1;
-    			while (eventType != XmlPullParser.END_DOCUMENT) {
-    				
-    				
-
-    				eventType = parser.next();
-
-    				if (eventType == XmlPullParser.START_DOCUMENT) {
-						//stringBuilder.append("\nSTART_DOCUMENT");
-
-					} else if (eventType == XmlPullParser.END_DOCUMENT) {
-					//	stringBuilder.append("\nEND_DOCUMENT");
-
-					} else if (eventType == XmlPullParser.START_TAG) {
-						nodeName = parser.getName();
-						//stringBuilder.append("\nSTART_TAG: " + nodeName);
-						
-						//nodeText = parser.getText();
-						
-						if(n == 1)
-						{
-						 stringBuilder.append(getAttributes(parser));
-
-						}
-				
-
-					} else if (eventType == XmlPullParser.END_TAG) {
-						nodeName = parser.getName();
-						//stringBuilder.append("\nEND_TAG:   " + nodeName );
-						
-						
-
-					} else if (eventType == XmlPullParser.TEXT) {
-						nodeText = parser.getText();
-						nodeName = parser.getName();
-					
-						
-						
-						if(nodeText.equals(searchItem))
-						{
-							//0textView1.append("im here");
-							//stringBuilder.append("\n    TEXT: ");
-							n =1;
-
-						}
-
-					
-    				}
-    			}
-    		} catch (Exception e) {
-    			Log.e("<<PARSING ERROR>>", e.getMessage());
-
-    		}
-
-    		return stringBuilder;
-    	}// doInBackground
-
-    	private String getAttributes(XmlPullParser parser) {
-    		StringBuilder stringBuilder = new StringBuilder();
-    		// trying to detect inner attributes nested inside a node tag
-    		String name = parser.getName();
-    		if (name != null) {
-    			int size = parser.getAttributeCount();
-
-    			for (int i = 0; i < size; i++) {
-    				String attrName = parser.getAttributeName(i);
-
-    				String attrValue = parser.getAttributeValue(i);
-    				
-    				stringBuilder.append("X value");
-    				
-    				if(attrName.equals("X"))
-    				{
-    					
-    					x = attrValue;
-    					
-    					//stringBuilder.append("X value");
-    					stringBuilder.append("X value" + attrValue);
-    				}
-    				if(attrName.equals("Y"))
-    				{
-    					y = attrValue;
-    					stringBuilder.append("Y value" + attrValue);
-    				}
-
-    		
-    			}
-    		}
-    		return stringBuilder.toString();
-
-    	}// innerElements
-
-    }// backroundAsyncTask
+ 
 }

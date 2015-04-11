@@ -43,6 +43,7 @@ public class ShoppingList extends Activity {
 	
 
 	public static int shopListOk = 0;
+	public static int delete = 0;
 	AutoCompleteTextView textView;
 	TextView txtMsg;
 	EditText inputQuantity;
@@ -69,7 +70,6 @@ public class ShoppingList extends Activity {
 	int ok;
 	int mainOk;
 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -78,6 +78,7 @@ public class ShoppingList extends Activity {
 		sh=0;
 		sum=0;
 		n=0;
+		
 
 		txtMsg = (TextView) findViewById(R.id.txtMsg);
 		inputQuantity = (EditText) findViewById(R.id.quantity);
@@ -128,30 +129,30 @@ public class ShoppingList extends Activity {
 			}		
 		});
 		
-		btnSpending.setOnClickListener(new OnClickListener() {	
-			public void onClick(View v) {
-	
-				  Intent spending = new Intent (ShoppingList.this,
-						  Spending.class);
-				  
-				  Calendar cal = Calendar.getInstance(TimeZone.getDefault());
-				  SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
-				  String timeC=sdf.format(cal.getTime());
-				  
-				  sendTime.add(timeC);
-				  
-				 
-				  String temp = String.format("%.2f", sum);
-				  
-				  sendtotalSpent.add(String.valueOf(temp));
-				  
-				  spending.putStringArrayListExtra("cost", sendtotalSpent);
-				  spending.putStringArrayListExtra("time",sendTime);
-				  
-
-				  startActivity(spending);
-			}		
-		});
+//		btnSpending.setOnClickListener(new OnClickListener() {	
+//			public void onClick(View v) {
+//	
+//				  Intent spending = new Intent (ShoppingList.this,
+//						  Spending.class);
+//				  
+//				  Calendar cal = Calendar.getInstance(TimeZone.getDefault());
+//				  SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+//				  String timeC=sdf.format(cal.getTime());
+//				  
+//				  sendTime.add(timeC);
+//				  
+//				 
+//				  String temp = String.format("%.2f", sum);
+//				  
+//				  sendtotalSpent.add(String.valueOf(temp));
+//				  
+//				  spending.putStringArrayListExtra("cost", sendtotalSpent);
+//				  spending.putStringArrayListExtra("time",sendTime);
+//				  
+//
+//				  startActivity(spending);
+//			}		
+//		});
 		
 		btnHide.setOnClickListener(new OnClickListener() {	
 			public void onClick(View v) {
@@ -203,6 +204,8 @@ public class ShoppingList extends Activity {
 				
 				dropTable();
 				
+				delete = 1;
+				
 				
 				//db.close();
 
@@ -221,15 +224,15 @@ public class ShoppingList extends Activity {
 	            {
 					
 					String storeInput =textView.getText().toString();		
-					String[] inputItem = storeInput.split("€");
+					//String[] inputItem = storeInput.split("€");
 					
 					quantity.add(inputQuantity.getText().toString());
-					storeItem.add(inputItem[0]);
-					price.add("€"+inputItem[1]);
+					storeItem.add(storeInput);
+					price.add("€"+"35");
 					
 					
 					
-					sum =Double.parseDouble(inputItem[1]);
+					//sum =Double.parseDouble(inputItem[1]);
 					totalSpent.add(sum);
 
 					for(int i = 0; i < totalSpent.size(); i++){
@@ -240,21 +243,25 @@ public class ShoppingList extends Activity {
 				
 				    txtMsg.append("Total spent\n" + sum);
 				    
-				    if(ok == 1 || mainOk==1 || shopListOk == 1)
-				    {
+//				    if(ok == 1 || mainOk==1 || shopListOk == 1)
+//				    {
+//				    	//openDatabase();
+//				    	insertData();
+//					    useRawQueryShowAll(); 	
+//				    }
+//				    else
+//				    {
 				    	//openDatabase();
-				    	insertData();
-					    useRawQueryShowAll();
-				    	
-				    }
-				    else
+				    if(delete != 1)
 				    {
-				    	//openDatabase();
 						dropTable();
+				    }
 						insertSomeDbData();
 					    useRawQueryShowAll();
+					    
+					    
 				    	
-				    }
+				  //  }
 
 
 					textView.setText("");
@@ -305,7 +312,7 @@ public class ShoppingList extends Activity {
 		db.beginTransaction();
 		try {
 			// create table
-			db.execSQL("create table shoppingList ("
+			db.execSQL("create table  if not exists shoppingList   ("
 					+ " ID integer PRIMARY KEY autoincrement, "
 					+ " Item  text, " + " Price text, "+" Quantity text);");
 			// commit your changes
@@ -423,6 +430,7 @@ public class ShoppingList extends Activity {
 			int recAffected = db.delete("shoppingList", "ID = ?",
 					whereArgs);
 
+			storeItem.clear();
 			//txtMsg.append("\n" + recAffected);
 			//db.close();
 			

@@ -47,36 +47,6 @@ public class Rota extends Activity {
 
 	AutoCompleteTextView textView;
 
-
-	TextView mon1R;
-	TextView mon2R;
-	TextView mon3R;
-	TextView mon4R;
-	TextView tues1R;
-	TextView tues2R;
-	TextView tues3R;
-	TextView tues4R;
-	TextView wed1R;
-	TextView wed2R;
-	TextView wed3R;
-	TextView wed4R;
-	TextView thurs1R;
-	TextView thurs2R;
-	TextView thurs3R;
-	TextView thurs4R;
-	TextView fri1R;
-	TextView fri2R;
-	TextView fri3R;
-	TextView fri4R;
-	TextView sat1R;
-	TextView sat2R;
-	TextView sat3R;
-	TextView sat4R;
-	TextView sun1R;
-	TextView sun2R;
-	TextView sun3R;
-	TextView sun4R;
-
 	TextView shift;
 	TextView swap;
 	TextView with;

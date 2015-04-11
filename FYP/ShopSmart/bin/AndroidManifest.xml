@@ -75,11 +75,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".CustomOnItemSelectedListener"
-            android:label="@string/title_activity_custom_on_item_selected_listener"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".employee.Pricing"
             android:label="@string/title_activity_pricing"
             android:screenOrientation="portrait" >
@@ -92,6 +87,14 @@
         <activity
             android:name=".employee.Manage"
             android:label="@string/title_activity_manage" >
+        </activity>
+        <activity
+            android:name=".customer.SpecialOffers"
+            android:label="@string/title_activity_special_offers" >
+        </activity>
+        <activity
+            android:name="fyp.shopsmart.customer.ImageAdapter"
+            android:label="@string/title_activity_image_adapter" >
         </activity>
     </application>
 

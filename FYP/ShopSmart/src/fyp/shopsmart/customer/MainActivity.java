@@ -18,6 +18,8 @@ public class MainActivity extends Activity {
 	 Button btnShopList;
 	 Button btnScan;
 	 Button btnSearch;
+	 Button btnSpecialOffers;
+	 
 	 
 	 
 	 
@@ -32,6 +34,7 @@ public class MainActivity extends Activity {
         btnShopList = (Button) findViewById(R.id.shoplist);
         btnScan = (Button) findViewById(R.id.scan);
         btnSearch = (Button) findViewById(R.id.search);
+        btnSpecialOffers = (Button) findViewById(R.id.specialoffers);
         
         Intent mainIntent = getIntent();
 	    ok = mainIntent.getIntExtra("main",0);
@@ -47,6 +50,14 @@ public class MainActivity extends Activity {
 			
       		}		
  		});
+        btnSpecialOffers.setOnClickListener(new OnClickListener() {	
+          	public void onClick(View v) {
+          		
+    			Intent signIn = new Intent (MainActivity.this,SpecialOffers.class);
+    			startActivity(signIn);
+    			
+          		}		
+     		});
         btnScan.setOnClickListener(new OnClickListener() {	
           	public void onClick(View v) {
           		

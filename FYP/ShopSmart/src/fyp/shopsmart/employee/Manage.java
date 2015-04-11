@@ -134,6 +134,8 @@ public class Manage extends Activity {
 				this, R.array.users_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner1.setAdapter(adapter);
+		
+		
 
 		spinner2 = (Spinner) findViewById(R.id.spinner2);
 		ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(

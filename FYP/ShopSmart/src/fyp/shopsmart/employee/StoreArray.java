@@ -1,6 +1,7 @@
 package fyp.shopsmart.employee;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StoreArray {
 	
@@ -13,7 +14,20 @@ public class StoreArray {
 	public ArrayList<String> storeRotaArray = new ArrayList<String>();
 	public ArrayList<String> storeRotaNWArray = new ArrayList<String>();
 	
+	public ArrayList<String> storeStaffHoursArray = new ArrayList<String>();
+	
+	public List<String> shoplist = new ArrayList<String>();
+	
 	public String itemN;
 	public String itemS;
+	
+	public String st;
+	public String ft;
+	public String bi;
+	public String bo;
+	
+	public String barcodeTxt;
+	public String barcodePrice;
+	public String tNameCheck;
 
 }
