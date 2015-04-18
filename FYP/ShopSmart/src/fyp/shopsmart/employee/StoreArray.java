@@ -33,5 +33,7 @@ public class StoreArray {
 	public String barcodeTxt;
 	public String barcodePrice;
 	public String tNameCheck;
+	
+	
 
 }
