@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -28,6 +29,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.UIManager;
@@ -37,6 +40,7 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.FontUIResource;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
@@ -48,6 +52,10 @@ import net.miginfocom.swing.MigLayout;
 public class GUI {
 
 	static int noOfRowsAdded;
+	static int newRow;
+	static int barcodeInDatabse;
+
+	DefaultTableModel tableModel = new DefaultTableModel();
 
 	JButton btnUpdateR;	
 	JButton btnAddRow;	
@@ -56,6 +64,9 @@ public class GUI {
 	JButton btnUpdateOL;
 	JButton btnUpdateD;
 	JButton btnAddD;	
+	JButton btnDeleteS;	
+	JButton btnRefresh;	
+	JButton btnAddB;	
 
 	JTable tableSH;
 	JTable tableR;
@@ -65,6 +76,20 @@ public class GUI {
 	JTable tableOL;
 	JTable tableD;
 	JTable tableB;
+
+	JTextField newItemStock;
+	JTextField newQtyStock;
+
+
+	JTextField newBarcode;
+	JTextField newItemPrice;
+	JTextField newPrice;
+	JTextField newStock;
+	JTextField newX;
+	JTextField newY;
+
+
+	JTextField statusOut;
 
 	JScrollPane scrollpaneSH;
 	JScrollPane scrollpaneR;
@@ -77,8 +102,8 @@ public class GUI {
 
 	readData rd;
 
-
-
+	JScrollPane scrollpaneFS;
+	JScrollPane scrollpaneFSQ;
 
 	public void setUpGUI() {
 
@@ -109,10 +134,62 @@ public class GUI {
 		btnUpdateR = new JButton("Update Rota");
 		btnAddRow = new JButton("Add Row");
 		btnUpdateM = new JButton("Update Staff Operations");
+		btnUpdateD = new JButton("Update Delivery Times");
+		btnDeleteS = new JButton("Delete");
+		btnRefresh = new JButton("Refresh");
+		btnAddB =  new JButton("Add New Item");
 
-		//JPanel rotaB = new JPanel();
-		//rotaB.add(btnUpdateR);
+		newItemStock= new JTextField(29);
+		statusOut  = new JTextField(35);
+		newQtyStock = new JTextField(5);
 
+
+		newBarcode = new JTextField(20);
+
+		newItemPrice = new JTextField(32);
+		newPrice = new JTextField(7);
+		newStock = new JTextField(7);
+		newX = new JTextField(5);
+		newY = new JTextField(5);
+
+
+		newItemStock.setBorder(  (BorderFactory.createCompoundBorder(
+				BorderFactory.createEmptyBorder(1, 5, 1, 1), null)));
+		newQtyStock.setBorder(  (BorderFactory.createCompoundBorder(
+				BorderFactory.createEmptyBorder(1, 5, 1, 1), null)));
+		statusOut.setBorder(BorderFactory.createCompoundBorder(
+				statusOut.getBorder(),BorderFactory.createEmptyBorder(1, 5, 1, 1)));
+
+		newItemPrice.setBorder(BorderFactory.createCompoundBorder(
+				newItemPrice.getBorder(),BorderFactory.createEmptyBorder(1, 5, 1, 1)));
+		newItemStock.setBorder(BorderFactory.createCompoundBorder(
+				newItemStock.getBorder(),BorderFactory.createEmptyBorder(1, 5, 1, 1)));
+		newBarcode.setBorder(BorderFactory.createCompoundBorder(
+				newBarcode.getBorder(),BorderFactory.createEmptyBorder(1, 5, 1, 1)));
+		newPrice.setBorder(BorderFactory.createCompoundBorder(
+				newPrice.getBorder(),BorderFactory.createEmptyBorder(1, 5, 1, 1)));
+		newStock.setBorder(BorderFactory.createCompoundBorder(
+				newStock.getBorder(),BorderFactory.createEmptyBorder(1, 5, 1, 1)));
+		newX.setBorder(BorderFactory.createCompoundBorder(
+				newX.getBorder(),BorderFactory.createEmptyBorder(1, 5, 1, 1)));
+		newY.setBorder(BorderFactory.createCompoundBorder(
+				newY.getBorder(),BorderFactory.createEmptyBorder(1, 5, 1, 1)));
+
+
+		newItemPrice.setText("Enter Item Name");
+		newBarcode.setText("Enter Barcode");
+		newPrice.setText("Enter Price");
+		newStock.setText("Enter Stock");
+		newX.setText("X");
+		newY.setText("Y");
+
+		newItemStock.setText("Enter Item Name");
+		statusOut.setText("ShopSmart Control Panel Started...");
+
+
+		newQtyStock.setText("Qty");
+		scrollpaneFS = new JScrollPane(newItemStock);
+		scrollpaneFSQ = new JScrollPane(newQtyStock);
 
 		JPanel left= new JPanel(new MigLayout());
 		JPanel center= new JPanel(new MigLayout());
@@ -126,12 +203,18 @@ public class GUI {
 		JPanel orderList= new JPanel();
 		JPanel shoppingList= new JPanel();
 		JPanel barcodes= new JPanel();
+		JPanel status= new JPanel();
+		JPanel statusRight= new JPanel();
+
+		JPanel olOptions= new JPanel();
 
 		JPanel border= new JPanel();
 		JPanel border1= new JPanel();
 		JPanel border2= new JPanel();
 		JPanel border3= new JPanel();
+		JPanel borderStatus= new JPanel();
 
+		status.setBorder(BorderFactory.createTitledBorder("Status"));
 		staffHours.setBorder(BorderFactory.createTitledBorder("Staff Hours"));
 		rota.setBorder(BorderFactory.createTitledBorder("Rota"));
 		rotaNw.setBorder(BorderFactory.createTitledBorder("Rota Next Week"));
@@ -145,6 +228,7 @@ public class GUI {
 		border1.setBorder(new EmptyBorder(0, 0,5,5));
 		border2.setBorder(new EmptyBorder(0, 0,5,5));
 		border3.setBorder(new EmptyBorder(0, 0,5,5));
+		//borderStatus.setBorder(new EmptyBorder(0, 50,5,5));
 
 		frame.getContentPane().setLayout(new MigLayout());
 
@@ -159,11 +243,11 @@ public class GUI {
 			tableM = new JTable(rd.insertData("manage",2,7));
 
 
-			tableB = new JTable(rd.insertData("barcodes",1,7));	
+			tableB = new JTable(rd.insertData("barcodes",2,8));	
 
 			tableB.setPreferredScrollableViewportSize(tableB.getPreferredSize());
-			tableB.getColumn("barcode").setPreferredWidth(160);
-			tableB.getColumn("item").setPreferredWidth(400);
+			tableB.getColumn("Barcode").setPreferredWidth(160);
+			tableB.getColumn("Item").setPreferredWidth(400);
 
 			tableB.getColumn("X").setPreferredWidth(60);
 			tableB.getColumn("Y").setPreferredWidth(60);
@@ -203,16 +287,15 @@ public class GUI {
 		scrollpaneM.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 		scrollpaneM.setPreferredSize(new Dimension(400,90));
 
-
-
 		scrollpaneB= new JScrollPane( tableB );
 
+
 		scrollpaneOL = new JScrollPane( tableOL );
-		scrollpaneOL.setPreferredSize(new Dimension(400,165));
+		scrollpaneOL.setPreferredSize(new Dimension(400,150));
 
 
 		scrollpaneSL = new JScrollPane( tableSL);
-		scrollpaneSL.setPreferredSize(new Dimension(400,225));
+		scrollpaneSL.setPreferredSize(new Dimension(400,215));
 
 
 		scrollpaneD = new JScrollPane( tableD);
@@ -233,21 +316,29 @@ public class GUI {
 
 		barcodes.add(scrollpaneB);
 
-
-
-
 		shoppingList.add(scrollpaneSL);
 
 		deliveries.setPreferredSize(new Dimension(400,165));
 		deliveries.add(scrollpaneD);
 		deliveries.add(btnUpdateD,BorderLayout.CENTER);
 
-		orderList.setPreferredSize(new Dimension(420,230));
+		orderList.setPreferredSize(new Dimension(420,240));
 		orderList.add(scrollpaneOL);
-		orderList.add(btnAddRow,BorderLayout.WEST);
-		orderList.add(btnAddD,BorderLayout.WEST);
-		orderList.add(btnUpdateOL,BorderLayout.WEST);
-		
+
+		olOptions.setPreferredSize(new Dimension(408,55));
+
+		scrollpaneFS.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollpaneFSQ.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		//scrollpaneFS.setBorder(null);
+
+		btnDeleteS.setPreferredSize(new Dimension(120,23));
+
+		olOptions.add(scrollpaneFS,BorderLayout.WEST);
+		olOptions.add(scrollpaneFSQ,BorderLayout.WEST);
+		olOptions.add(btnAddD,BorderLayout.WEST);
+		olOptions.add(btnUpdateOL,BorderLayout.SOUTH);
+		olOptions.add(btnDeleteS,BorderLayout.SOUTH);
+		orderList.add(olOptions,BorderLayout.CENTER);
 
 
 		left.setPreferredSize(new Dimension(440,700));
@@ -263,13 +354,46 @@ public class GUI {
 		center.add(orderList,"wrap,gapbottom 5px");
 		center.add(shoppingList,"wrap ,growx,gapbottom 5px");
 
+		status.setPreferredSize(new Dimension(490,50));
+
+
+		right.setPreferredSize(new Dimension(500,50));
+
+		btnRefresh.setPreferredSize(new Dimension(120,22));
+
+		status.add(statusOut,BorderLayout.WEST);
+		status.add(borderStatus,BorderLayout.WEST);
+		status.add(btnRefresh,BorderLayout.WEST);
+		right.add(status,"wrap,gapbottom 5px");
+
+		barcodes.setPreferredSize(new Dimension(490,610));
+
+		btnAddB.setPreferredSize(new Dimension(90,23));
+		btnUpdateB.setPreferredSize(new Dimension(90,23));
+
+
+		barcodes.add(newBarcode,BorderLayout.WEST);
+		barcodes.add(newItemPrice,BorderLayout.WEST);
+		barcodes.add(newPrice,BorderLayout.SOUTH);
+		barcodes.add(newStock,BorderLayout.SOUTH);
+		barcodes.add(newX,BorderLayout.SOUTH);
+		barcodes.add(newY,BorderLayout.SOUTH);
+		barcodes.add(btnAddB,BorderLayout.SOUTH);
+		barcodes.add(btnUpdateB,BorderLayout.SOUTH);
+
 		right.add(barcodes);
+
+
+
 
 		frame.add(BorderLayout.NORTH,border);
 		frame.add(BorderLayout.WEST,border1);
 		frame.add(BorderLayout.WEST,left);
 		frame.add(BorderLayout.CENTER,center);
 		frame.add(BorderLayout.EAST,right);
+		//frame.add(BorderLayout.CENTER,status);
+
+
 
 		btnUpdateR.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
@@ -277,6 +401,9 @@ public class GUI {
 				SwingUtilities.invokeLater(new Runnable(){
 					public void run(){
 						try {
+							statusOut.setText("");
+
+							statusOut.setText("Rota Was Updated...");
 
 							rd.getTable( tableR,1 );
 						} catch (Exception ex) {
@@ -295,6 +422,10 @@ public class GUI {
 						try {
 
 							rd.getTable( tableM,2 );
+							statusOut.setText("");
+
+							statusOut.setText("Staff Operations Were Changed...");
+
 						} catch (Exception ex) {
 
 						}   
@@ -312,6 +443,9 @@ public class GUI {
 						try {
 
 							rd.getTable( tableD,3 );
+							statusOut.setText("");
+
+							statusOut.setText("Delivery Times Were Changed...");
 						} catch (Exception ex) {
 
 						}   
@@ -326,8 +460,10 @@ public class GUI {
 				SwingUtilities.invokeLater(new Runnable(){
 					public void run(){
 						try {
-
 							rd.getTable( tableOL,4 );
+							statusOut.setText("");
+
+							statusOut.setText("Order List Updated...");
 						} catch (Exception ex) {
 
 						}   
@@ -336,19 +472,16 @@ public class GUI {
 
 			}
 		});
-		
-		btnAddRow.addActionListener(new ActionListener(){
+		btnUpdateB.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{ 
 				SwingUtilities.invokeLater(new Runnable(){
 					public void run(){
 						try {
-							
-							
-							//System.out.print(" ADDED"+ 	noOfRowsAdded);
-							rd.addRow();
-							DefaultTableModel model = (DefaultTableModel) tableOL.getModel();
-							model.addRow(new Object[]{noOfRowsAdded, "", ""});
+							rd.getTable( tableB,5 );
+							statusOut.setText("");
+
+							statusOut.setText("Barcodes Updated...");
 						} catch (Exception ex) {
 
 						}   
@@ -357,13 +490,139 @@ public class GUI {
 
 			}
 		});
+		btnAddB.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{ 
+				SwingUtilities.invokeLater(new Runnable(){
+					public void run(){
+						try {
+						
+							if(!newItemPrice.getText().equals("Enter Item Name") && !newBarcode.getText().equals("Enter Barcode")&& !newPrice.getText().equals("Enter Price") &&  !newStock.getText().equals("Enter Stock")&& !newX.getText().equals("X")&& !newY.getText().equals("Y"))
+							{
+								System.out.print("INNNNNNNNNN");
+								rd.setUpNewItem(newItemPrice.getText(),newBarcode.getText(),newPrice.getText(),newStock.getText(),newX.getText(),newY.getText());
+								if(barcodeInDatabse!=1)
+								{
+									statusOut.setText("");
+									statusOut.setText("New Item Added To Barcodes List...");
+									newItemPrice.setText("");
+									newBarcode.setText("");
+									newPrice.setText("");
+									newStock.setText("");
+									newX.setText("");
+									newY.setText("");
+									
+									DefaultTableModel model = (DefaultTableModel) tableB.getModel();
+									model.addRow(new Object[]{newItemPrice.getText(),newBarcode.getText(),newPrice.getText(),newStock.getText(),newX.getText(),newY.getText()});
+								}
+								else
+								{
+									statusOut.setText("");
+									statusOut.setText("Barcode Is Allready In Databse,Use Update Instead...");
+
+								}
+							}
+							else
+							{
+								statusOut.setText("");
+								statusOut.setText("Please Change All Default Values...");
+								
+							}
+						} catch (Exception ex) {
+
+						}   
+					}
+				});
+
+			}
+		});
+		btnRefresh.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{ 
+				SwingUtilities.invokeLater(new Runnable(){
+					public void run(){
+						try {
+
+							frame.revalidate();
+							frame.repaint();
+
+							for (int i = 0; i < tableOL.getRowCount(); i++)
+								for(int j = 0; j < tableOL.getColumnCount(); j++) {
+									tableOL.setValueAt("", i, j);
+								}
+
+							//							orderList.revalidate();
+							//							orderList.repaint();
+							//							   					
+
+
+						} catch (Exception ex) {
+
+						}   
+					}
+				});
+
+			}
+		});
+		btnDeleteS.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{ 
+				SwingUtilities.invokeLater(new Runnable(){
+					public void run(){
+						try {
+
+
+							rd.delteItemFS();
+
+							statusOut.setText("");
+							statusOut.setText("Order List Cleared...");
+
+						}
+						catch (Exception ex) {
+
+						}   
+					}
+				});
+
+			}
+		});
+
+
 		btnAddD.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e)
 			{ 
 				SwingUtilities.invokeLater(new Runnable(){
 					public void run(){
 						try {
-							//rd.getTable( tableOL,5);
+
+							if(!newItemStock.getText().equals("Enter Item Name") && !newQtyStock.getText().equals("Qty"))
+							{
+
+								rd.addNew(newItemStock.getText(),newQtyStock.getText());
+
+								if(newRow !=1)
+								{
+									statusOut.setText("");
+
+									statusOut.setText("Item Was Added To Orderlist...");
+									DefaultTableModel model = (DefaultTableModel) tableOL.getModel();
+									model.addRow(new Object[]{noOfRowsAdded, newItemStock.getText(), newQtyStock.getText()});
+								}
+								else
+								{
+									statusOut.setText("");
+
+									statusOut.setText("Item Allready In Orderlist,Please Use Update Instead...");
+
+								}
+							}
+							else {
+
+								statusOut.setText("");
+								statusOut.setText("Please Enter Item Name and Qty. To Be Added...");
+
+							}
+
 						} catch (Exception ex) {
 
 						}   
