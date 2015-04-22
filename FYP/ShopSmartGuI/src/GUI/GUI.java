@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.ScrollPane;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -26,6 +28,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
@@ -43,12 +47,15 @@ import net.miginfocom.swing.MigLayout;
 
 public class GUI {
 
+	static int noOfRowsAdded;
 
-	JButton btnStaffHours;	
-	JButton btnBarcodes;
-	JButton btnStockList;			
-	JButton btnManage;
-	JButton btnRota;
+	JButton btnUpdateR;	
+	JButton btnAddRow;	
+	JButton btnUpdateB;		
+	JButton btnUpdateM;		
+	JButton btnUpdateOL;
+	JButton btnUpdateD;
+	JButton btnAddD;	
 
 	JTable tableSH;
 	JTable tableR;
@@ -71,13 +78,14 @@ public class GUI {
 	readData rd;
 
 
+
+
 	public void setUpGUI() {
 
 		JFrame frame = new JFrame("ShopSmart Control panel");
 
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setSize(screenSize.width, screenSize.height);
-
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		try {
@@ -93,6 +101,18 @@ public class GUI {
 		}
 
 		rd= new readData();
+
+		btnAddD = new JButton("Add New Item");
+		btnUpdateB = new JButton("Update Barcodes");
+		btnUpdateD = new JButton("Update Delivery Times");
+		btnUpdateOL = new JButton("Update Order List");
+		btnUpdateR = new JButton("Update Rota");
+		btnAddRow = new JButton("Add Row");
+		btnUpdateM = new JButton("Update Staff Operations");
+
+		//JPanel rotaB = new JPanel();
+		//rotaB.add(btnUpdateR);
+
 
 		JPanel left= new JPanel(new MigLayout());
 		JPanel center= new JPanel(new MigLayout());
@@ -110,6 +130,7 @@ public class GUI {
 		JPanel border= new JPanel();
 		JPanel border1= new JPanel();
 		JPanel border2= new JPanel();
+		JPanel border3= new JPanel();
 
 		staffHours.setBorder(BorderFactory.createTitledBorder("Staff Hours"));
 		rota.setBorder(BorderFactory.createTitledBorder("Rota"));
@@ -120,30 +141,15 @@ public class GUI {
 		shoppingList.setBorder(BorderFactory.createTitledBorder("Pre-Orderdered Shopping Lists"));
 		deliveries.setBorder(BorderFactory.createTitledBorder("Deliveries"));
 
-		border.setBorder(new EmptyBorder(0, 0,5,5));
+		border.setBorder(new EmptyBorder(0, 0,0,0));
 		border1.setBorder(new EmptyBorder(0, 0,5,5));
 		border2.setBorder(new EmptyBorder(0, 0,5,5));
+		border3.setBorder(new EmptyBorder(0, 0,5,5));
 
 		frame.getContentPane().setLayout(new MigLayout());
 
-		String columnNames[] = { "Name", "Start Time", "Break In","BreakOut","Finish Time" };
+		try{
 
-
-		// Create some data
-		String dataValues[][] =
-			{
-				{ "Monday", "234", "67","12", "234"},
-				{ "Tuesday", "43", "853","12", "234"},
-				{ "Wednesday", "89.2", "109","6","12"},
-				{ "Thursday", "89.2", "109","6","12"},
-				{ "Friday", "89.2", "109","6","12"},
-				{ "Saturday", "89.2", "109","6","12"},
-				{ "Sunday", "89.2", "109","6","12"},
-
-			};
-
-
-		try {
 			tableSH = new JTable(rd.insertData("staffhours",2,7));
 
 			tableR = new JTable(rd.insertData("rota",2,7));
@@ -158,23 +164,20 @@ public class GUI {
 			tableB.setPreferredScrollableViewportSize(tableB.getPreferredSize());
 			tableB.getColumn("barcode").setPreferredWidth(160);
 			tableB.getColumn("item").setPreferredWidth(400);
-			tableB.getColumn("SearchX").setPreferredWidth(60);
-			tableB.getColumn("SearchY").setPreferredWidth(60);
-	
+
+			tableB.getColumn("X").setPreferredWidth(60);
+			tableB.getColumn("Y").setPreferredWidth(60);
 
 			tableOL = new JTable(rd.insertData("orderlist",1,4));
-			tableOL.getColumn("id").setPreferredWidth(50);
-			tableOL.getColumn("qty").setPreferredWidth(50);
-			tableOL.getColumn("item").setPreferredWidth(400);
-			
+			tableOL.getColumn("ID").setPreferredWidth(60);
+			tableOL.getColumn("Qty").setPreferredWidth(60);
+			tableOL.getColumn("Item").setPreferredWidth(400);
 
 			tableSL = new JTable(rd.insertData("shoppinglists",3,5));
 			tableSL.getColumn("ShoppingList").setPreferredWidth(400);
-			tableSL.getColumn("CustomerName").setPreferredWidth(100);
-			
+			tableSL.getColumn("CustomerName").setPreferredWidth(150);
+
 			tableD = new JTable(rd.insertData("deliveries",2,8));
-			
-	
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -205,42 +208,56 @@ public class GUI {
 		scrollpaneB= new JScrollPane( tableB );
 
 		scrollpaneOL = new JScrollPane( tableOL );
-		scrollpaneOL.setPreferredSize(new Dimension(400,200));
+		scrollpaneOL.setPreferredSize(new Dimension(400,165));
 
-//		TableColumn column1 = null;
-//		for (int i = 0; i < 2; i++) {
-//			column1 =  tableSL.getColumnModel().getColumn(i);
-//			if (i == 0) 
-//			{
-//				column1.setPreferredWidth(30); 
-//			} 
-//			else
-//			{
-//				column1.setPreferredWidth(220);
-//			}
-//		}
+
 		scrollpaneSL = new JScrollPane( tableSL);
-		scrollpaneSL.setPreferredSize(new Dimension(400,200));
+		scrollpaneSL.setPreferredSize(new Dimension(400,225));
 
-		
+
 		scrollpaneD = new JScrollPane( tableD);
 		scrollpaneD.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 		scrollpaneD.setPreferredSize(new Dimension(400,106));
 
 		staffHours.add(scrollpaneSH);
+
+		rota.setPreferredSize(new Dimension(350,200));
 		rota.add(scrollpaneR);
+		rota.add(btnUpdateR,BorderLayout.CENTER);
+
 		rotaNw.add(scrollpaneRNw);
+
+		manage.setPreferredSize(new Dimension(350,150));
 		manage.add(scrollpaneM);
+		manage.add(btnUpdateM,BorderLayout.CENTER);
+
 		barcodes.add(scrollpaneB);
 
-		orderList.add(scrollpaneOL);
+
+
+
 		shoppingList.add(scrollpaneSL);
+
+		deliveries.setPreferredSize(new Dimension(400,165));
 		deliveries.add(scrollpaneD);
+		deliveries.add(btnUpdateD,BorderLayout.CENTER);
+
+		orderList.setPreferredSize(new Dimension(420,230));
+		orderList.add(scrollpaneOL);
+		orderList.add(btnAddRow,BorderLayout.WEST);
+		orderList.add(btnAddD,BorderLayout.WEST);
+		orderList.add(btnUpdateOL,BorderLayout.WEST);
+		
+
+
+		left.setPreferredSize(new Dimension(440,700));
 
 		left.add(staffHours,"wrap,gapbottom 5px");
 		left.add(rota,"wrap ,growx,gapbottom 5px");
 		left.add(rotaNw,"wrap,growx,gapbottom 5px");
 		left.add(manage,"wrap,growx,gapbottom 5px");
+
+		center.setPreferredSize(new Dimension(440,700));
 
 		center.add(deliveries,"wrap,growx,gapbottom 5px");
 		center.add(orderList,"wrap,gapbottom 5px");
@@ -252,9 +269,109 @@ public class GUI {
 		frame.add(BorderLayout.WEST,border1);
 		frame.add(BorderLayout.WEST,left);
 		frame.add(BorderLayout.CENTER,center);
-		//frame.add(BorderLayout.NORTH,border2);
 		frame.add(BorderLayout.EAST,right);
 
+		btnUpdateR.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{ 
+				SwingUtilities.invokeLater(new Runnable(){
+					public void run(){
+						try {
+
+							rd.getTable( tableR,1 );
+						} catch (Exception ex) {
+
+						}   
+					}
+				});
+
+			}
+		});
+		btnUpdateM.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{ 
+				SwingUtilities.invokeLater(new Runnable(){
+					public void run(){
+						try {
+
+							rd.getTable( tableM,2 );
+						} catch (Exception ex) {
+
+						}   
+					}
+				});
+
+			}
+		});
+
+		btnUpdateD.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{ 
+				SwingUtilities.invokeLater(new Runnable(){
+					public void run(){
+						try {
+
+							rd.getTable( tableD,3 );
+						} catch (Exception ex) {
+
+						}   
+					}
+				});
+
+			}
+		});
+		btnUpdateOL.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{ 
+				SwingUtilities.invokeLater(new Runnable(){
+					public void run(){
+						try {
+
+							rd.getTable( tableOL,4 );
+						} catch (Exception ex) {
+
+						}   
+					}
+				});
+
+			}
+		});
+		
+		btnAddRow.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{ 
+				SwingUtilities.invokeLater(new Runnable(){
+					public void run(){
+						try {
+							
+							
+							//System.out.print(" ADDED"+ 	noOfRowsAdded);
+							rd.addRow();
+							DefaultTableModel model = (DefaultTableModel) tableOL.getModel();
+							model.addRow(new Object[]{noOfRowsAdded, "", ""});
+						} catch (Exception ex) {
+
+						}   
+					}
+				});
+
+			}
+		});
+		btnAddD.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{ 
+				SwingUtilities.invokeLater(new Runnable(){
+					public void run(){
+						try {
+							//rd.getTable( tableOL,5);
+						} catch (Exception ex) {
+
+						}   
+					}
+				});
+
+			}
+		});
 
 		frame.setVisible(true);
 

@@ -110,7 +110,7 @@ public class StockData {
 		try {
 
 			sqlAddItem = connection.prepareStatement(
-					"INSERT INTO orderlist (item,quantity) VALUES ( '"+addItemTxt+"' , '"+  addItemStock +"')" );
+					"INSERT INTO orderlist (Item,Qty) VALUES ( '"+addItemTxt+"' , '"+  addItemStock +"')" );
 			result =sqlAddItem .executeUpdate();
 
 
