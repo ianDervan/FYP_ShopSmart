@@ -36,6 +36,7 @@ public class Servlet extends HttpServlet {
 		String inputP = request.getParameter("price");
 		String inputS = request.getParameter("stock");
 		String inputSE = request.getParameter("search");
+		String inputPSL = request.getParameter("slPrice");
 
 		Map<String,String> mapTimes = new HashMap<String,String>(); 
 		String temp1 = null;
@@ -696,8 +697,42 @@ public class Servlet extends HttpServlet {
 						PrintWriter outb = response.getWriter();
 						outb.println(new JSONObject(infob));
 					}
-				
+
 				}
+			} catch (Exception e) { 
+
+				System.out.print("\n exception ..." + e);
+			}
+		}
+		if(inputPSL != null)
+		{
+			String item;
+
+			System.out.print("\nBARCODE\n");
+
+			try{
+				JSONObject inputPriceS = new JSONObject(inputPSL); 
+				if(inputPriceS != null)
+				{
+					item = inputPriceS.getString("getPrice");
+
+					
+
+					PriceData price = new PriceData();
+
+					String t1;
+
+					price.getPrice(item);
+					item =price.getItemPrice();
+
+					item = item.substring(1);
+
+					SendSLP infop = new SendSLP(item);
+					PrintWriter outp = response.getWriter();
+					outp.println(new JSONObject(infop));
+				}
+
+
 			} catch (Exception e) { 
 
 				System.out.print("\n exception ..." + e);
@@ -737,7 +772,7 @@ public class Servlet extends HttpServlet {
 		{
 			String requestItem;
 
-			
+
 
 			try{
 				JSONObject inputRequest = new JSONObject(inputRE); 
@@ -772,7 +807,7 @@ public class Servlet extends HttpServlet {
 					userRE= inputRequestJ.getString("userName");
 					dayRE =  inputRequestJ.getString("dayTime");
 					status =  inputRequestJ.getString("status");
-				
+
 					JSONArray js = new JSONArray();
 					js = inputRequestJ.getJSONArray("jsArray");
 
@@ -789,10 +824,10 @@ public class Servlet extends HttpServlet {
 					}
 					else
 					{
-						
+
 						sh.getStatus(userRE);
 						String status1 = sh.getStatusR();
-						
+
 						SendShopList infoS = new SendShopList(" ",status1);
 						PrintWriter outS = response.getWriter();
 						outS.println(new JSONObject(infoS));
@@ -805,44 +840,86 @@ public class Servlet extends HttpServlet {
 		}
 		if(inputRV != null)
 		{
-			System.out.print("\nREQUEST" );
-			String getRequest,getUsers;
+
+			String getRequest,getUsers,getShop,getStatus;
 			try{
 				JSONObject inputRequestV = new JSONObject(inputRV); 
 				if(inputRequestV != null)
 				{
 					getRequest= inputRequestV.getString("getRequest");
 					getUsers= inputRequestV.getString("getUsers");
+					getShop= inputRequestV.getString("getShop");
 
-					if(!getRequest.equals("N"))
+					if(!getRequest.equals("N") && getShop.equals("N"))
 					{
-						System.out.print("getRequest" +getRequest);
-						
+						System.out.print("Request 1");
+
 						ViewRequests vr =new ViewRequests();
 						vr.getRequests();
-						
-						JSONArray jsArray = new JSONArray(vr.getReqList());
+						vr.getUsers();
 
-						SendViewR infovr = new SendViewR(jsArray,empty);
+						JSONArray jsArray = new JSONArray(vr.getReqList());
+						JSONArray jsArray1 = new JSONArray(vr.getUserList());
+
+						SendViewR infovr = new SendViewR(jsArray,jsArray1,empty, "N", "N");
 						PrintWriter outvr = response.getWriter();
 						outvr.println(new JSONObject(infovr));
 
 					}
 					if(!getUsers.equals("N"))
 					{
-						System.out.print("\nREQUEST" );
+						System.out.print("\nREQUEST 2" );
 						ViewRequests vr =new ViewRequests();
 						vr.getUsers();
-						
+
 						JSONArray jsArray1 = new JSONArray(vr.getUserList());
 
-						SendViewR infovr = new SendViewR( empty,jsArray1);
+						SendViewR infovr = new SendViewR( empty,jsArray1,empty,"N","N");
 						PrintWriter outvr = response.getWriter();
 						outvr.println(new JSONObject(infovr));
-						
+
+					}
+					if(!getShop.equals("N") && !getRequest.equals("Update"))
+					{
+						System.out.print("\nREQUEST 3");
+						ViewRequests vr =new ViewRequests();
+						vr.getShopList(getShop);
+
+						ShoppingLists sh = new ShoppingLists();
+
+						sh.getStatus(getShop);
+
+
+						vr.getDelivery(getShop);
+						System.out.print("\nREQUEST 3" + vr.getdayTime());
+						JSONArray jsArray1 = new JSONArray(vr.getShopList());
+
+						SendViewR infovr = new SendViewR( empty,empty,jsArray1,sh.getStatusR(), vr.getdayTime());
+						PrintWriter outvr = response.getWriter();
+						outvr.println(new JSONObject(infovr));
+
+					}
+					if(getRequest.equals("Update") && !getShop.equals("N"))
+					{
+						System.out.print("\nREQUEST 4");
+
+						getStatus= inputRequestV.getString("status");
+
+						ViewRequests vr =new ViewRequests();
+						vr.insertStatus(getStatus,getShop);
+
+
 					}
 
+					if(getRequest.equals("Delete") )
+					{
+						System.out.print("\nDELETE");
 
+
+						ViewRequests vr =new ViewRequests();
+						vr.delete(getShop);
+
+					}
 				}
 			} catch (Exception e) { 
 

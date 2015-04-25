@@ -52,8 +52,8 @@ public class PriceData {
 
 		try {
 
-			String query= "SELECT item FROM barcodes " +
-					"WHERE barcode = '"+bar +"'";
+			String query= "SELECT Item FROM barcodes " +
+					"WHERE Barcode = '"+bar +"'";
 
 			Statement stmt = connection.createStatement();
 
@@ -85,7 +85,7 @@ public class PriceData {
 		try {
 
 			String query= "SELECT Price FROM barcodes " +
-					"WHERE item = '"+itemName+"'";
+					"WHERE Item = '"+itemName+"'";
 
 			Statement stmt = connection.createStatement();
 
@@ -152,7 +152,7 @@ public class PriceData {
 		try {
 
 			sqlSubmitNewItem = connection.prepareStatement(
-			         "INSERT INTO barcodes ( barcode, item, price, stock) VALUES ( '"+ setUpBar+"' , '"+ setUpName +"', '"+setUpP +"', '"+setUpQ +"' )" );
+			         "INSERT INTO barcodes ( Barcode, Item, Price, Stock) VALUES ( '"+ setUpBar+"' , '"+ setUpName +"', '"+setUpP +"', '"+setUpQ +"' )" );
 			 result =sqlSubmitNewItem .executeUpdate();
 	         
 	         
@@ -186,8 +186,8 @@ public class PriceData {
 
 
 			sqlDeleteItem = connection.prepareStatement(
-					"UPDATE barcodes SET barcode = '"+""+"',item = '"+""+"',price = '"+""+"',stock = '"+""+"' " +
-							"WHERE item = '"+   itemNameFD +"' ");
+					"UPDATE barcodes SET Barcode = '"+""+"',item = '"+""+"',price = '"+""+"',stock = '"+""+"' " +
+							"WHERE Item = '"+   itemNameFD +"' ");
 
 			result = sqlDeleteItem.executeUpdate();
 			

@@ -103,7 +103,7 @@ public class ShoppingLists {
 
 		
 		try {
-			System.out.print("status ");
+			
 
 			String query1= "SELECT Status FROM shoppinglists " +
 					"WHERE UserName= '"+userName+"'";
@@ -119,7 +119,7 @@ public class ShoppingLists {
 
 			}
 			
-			System.out.print("status " + status);
+			
 
 
 			if ( result == 0 ) {
