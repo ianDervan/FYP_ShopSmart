@@ -16,7 +16,7 @@
     <string name="manage">Manage</string>
     <string name="updatestock">Stock List</string>
     <string name="rota">Rota</string>
-    <string name="messages">Messages</string>
+    <string name="messages">Requests</string>
     <string name="changeprice">Change Price</string>
     <string name="title_activity_employee_menu">EmployeeMenu</string>
     <string name="title_activity_shopping_list">ShoppingList</string>
@@ -96,5 +96,7 @@
     <string name="title_activity_manage">Manage</string>
     <string name="title_activity_special_offers">SpecialOffers</string>
     <string name="title_activity_image_adapter">ImageAdapter</string>
+    <string name="title_activity_request">Request</string>
+    <string name="title_activity_view_requests">ViewRequests</string>
 
 </resources>

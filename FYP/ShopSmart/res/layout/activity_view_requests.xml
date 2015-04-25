@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="fyp.shopsmart.employee.ViewRequests" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout4"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnviewr"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight=".4"
+            android:background="@drawable/custombutton_lr"
+            android:text="Requests"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnviews"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight=".4"
+            android:background="@drawable/custombutton_lr"
+            android:text="Shop.Lists"
+            android:textColor="#FFFFFF" />
+
+        <Spinner
+            android:id="@+id/spinnervr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginTop="10dp"
+        android:background="#ED6F26" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/line"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/requestview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="#ED6F26"
+            android:dividerHeight="0.1dp" >
+        </ListView>
+    </LinearLayout>
+
+</RelativeLayout>

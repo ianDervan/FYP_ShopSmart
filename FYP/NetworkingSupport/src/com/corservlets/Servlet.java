@@ -30,6 +30,9 @@ public class Servlet extends HttpServlet {
 		String inputM = request.getParameter("manage");
 		String inputT = request.getParameter("user");
 		String inputR = request.getParameter("rota");
+		String inputRE = request.getParameter("request");
+		String inputREJ = request.getParameter("request1");
+		String inputRV = request.getParameter("viewRequest");
 		String inputP = request.getParameter("price");
 		String inputS = request.getParameter("stock");
 		String inputSE = request.getParameter("search");
@@ -62,7 +65,7 @@ public class Servlet extends HttpServlet {
 		String newPriceR;
 		String sendItem;
 		String sendItemPrice;
-	
+
 
 		String setUpPrice;
 		String setUpName;
@@ -679,117 +682,22 @@ public class Servlet extends HttpServlet {
 						price.getItem( barcode);
 						barcodeTxt = price.getItemText();
 
-					
+
 
 						price.getPrice(barcodeTxt);
 						barcodePrice =price.getItemPrice();
-						
+
 						System.out.print("\nBARCODE\n" + barcodePrice);
 						System.out.print("\nBARCODE\n" + barcodeTxt);
 
-					
+
 
 						SendBarcode infob = new SendBarcode(barcodeTxt,barcodePrice);
 						PrintWriter outb = response.getWriter();
 						outb.println(new JSONObject(infob));
 					}
-//					if(barcode.equals("ADD"))
-//					{
-//
-//						checkTable = inputBarcodes.getString("checkTable");
-//						item = inputBarcodes.getString("data");
-//
-//						if(checkTable.equals("1"))
-//						{
-//							System.out.print("\nNEW TABLE\n");
-//							ShoppingLists sp = new ShoppingLists();
-//							sp.checkNew(item,listName);
-//
-//							Global g = new Global();
-//
-//							if(g.checkTableName == 1)
-//							{
-//
-//								SendBarcode infob = new SendBarcode("","","nameTaken",empty);
-//								PrintWriter outb = response.getWriter();
-//								outb.println(new JSONObject(infob));
-//							}
-//							if(g.checkTableName == 0)
-//							{
-//								ShoppingLists sh = new ShoppingLists();
-//								sh.getData(listName);
-//
-//								JSONArray jsArray = new JSONArray(sh.getList());
-//
-//								SendBarcode infob = new SendBarcode("","","", jsArray);
-//								PrintWriter outb = response.getWriter();
-//								outb.println(new JSONObject(infob));
-//
-//							}
-//
-//						}
-//						else
-//						{
-//							System.out.print("\nOLD TABLE\n");
-//							
-//
-//							ShoppingLists sh = new ShoppingLists();
-//							sh.checkOld(item,listName);
-//
-//							Global g = new Global();
-//
-//							if(g.checkTableName1 == 1)
-//							{
-//								
-//								SendBarcode infob = new SendBarcode("","","noColumn",empty);
-//								PrintWriter outb = response.getWriter();
-//								outb.println(new JSONObject(infob));
-//							}
-//							if(g.checkTableName1 == 0)
-//							{
-//								sh.getData(listName);
-//
-//								JSONArray jsArray = new JSONArray(sh.getList());
-//
-//								SendBarcode infob = new SendBarcode("","","", jsArray);
-//								PrintWriter outb = response.getWriter();
-//								outb.println(new JSONObject(infob));
-//							}
-//						}
-//
-//					}
-//					
-//					if(barcode.equals("SHOW"))
-//					{
-//						System.out.print("\nSHOW\n");
-//						
-//						ShoppingLists sh = new ShoppingLists();
-//						
-//						sh.checkOld("",listName);
-//						
-//						Global g = new Global();
-//						
-//						if(g.checkTableName1 == 1)
-//						{
-//							
-//							SendBarcode infob = new SendBarcode("","","noShow",empty);
-//							PrintWriter outb = response.getWriter();
-//							outb.println(new JSONObject(infob));
-//						}
-//						if(g.checkTableName1 == 0)
-//						{
-//							System.out.print("\nGET SHOW");
-//							sh.getData(listName);
-//	
-//							JSONArray jsArray = new JSONArray(sh.getList());
-//	
-//							SendBarcode infob = new SendBarcode("","","", jsArray);
-//							PrintWriter outb = response.getWriter();
-//							outb.println(new JSONObject(infob));
-//						}
-//					}
-//
-			}
+				
+				}
 			} catch (Exception e) { 
 
 				System.out.print("\n exception ..." + e);
@@ -798,33 +706,151 @@ public class Servlet extends HttpServlet {
 		if(inputSE != null)
 		{
 			String search;
-			
+
 			String x,y;
 			try{
 				JSONObject inputSearch = new JSONObject(inputSE); 
 				if(inputSearch != null)
 				{
 					search= inputSearch.getString("GetSearch");
-					System.out.print("\nGET SHOW" +search);
-					
+
+
 					Search s = new Search();
 					s.getCoOrdinates(search);
-					
+
 					x = s.getSearch("searchX");
 					y = s.getSearch("searchY");
-					
+
 					SendSearch infos = new SendSearch(x,y);
 					PrintWriter outs = response.getWriter();
 					outs.println(new JSONObject(infos));
-					
-					
-					
+
+
+
 				}
 			} catch (Exception e) { 
 
 				System.out.print("\n exception ..." + e);
 			}
 		}
+		if(inputRE != null)
+		{
+			String requestItem;
+
+			
+
+			try{
+				JSONObject inputRequest = new JSONObject(inputRE); 
+				if(inputRequest != null)
+				{
+					requestItem= inputRequest.getString("newRequest");
+
+					if(!requestItem.equals("N"))
+					{
+						Requests r = new Requests();
+						r.insertRequest(requestItem);
+					}
+
+
+				}
+			} catch (Exception e) { 
+
+				System.out.print("\n exception ..." + e);
+			}
+		}
+
+		if(inputREJ != null)
+		{
+
+			String userRE,dayRE,status;
+
+			try{
+				JSONObject inputRequestJ = new JSONObject(inputREJ); 
+				if(inputRequestJ != null)
+				{
+
+					userRE= inputRequestJ.getString("userName");
+					dayRE =  inputRequestJ.getString("dayTime");
+					status =  inputRequestJ.getString("status");
+				
+					JSONArray js = new JSONArray();
+					js = inputRequestJ.getJSONArray("jsArray");
+
+					ShoppingLists sh = new ShoppingLists();
+					sh.insertData(userRE,dayRE,js,status);
+
+					Global g = new Global();
+
+					if(g.checkUser ==1)
+					{
+						SendShopList infoS = new SendShopList("usernameTaken","");
+						PrintWriter outS = response.getWriter();
+						outS.println(new JSONObject(infoS));	
+					}
+					else
+					{
+						
+						sh.getStatus(userRE);
+						String status1 = sh.getStatusR();
+						
+						SendShopList infoS = new SendShopList(" ",status1);
+						PrintWriter outS = response.getWriter();
+						outS.println(new JSONObject(infoS));
+					}
+				}
+			} catch (Exception e) { 
+
+				System.out.print("\n exception ..." + e);
+			}
+		}
+		if(inputRV != null)
+		{
+			System.out.print("\nREQUEST" );
+			String getRequest,getUsers;
+			try{
+				JSONObject inputRequestV = new JSONObject(inputRV); 
+				if(inputRequestV != null)
+				{
+					getRequest= inputRequestV.getString("getRequest");
+					getUsers= inputRequestV.getString("getUsers");
+
+					if(!getRequest.equals("N"))
+					{
+						System.out.print("getRequest" +getRequest);
+						
+						ViewRequests vr =new ViewRequests();
+						vr.getRequests();
+						
+						JSONArray jsArray = new JSONArray(vr.getReqList());
+
+						SendViewR infovr = new SendViewR(jsArray,empty);
+						PrintWriter outvr = response.getWriter();
+						outvr.println(new JSONObject(infovr));
+
+					}
+					if(!getUsers.equals("N"))
+					{
+						System.out.print("\nREQUEST" );
+						ViewRequests vr =new ViewRequests();
+						vr.getUsers();
+						
+						JSONArray jsArray1 = new JSONArray(vr.getUserList());
+
+						SendViewR infovr = new SendViewR( empty,jsArray1);
+						PrintWriter outvr = response.getWriter();
+						outvr.println(new JSONObject(infovr));
+						
+					}
+
+
+				}
+			} catch (Exception e) { 
+
+				System.out.print("\n exception ..." + e);
+			}
+		}
+
+
 
 	}
 }

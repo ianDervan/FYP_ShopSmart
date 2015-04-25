@@ -18,6 +18,7 @@ public class MainActivity extends Activity {
 	 Button btnShopList;
 	 Button btnScan;
 	 Button btnSearch;
+	 Button btnRequest;
 	 Button btnSpecialOffers;
 	 
 	 
@@ -35,6 +36,7 @@ public class MainActivity extends Activity {
         btnScan = (Button) findViewById(R.id.scan);
         btnSearch = (Button) findViewById(R.id.search);
         btnSpecialOffers = (Button) findViewById(R.id.specialoffers);
+        btnRequest  = (Button) findViewById(R.id.request);
         
         Intent mainIntent = getIntent();
 	    ok = mainIntent.getIntExtra("main",0);
@@ -62,6 +64,14 @@ public class MainActivity extends Activity {
           	public void onClick(View v) {
           		
     			Intent scan = new Intent (MainActivity.this,BarcodeScan.class);
+    			startActivity(scan);
+    			
+          		}		
+     		});
+        btnRequest.setOnClickListener(new OnClickListener() {	
+          	public void onClick(View v) {
+          		
+    			Intent scan = new Intent (MainActivity.this,Request.class);
     			startActivity(scan);
     			
           		}		
@@ -112,6 +122,8 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+        
+        
     }
 	@Override
 	public void onBackPressed()

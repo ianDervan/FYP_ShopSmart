@@ -130,9 +130,7 @@ public class StockData {
 	}
 	public void getItem() 
 	{
-		int i = 0;
-		String getItemtxt = null;
-
+		
 		try {
 			connect();
 		} catch (Exception e) {
@@ -155,19 +153,7 @@ public class StockData {
 					stockdataQty.add(rs.getString("quantity"));
 					
 				}
-				
-			
 
-//			for (String str : stockdata) {
-//
-//				System.out.println("Item is: " + str);
-//
-//			}
-//			for (String str : stockdataQty) {
-//
-//				System.out.println("Item is: " + str);
-//
-//			}
 
 			connection.commit();
 

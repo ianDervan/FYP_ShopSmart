@@ -16,10 +16,25 @@ public class StoreArray {
 	
 	public ArrayList<String> storeStaffHoursArray = new ArrayList<String>();
 	
-	public List<String> shoplist = new ArrayList<String>();
+	public ArrayList<String> storeShoppingList = new ArrayList<String>();
+	
+	public static List<String> shoplist = new ArrayList<String>();
+	
+	public static ArrayList<String> storeItem  = new ArrayList<String>();
+	
+	public  List<String> storeUsers = new ArrayList<String>();
+	
+	public  List<String> storeRequest= new ArrayList<String>();
 	
 	public String itemN;
 	public String itemS;
+	
+	public String usernameS;
+	public String statusS;
+	
+	
+	
+	
 	
 	public static int  backpressed = 0;
 	

@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 
 
 public class ShoppingLists {
@@ -23,184 +25,123 @@ public class ShoppingLists {
 	ArrayList<String> shoplist= new ArrayList<String>();
 
 	private PreparedStatement sqlInsertData;
-	public void checkNew(String item,String name)
-	{
-
-		check = 0;
-		String tableN;
-
-		i = 0;
-		try {
-			connect();
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-
-
-		try {
-
-			DatabaseMetaData data = connection.getMetaData();
-			ResultSet rsTables = data.getColumns(null, null, "shoppinglists", name);
-			if (rsTables.next()) {
-
-				check = 1;
-			}
-			else
-			{
-				Global g = new Global();
-				g.checkTableName = 0;
-
-
-				String query= "ALTER TABLE shoppinglists ADD " +name+" VARCHAR(50) AFTER id;" ;
-
-				Statement stmt = connection.createStatement();
-
-				stmt.executeUpdate(query);
-				
-				insertData(item,name);
-
-			}
-
-			if(check == 1)
-			{
-
-
-				Global g = new Global();
-
-				g.checkTableName = 1;
-
-			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-	}
-
-	public void checkOld(String item,String ShopListName)
-	{
-
-		int noColumn = 0;
-		try {
-			connect();
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-
-		try {
-			
-			DatabaseMetaData data = connection.getMetaData();
-			ResultSet rsTables = data.getColumns(null, null, "shoppinglists", ShopListName);
-			if (rsTables.next()) {
-
-				Global g = new Global();
-				g.checkTableName1 = 0;
-				
-				if(!item.trim().equals(""))
-				{
-					System.out.println("INSERT");
-					insertData(item,ShopListName);
-				}
-
-			}
-			else
-			{
-				noColumn = 1;
-			}
-
-			if(noColumn == 1)
-			{
-
-				Global g = new Global();
-				g.checkTableName1 = 1;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-	public void insertData(String data,String ShopListName)
-	{
-
-		try {
-			connect();
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-
-
-		try {
-
-			sqlInsertData = connection.prepareStatement(
-					"INSERT INTO shoppingLists ("+ShopListName+") VALUES ( '"+ data+"'  )"
-					);
-
-
-			result =  sqlInsertData.executeUpdate();
-			if ( result == 0 ) {
-				connection.rollback(); // rollback update
-			}      
-
-			connection.commit();
-
-
-			//System.out.println("price is = \n" + newPrice);
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-	}
-	public void getData(String ShopListName)
-	{
-
-		try {
-			connect();
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-
-
-		try {
-
-			String query= "SELECT * FROM  shoppinglists WHERE  "+ShopListName+"  IS NOT NULL";
-
-			Statement stmt = connection.createStatement();
-
-			ResultSet rs = stmt.executeQuery(query);
-			while(rs.next())
-			{
-				if(rs!=null)
-				{
-					shoplist.add(rs.getString(ShopListName));
-				}
-
-			}
-
-			for (String str : shoplist) {
-
-				System.out.println("Item is: " + str);
-
-			}
-
-			connection.commit();
-
-
-
-			//System.out.println("price is = \n" + newPrice);
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-	}
 	
+	String status;
+
+
+	public void insertData(String userName,String dayTime,JSONArray js,String Status)
+	{
+
+		try {
+			connect();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+		Global g = new Global();
+		
+		g.checkUser=0;
+		
+		try {
+
+			String query1= "SELECT UserName FROM shoppinglists " +
+					"WHERE UserName= '"+userName+"'";
+
+			Statement stmt1 = connection.createStatement();
+
+			ResultSet rs1 = stmt1.executeQuery(query1);
+
+			if(rs1.next())
+			{
+
+				g.checkUser=1;
+
+			}
+			else
+			{
+
+				for(int i= 0;i<js.length();i++)
+				{		
+
+					try {
+						sqlInsertData = connection.prepareStatement(
+								"INSERT INTO shoppinglists(  UserName, DayTime,ShoppingList,Status) VALUES ( '"+userName+"' , '"+ dayTime +"', '"+js.get(i) +"', '"+Status +"'  )" );
+						result = sqlInsertData .executeUpdate();
+					} catch (JSONException e) {
+
+						e.printStackTrace();
+					}
+
+
+
+				}
+
+			}
+
+			if ( result == 0 ) {
+				connection.rollback(); 
+
+			}      
+			connection.commit();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+	public void getStatus(String userName)
+	{
+
+		try {
+			connect();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+		
+		try {
+			System.out.print("status ");
+
+			String query1= "SELECT Status FROM shoppinglists " +
+					"WHERE UserName= '"+userName+"'";
+
+			Statement stmt1 = connection.createStatement();
+
+			ResultSet rs1 = stmt1.executeQuery(query1);
+
+			if(rs1.next())
+			{
+
+				status = rs1.getString("Status");
+
+			}
+			
+			System.out.print("status " + status);
+
+
+			if ( result == 0 ) {
+				connection.rollback(); 
+
+			}      
+			
+			
+			connection.commit();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		
+
+	}
+	public String getStatusR()
+	{
+		return status;
+	}
+
 	public  ArrayList<String> getList() {	
 		return shoplist;
 	}
@@ -223,7 +164,7 @@ public class ShoppingLists {
 	}
 	protected void finalize()
 	{
-		
+
 		close(); 
 	}
 

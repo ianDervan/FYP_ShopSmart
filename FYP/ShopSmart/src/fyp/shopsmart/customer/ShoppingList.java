@@ -52,26 +52,26 @@ public class ShoppingList extends Activity {
 	Button  btnAddItem;
 	Button  btnHide;
 	Button  btnRemoveA;
-	ArrayList<String> storeItem;
 	ArrayList<String> price;
 	ArrayList<String> quantity;
 	ArrayList<Double> totalSpent;
 	ArrayList<String> sendtotalSpent;
+	
 
 	ArrayList<String> sendTime;
 	SQLiteDatabase db;
-
-
-
 	int sh;
 	int n ;
 	double sum;
 
+	
+	
 	int v1;
 	int ok;
 	int mainOk;
 
 	StoreArray s ;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,13 +89,15 @@ public class ShoppingList extends Activity {
 		btnHide = (Button) findViewById(R.id.hide);
 		btnRemoveA = (Button) findViewById(R.id.removeAll);
 
-		storeItem = new ArrayList<String>();
+		
 		price = new ArrayList<String>();
 		quantity = new ArrayList<String>();
 
 		totalSpent = new ArrayList<Double>();
 		sendtotalSpent = new ArrayList<String>();
 		sendTime = new ArrayList<String>();
+		
+		
 
 		textView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
 		String[] suggestedItems = getResources().getStringArray(R.array.suggestions_array);
@@ -110,6 +112,9 @@ public class ShoppingList extends Activity {
 
 		s = new StoreArray();
 
+
+		
+		
 
 		openDatabase();
 
@@ -143,26 +148,7 @@ public class ShoppingList extends Activity {
 			}		
 		});
 
-		//		btnRemoveOne.setOnClickListener(new View.OnClickListener() {
-		//
-		//			@Override
-		//			public void onClick(View v) {
-		//				
-		////				db.close();
-		//
-		//				
-		//				//dropTable();
-		//				//openDatabase();
-		//			useDeleteMethod();
-		//			 
-		//			
-		//			//db.close();
-		//			textView.setText("");
-		//				
-		//			
-		//	
-		//			}
-		//		});
+
 		btnRemoveA.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -171,8 +157,10 @@ public class ShoppingList extends Activity {
 
 				dropTable();
 
-				storeItem.clear();
+				s.storeItem.clear();
 				price.clear();
+				
+				s.shoplist.clear();
 
 
 				txtMsg.setText("");
@@ -189,17 +177,17 @@ public class ShoppingList extends Activity {
 				if (text != null && text.trim().length() > 0 ) 
 				{
 
+				//	storeItem.clear();
 					String storeInput =textView.getText().toString();		
 					String[] inputItem = storeInput.split("€");
 
 					quantity.add(inputQuantity.getText().toString());
-					storeItem.add(storeInput);
+					
+					s.shoplist.add(storeInput);
+					s.storeItem.add(storeInput);
+				
 					price.add("€"+"35");
 
-
-
-					//sum =Double.parseDouble(inputItem[1]);
-					//	totalSpent.add(sum);
 
 					for(int i = 0; i < totalSpent.size(); i++){
 
@@ -207,25 +195,9 @@ public class ShoppingList extends Activity {
 
 					}
 
-					txtMsg.append("Total spent\n" + sum);
-
-					//				    if(ok == 1 || mainOk==1 || shopListOk == 1 )
-					//				    {
-					//				    	
-					//				    	
-					//				    	
-					//				    	//insertSomeDbData();
-					//					    useRawQueryShowAll();
-					//				    	
-					//				    }
-					//				    else
-					//				    
-					if(s.backpressed != 1)
-					{
-
-						dropTable();
-						s.backpressed = 0;
-					}
+										
+					
+					dropTable();
 					insertSomeDbData();
 					useRawQueryShowAll();
 
@@ -295,10 +267,13 @@ public class ShoppingList extends Activity {
 
 		db.beginTransaction();
 		try {
+			
 
-			for(int i = 0; i < storeItem.size(); i++){
+
+			
+			for(int i = 0; i < s.storeItem.size(); i++){
 				db.execSQL("insert into shoppingList (Item,Price,Quantity) "
-						+ " values ('"+ storeItem.get(i)+"', '" + price.get(i)+"', '" + quantity.get(i)+"');");
+						+ " values ('"+ s.storeItem.get(i)+"', '" + ""+"', '" +  ""+"');");
 			}
 			db.setTransactionSuccessful();
 
@@ -408,7 +383,7 @@ public class ShoppingList extends Activity {
 		TextView text = (TextView) layout.findViewById(R.id.toasttext);
 		text.setText(message);
 		Toast t = new Toast(getApplicationContext());
-		t.setDuration(Toast.LENGTH_LONG);
+		t.setDuration(Toast.LENGTH_SHORT);
 		t.setView(layout);
 		t.show();     
 	}
@@ -418,14 +393,7 @@ public class ShoppingList extends Activity {
 	{
 
 		s.backpressed= 1;
-		//		if(mainOk == 1 )
-		//		{
-		//			mainOk = 0;
-		//			
-		//			Intent main = new Intent (ShoppingList.this,MainActivity.class);	
-		//			
-		//			startActivity(main);
-		//		}
+
 		db.close();
 		finish();  
 	}

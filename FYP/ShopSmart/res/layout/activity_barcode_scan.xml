@@ -68,43 +68,13 @@
         android:layout_marginTop="5dp"
         android:background="#ED6F26" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@+id/view1"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal" >
 
-        <EditText
-            android:id="@+id/shoplistname"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_weight=".5"
-            android:background="@drawable/customeditext"
-            android:gravity="center_vertical"
-            android:hint=" New Shopping List.."
-            android:paddingLeft="5dp"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/oldshoplist"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginLeft="10dp"
-            android:layout_weight=".5"
-            android:background="@drawable/customeditext"
-            android:gravity="center_vertical"
-            android:hint="Old Shopping List.."
-            android:paddingLeft="5dp"
-            android:textSize="15sp" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout1"
+        android:layout_below="@+id/view1"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal" >

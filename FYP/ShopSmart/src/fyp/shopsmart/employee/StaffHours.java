@@ -75,34 +75,7 @@ public class StaffHours extends Activity {
 	TextView breakIn;
 	TextView breakOut;
 
-	TextView mon1;
-	TextView mon2;
-	TextView mon3;
-	TextView mon4;
-	TextView tues1;
-	TextView tues2;
-	TextView tues3;
-	TextView tues4;
-	TextView wed1;
-	TextView wed2;
-	TextView wed3;
-	TextView wed4;
-	TextView thurs1;
-	TextView thurs2;
-	TextView thurs3;
-	TextView thurs4;
-	TextView fri1;
-	TextView fri2;
-	TextView fri3;
-	TextView fri4;
-	TextView sat1;
-	TextView sat2;
-	TextView sat3;
-	TextView sat4;
-	TextView sun1;
-	TextView sun2;
-	TextView sun3;
-	TextView sun4;
+
 
 	SQLiteDatabase db;
 	String timeC;

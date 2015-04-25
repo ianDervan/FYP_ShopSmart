@@ -86,15 +86,27 @@
         </activity>
         <activity
             android:name=".employee.Manage"
-            android:label="@string/title_activity_manage" >
+            android:label="@string/title_activity_manage"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".customer.SpecialOffers"
-            android:label="@string/title_activity_special_offers" >
+            android:label="@string/title_activity_special_offers"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="fyp.shopsmart.customer.Image"
-            android:label="@string/title_activity_image_adapter" >
+            android:name=".customer.Image"
+            android:label="@string/title_activity_image_adapter"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".customer.Request"
+            android:label="@string/title_activity_request"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".employee.ViewRequests"
+            android:label="@string/title_activity_view_requests" >
         </activity>
     </application>
 

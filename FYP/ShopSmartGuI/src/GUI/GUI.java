@@ -10,6 +10,7 @@ import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -259,9 +260,12 @@ public class GUI {
 
 			tableSL = new JTable(rd.insertData("shoppinglists",3,5));
 			tableSL.getColumn("ShoppingList").setPreferredWidth(400);
-			tableSL.getColumn("CustomerName").setPreferredWidth(150);
+			//tableSL.getColumn("UserName").setPreferredWidth(100);
+		//	tableSL.getColumn("DayTime").setPreferredWidth(100);
 
 			tableD = new JTable(rd.insertData("deliveries",2,8));
+			
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -543,13 +547,20 @@ public class GUI {
 					public void run(){
 						try {
 
-							frame.revalidate();
-							frame.repaint();
+							frame.setVisible(false);
+							
+							
+							//frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+							
+							setUpGUI();
 
-							for (int i = 0; i < tableOL.getRowCount(); i++)
-								for(int j = 0; j < tableOL.getColumnCount(); j++) {
-									tableOL.setValueAt("", i, j);
-								}
+//							for (int i = 0; i < tableOL.getRowCount(); i++)
+//								for(int j = 0; j < tableOL.getColumnCount(); j++) {
+//									tableOL.setValueAt("", i, j);
+//								}
+							
+//							frame.revalidate();
+//							frame.repaint();
 
 							//							orderList.revalidate();
 							//							orderList.repaint();
@@ -626,6 +637,7 @@ public class GUI {
 						} catch (Exception ex) {
 
 						}   
+						
 					}
 				});
 

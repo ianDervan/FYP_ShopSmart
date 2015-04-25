@@ -22,6 +22,7 @@ public class EmployeeMenu extends Activity {
 	Button btnStock;
 	Button btnPricing;
 	Button btnManage;
+	Button btnRequests;
 	int check;
 	int john;
 	int ian;
@@ -42,6 +43,7 @@ public class EmployeeMenu extends Activity {
 		 btnRota = (Button) findViewById(R.id.rota);
 		 btnStock = (Button) findViewById(R.id.updatestock);
 		 btnManage = (Button) findViewById(R.id.btnmanage);
+		 btnRequests  = (Button) findViewById(R.id.requests);
 		 Intent intent = getIntent();	
 	  	 ian = intent.getIntExtra("ian",0);
 	  	 john = intent.getIntExtra("john",0);
@@ -182,6 +184,17 @@ public class EmployeeMenu extends Activity {
 		      	public void onClick(View v) {
 		      		
 					Intent stock= new Intent (EmployeeMenu.this,UpdateStock.class);
+
+						
+						startActivity(stock);		
+
+						
+		    }		
+		 });
+		 btnRequests.setOnClickListener(new OnClickListener() {	
+		      	public void onClick(View v) {
+		      		
+					Intent stock= new Intent (EmployeeMenu.this,ViewRequests.class);
 
 						
 						startActivity(stock);		

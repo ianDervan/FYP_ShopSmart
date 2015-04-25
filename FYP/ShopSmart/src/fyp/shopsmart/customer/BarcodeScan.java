@@ -62,8 +62,6 @@ public class BarcodeScan extends Activity {
 	TextView txtPrice;
 	TextView txtMsg;
 	TextView shopList;
-	EditText newShopList;
-	EditText oldShopList;
 	String resultBarcode;
 
 	SQLiteDatabase db;
@@ -104,8 +102,6 @@ public class BarcodeScan extends Activity {
 		txtItem = (TextView) findViewById(R.id.item);
 		txtPrice = (TextView) findViewById(R.id.price);
 		shopList = (TextView) findViewById(R.id.shoplist);
-		newShopList  = (EditText) findViewById(R.id.shoplistname);
-		oldShopList = (EditText) findViewById(R.id.oldshoplist);
 		btnAddItem = (Button) findViewById(R.id.additem);
 		btnShow =  (Button) findViewById(R.id.show);
 		
@@ -144,8 +140,11 @@ public class BarcodeScan extends Activity {
 
 				String storeInput =txtItem.getText().toString();		
 				String  storeInput1= txtPrice.getText().toString();
+				
+				s.shoplist.add(storeInput);
 
 				storeItem.add(storeInput);
+			
 				price.add("€"+storeInput1);
 
 				if(s.backpressed != 1)
