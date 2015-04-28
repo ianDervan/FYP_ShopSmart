@@ -44,6 +44,7 @@ public class Database {
 	private PreparedStatement sqlInsertTime;
 	private PreparedStatement sqlInsertUserTime;
 	private PreparedStatement sqlDeleteUser;
+	private PreparedStatement sqlDeleteUserD;
 	private PreparedStatement sqlDeleteTable;
 
 	//String t1,String t2,String t3,String t4
@@ -124,7 +125,7 @@ public class Database {
 			}
 			else if(userName.equals("aishling"))
 			{
-				System.out.println("AISHLING");
+				
 				String queryUser = "SELECT StartTime,BreakIn,BreakOut,FinishTime FROM aishling " +
 						"WHERE Day = '"+ dayS+"'";
 				Statement stmtUser = connection.createStatement();
@@ -141,7 +142,7 @@ public class Database {
 			}
 			else  if(userName.equals("john"))
 			{
-				System.out.println("INSERTINGJ");
+				
 				String queryUser = "SELECT StartTime,BreakIn,BreakOut,FinishTime FROM john " +
 						"WHERE Day = '"+ dayS+"'";
 				Statement stmtUser = connection.createStatement();
@@ -162,8 +163,7 @@ public class Database {
 
 			if(timeIn != null && st.isEmpty())
 			{
-				System.out.println("TIME IN");
-				//System.out.println(" START TIME");
+				
 				sqlInsertTime = connection.prepareStatement(
 						"UPDATE staffhours SET StartTime = '"+timeIn+"' " +
 								"WHERE Name = '"+ userName+"' ");
@@ -260,13 +260,16 @@ public class Database {
 		}
 		try {
 
-			System.out.print("\nDeleting staffhours\n");
+	
 
 			sqlDeleteUser = connection.prepareStatement(
 					"UPDATE staffhours SET StartTime = '"+""+"',FinishTime = '"+""+"',BreakIn = '"+""+"',BreakOut = '"+""+"' " +
 							"WHERE Name = '"+ name+"' ");
 
 			result = sqlDeleteUser.executeUpdate();
+			
+			
+			
 
 			if ( result == 0 ) {
 
@@ -291,12 +294,48 @@ public class Database {
 		}
 		try {
 
-			System.out.print("\nDeleting Table");
+		
 
 				sqlDeleteTable = connection.prepareStatement(
 						"UPDATE "+user+" SET StartTime = '"+""+"',FinishTime = '"+""+"',BreakIn = '"+""+"',BreakOut = '"+""+"' " );
 				result = sqlDeleteTable.executeUpdate();
 
+				sqlDeleteUserD = connection.prepareStatement(
+						"UPDATE staffhours SET HoursWorkedW = '"+""+"' " +
+								"WHERE Name = '"+ user+"' ");
+
+				result = sqlDeleteUserD.executeUpdate();
+			if ( result == 0 ) {
+
+				connection.rollback();
+
+			} 
+			connection.commit();
+
+			sqlDeleteTable.close();
+			connection.close();
+
+		} catch (SQLException e) {
+			System.out.print("\nDeleting" + e);
+
+		}
+	}
+	public void deleteDaily(String user)
+	{
+
+		try {
+			connect();
+		} catch (Exception e) {
+		}
+		try {
+
+	
+
+				sqlDeleteUserD = connection.prepareStatement(
+						"UPDATE staffhours SET HoursWorkedD = '"+""+"' " +
+								"WHERE Name = '"+ user+"' ");
+
+				result = sqlDeleteUserD.executeUpdate();
 			if ( result == 0 ) {
 
 				connection.rollback();
@@ -322,6 +361,7 @@ public class Database {
 	private void close() {
 
 		try {
+			sqlDeleteUserD.close();
 			sqlInsertTime.close();
 			sqlInsertUserTime.close();
 			connection.close();

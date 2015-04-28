@@ -258,10 +258,10 @@ public class GUI {
 			tableOL.getColumn("Qty").setPreferredWidth(60);
 			tableOL.getColumn("Item").setPreferredWidth(400);
 
-			tableSL = new JTable(rd.insertData("shoppinglists",3,5));
-			tableSL.getColumn("ShoppingList").setPreferredWidth(400);
-			//tableSL.getColumn("UserName").setPreferredWidth(100);
-		//	tableSL.getColumn("DayTime").setPreferredWidth(100);
+			tableSL = new JTable(rd.insertData("shoppinglists",2,5));
+			tableSL.getColumn("ShoppingList").setPreferredWidth(350);
+			tableSL.getColumn("UserName").setPreferredWidth(150);
+		    tableSL.getColumn("DayTime").setPreferredWidth(150);
 
 			tableD = new JTable(rd.insertData("deliveries",2,8));
 			

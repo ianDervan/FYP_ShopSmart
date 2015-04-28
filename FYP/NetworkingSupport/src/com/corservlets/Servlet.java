@@ -120,7 +120,7 @@ public class Servlet extends HttpServlet {
 
 					if(temp4.equals("2") )
 					{
-						System.out.print("temp 4"+temp4 +"\n");
+						
 						GetUserData data1 = new GetUserData();
 						data1.getData(userName); 
 						data1.getStaffData(userName); 
@@ -135,7 +135,14 @@ public class Servlet extends HttpServlet {
 						String breakI = breakIn;
 						String breakO = breakOut;
 						JSONArray jsArray = new JSONArray(data1.getUserDataResult());
-						SendTimes info = new SendTimes(start, finish, breakI,breakO,jsArray);
+						
+						
+						data1.getHoursTotal(userName);
+						
+					
+					
+						
+						SendTimes info = new SendTimes(start, finish, breakI,breakO,jsArray,data1.getDaily(),data1.getWeekly());
 						PrintWriter out = response.getWriter();
 						out.println(new JSONObject(info));
 
@@ -148,23 +155,29 @@ public class Servlet extends HttpServlet {
 
 					else if(temp1.equals("4") && temp4.equals("4"))
 					{
-						System.out.print("Delete table"+ "\n");
+						
 						Database data = new Database(null,null,null,null);
 						data.deleteTable(userName);
 					}
+					else if(temp1.equals("5") && temp4.equals("5"))
+					{
+						
+						Database data = new Database(null,null,null,null);
+						data.deleteDaily(userName);
+					}
+				
+				
 
 					else if(!temp1.equals("N")  &&temp3.equals("N"))
 					{
 
-
-						System.out.print("temp1 "+temp1 +"\n");
 						Database data = new Database(temp1, null, null, null);
 						data.readData(userName);
 
 					}
 					else if(!temp2.equals("N")  && temp3.equals("N"))
 					{
-						System.out.print("temp2 "+temp2 +"\n");
+
 						Database data = new Database(null,temp2, null, null);
 						data.readData(userName);
 
@@ -172,25 +185,28 @@ public class Servlet extends HttpServlet {
 					}
 					else if(!temp3.equals("N") &&temp2.equals("N"))
 					{
-						System.out.print("temp3 "+temp3 +"\n");
+
 						Database data = new Database(null, null, temp3, null);
 						data.readData(userName);
 					}
 					else if(!temp4.equals("N") && temp3.equals("N") )
 					{
-						System.out.print("temp4 "+temp4 +"\n");
+						
 						Database data = new Database(null, null, null, temp4);
 						data.readData(userName);
-
+						
 						GetUserData data1 = new GetUserData();
+						
 						data1.getHoursDay(userName); 
+
+					
 					}
 
 				}
 
 			} catch (Exception e) { 
 
-				System.out.print("\n exception ..." + e);
+				
 
 			}
 		}
@@ -241,8 +257,7 @@ public class Servlet extends HttpServlet {
 						day=inputRota.getString("Day");
 
 
-						System.out.print("\n user is .." + userNameFR);
-						System.out.print("\n day is .." + day);
+					
 
 						RotaData rota1 = new RotaData();
 						rota1.requestDayOff(day,userNameFR);
@@ -373,11 +388,13 @@ public class Servlet extends HttpServlet {
 						barcodeRecieved = inputPrice.getString("barcode");
 						itemTxtR = inputPrice.getString("checkPriceTxt");
 						newPriceR = inputPrice.getString("newPrice");
-						System.out.print("\n checkPrice" + checkPrice);
+						
 
 						if(!barcodeRecieved.equals("N") && itemTxtR.equals("N"))
 						{
-							System.out.print("\n barcode recievied = " +barcodeRecieved);
+							
+							System.out.println("BARCODE");
+							
 							PriceData price = new PriceData();
 							price.getItem( barcodeRecieved);
 							sendItem = price.getItemText();
@@ -388,10 +405,12 @@ public class Servlet extends HttpServlet {
 						}
 						else if(newPriceR.equals("N") && !itemTxtR.equals("N"))
 						{
-							System.out.print("\n itemRecieved = " +itemTxtR);
+						
 							PriceData price = new PriceData();
 							price.getPrice(itemTxtR);
 							sendItemPrice = price.getItemPrice();
+							
+							
 							SendPrice info = new SendPrice("N",sendItemPrice);
 							PrintWriter out = response.getWriter();
 							out.println(new JSONObject(info));
@@ -399,8 +418,7 @@ public class Servlet extends HttpServlet {
 						}
 						else if(barcodeRecieved.equals("N") && !newPriceR.equals("N") && !itemTxtR.equals("N"))
 						{
-							System.out.print("\n new Price Recieved = " +newPriceR);
-							System.out.print("\n new Item Recieved = " +itemTxtR);
+							
 							PriceData newPrice = new PriceData();
 							newPrice.setNewPrice(itemTxtR,newPriceR);
 						}	
@@ -417,7 +435,6 @@ public class Servlet extends HttpServlet {
 					if(deleteItem.equals("1"))
 					{
 						deleteItemTxt = inputPrice.getString("deleteTxt");
-						System.out.print("\n Item for delete= " + deleteItemTxt);
 						PriceData delete = new PriceData();
 						delete.deleteItem(deleteItemTxt);
 					}
@@ -444,7 +461,7 @@ public class Servlet extends HttpServlet {
 
 						if(!getBarS.equals("N") && getItemFS.equals("N"))
 						{
-							System.out.print("\n Barcode" + getBarS);
+							
 
 							PriceData stock = new PriceData();
 							stock.getItem( getBarS);
@@ -456,7 +473,7 @@ public class Servlet extends HttpServlet {
 						}
 						else if( !getItemFS.equals("N") && getItemSTK.equals("N"))
 						{
-							System.out.print("\n Barcode" + getItemFS);
+							
 							StockData ss = new StockData();
 							ss.getStock(getItemFS);
 
@@ -470,15 +487,14 @@ public class Servlet extends HttpServlet {
 						}
 						else if(getBarS.equals("N") && !getItemFS.equals("N") && !getItemSTK.equals("N"))
 						{
-							System.out.print("\n new Price Recieved = " +getItemFS);
-							System.out.print("\n new Item Recieved = " +getItemSTK);
+							
 
 							StockData ssn = new StockData();
 							ssn.setNewStock(getItemFS,getItemSTK);
 
 						}	
 
-						//System.out.print("\n Barcode" + sendItemFS);
+					
 					}
 					if(addItem.equals("1"))
 					{
@@ -517,7 +533,7 @@ public class Servlet extends HttpServlet {
 					if(addItem.equals("3") && updateStock.equals("3"))
 					{
 
-						System.out.print("\n DELETE");
+						
 						StockData clear = new StockData();
 						clear.clearTable();
 
@@ -545,8 +561,7 @@ public class Servlet extends HttpServlet {
 						staffName = inputManage.getString("StaffName");
 						operation = inputManage.getString("Operation");
 
-						System.out.print("\n staffName ..." + staffName);
-						System.out.print("\n operation ..." + operation);
+					
 
 						ManageData md = new ManageData();
 						md.insertOp(staffName,operation);
@@ -577,9 +592,7 @@ public class Servlet extends HttpServlet {
 						deliveryD = inputManage.getString("day");
 						deliveryT = inputManage.getString("time");
 
-						System.out.print("\n name " + deliveryN);
-						System.out.print("\n name " + deliveryD);
-						System.out.print("\n name " + deliveryT + "\n");
+						
 						ManageData mdft = new ManageData();
 						mdft.insertDelivery(deliveryN, deliveryD, deliveryT);
 						mdft.getDataFDT();
@@ -599,8 +612,7 @@ public class Servlet extends HttpServlet {
 						deliveryD = inputManage.getString("day");
 						JSONArray jsArray1 = null;
 
-						System.out.print("\n name " + deliveryN);
-						System.out.print("\n name " + deliveryD);
+					
 
 						if(deliveryN.equals("Clear All"))
 						{
@@ -634,8 +646,6 @@ public class Servlet extends HttpServlet {
 						staffName = inputManage.getString("StaffName");
 						operation = inputManage.getString("Operation");
 
-						System.out.print("\n staffName ..." + staffName);
-						System.out.print("\n operation ..." + operation);
 
 						ManageData md = new ManageData();
 						md.clearData(staffName, operation);
@@ -677,7 +687,7 @@ public class Servlet extends HttpServlet {
 
 					if(listName.equals("GETITEM"))
 					{
-						System.out.print("\nBARCODE\n");
+						
 
 						PriceData price = new PriceData();
 						price.getItem( barcode);
@@ -687,11 +697,10 @@ public class Servlet extends HttpServlet {
 
 						price.getPrice(barcodeTxt);
 						barcodePrice =price.getItemPrice();
+						
+					
 
-						System.out.print("\nBARCODE\n" + barcodePrice);
-						System.out.print("\nBARCODE\n" + barcodeTxt);
-
-
+					
 
 						SendBarcode infob = new SendBarcode(barcodeTxt,barcodePrice);
 						PrintWriter outb = response.getWriter();
@@ -708,7 +717,6 @@ public class Servlet extends HttpServlet {
 		{
 			String item;
 
-			System.out.print("\nBARCODE\n");
 
 			try{
 				JSONObject inputPriceS = new JSONObject(inputPSL); 
@@ -725,7 +733,7 @@ public class Servlet extends HttpServlet {
 					price.getPrice(item);
 					item =price.getItemPrice();
 
-					item = item.substring(1);
+					
 
 					SendSLP infop = new SendSLP(item);
 					PrintWriter outp = response.getWriter();
@@ -852,8 +860,7 @@ public class Servlet extends HttpServlet {
 
 					if(!getRequest.equals("N") && getShop.equals("N"))
 					{
-						System.out.print("Request 1");
-
+						
 						ViewRequests vr =new ViewRequests();
 						vr.getRequests();
 						vr.getUsers();
@@ -868,7 +875,7 @@ public class Servlet extends HttpServlet {
 					}
 					if(!getUsers.equals("N"))
 					{
-						System.out.print("\nREQUEST 2" );
+						
 						ViewRequests vr =new ViewRequests();
 						vr.getUsers();
 
@@ -881,7 +888,7 @@ public class Servlet extends HttpServlet {
 					}
 					if(!getShop.equals("N") && !getRequest.equals("Update"))
 					{
-						System.out.print("\nREQUEST 3");
+						
 						ViewRequests vr =new ViewRequests();
 						vr.getShopList(getShop);
 
@@ -891,7 +898,7 @@ public class Servlet extends HttpServlet {
 
 
 						vr.getDelivery(getShop);
-						System.out.print("\nREQUEST 3" + vr.getdayTime());
+						
 						JSONArray jsArray1 = new JSONArray(vr.getShopList());
 
 						SendViewR infovr = new SendViewR( empty,empty,jsArray1,sh.getStatusR(), vr.getdayTime());
@@ -901,7 +908,7 @@ public class Servlet extends HttpServlet {
 					}
 					if(getRequest.equals("Update") && !getShop.equals("N"))
 					{
-						System.out.print("\nREQUEST 4");
+						
 
 						getStatus= inputRequestV.getString("status");
 
@@ -913,7 +920,7 @@ public class Servlet extends HttpServlet {
 
 					if(getRequest.equals("Delete") )
 					{
-						System.out.print("\nDELETE");
+					
 
 
 						ViewRequests vr =new ViewRequests();

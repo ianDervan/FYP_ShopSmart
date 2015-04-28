@@ -9,8 +9,8 @@ public class Day {
 	public String getDay()
 	{
 		Calendar calendar = Calendar.getInstance();
-		int day = calendar.get(Calendar.DAY_OF_WEEK);
-		//int day = 3;
+		//int day = calendar.get(Calendar.DAY_OF_WEEK);
+		int day = 3;
 
 		if(day ==1)
 		{

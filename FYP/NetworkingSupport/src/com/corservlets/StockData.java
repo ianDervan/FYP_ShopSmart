@@ -150,7 +150,7 @@ public class StockData {
 				while(rs.next())
 				{
 					stockdata.add(rs.getString("item"));
-					stockdataQty.add(rs.getString("quantity"));
+					stockdataQty.add(rs.getString("Qty"));
 					
 				}
 

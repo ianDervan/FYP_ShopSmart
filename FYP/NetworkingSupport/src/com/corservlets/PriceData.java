@@ -95,8 +95,6 @@ public class PriceData {
 				price=  rs.getString("Price");
 			}
 
-
-			//System.out.println("price is = \n" + price);
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -128,7 +126,6 @@ public class PriceData {
 			connection.commit();
 
 
-			//System.out.println("price is = \n" + newPrice);
 		} catch (SQLException e) {
 
 			e.printStackTrace();

@@ -11,8 +11,7 @@ public class SendPrice implements Serializable {
     public SendPrice(String p1,String p2) {
         itemTxt = p1;
         itemPrice = p2;
-       
-   //System.out.println("itemPrice" + itemPrice);
+
     }
 
 	public String getItemTxt() {

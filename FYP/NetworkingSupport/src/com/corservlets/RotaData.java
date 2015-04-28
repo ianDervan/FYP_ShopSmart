@@ -134,7 +134,6 @@ public class RotaData {
 
 		} catch (SQLException e) {
 
-			System.out.println("\nexception 1" + e );
 		}
 
 

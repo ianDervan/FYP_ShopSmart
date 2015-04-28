@@ -33,7 +33,7 @@ public class Search {
 
 		try {
 
-			String query= "SELECT searchX FROM barcodes " +
+			String query= "SELECT X FROM barcodes " +
 					"WHERE item = '"+itemName+"'";
 
 			Statement stmt = connection.createStatement();
@@ -41,12 +41,12 @@ public class Search {
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next())
 			{
-				x =  rs.getString("searchX");
+				x =  rs.getString("X");
 			}
 			
 			search.put("searchX",x);
 			
-			String query2= "SELECT searchY FROM barcodes " +
+			String query2= "SELECT Y FROM barcodes " +
 					"WHERE item = '"+itemName+"'";
 
 			stmt = connection.createStatement();
@@ -54,12 +54,10 @@ public class Search {
             rs = stmt.executeQuery(query2);
 			if(rs.next())
 			{
-				y =  rs.getString("searchY");
+				y =  rs.getString("Y");
 			}
 			search.put("searchY",y);
 
-			System.out.println("stock is = \n" + x);
-			System.out.println("stock is = \n" + y);
 		} catch (SQLException e) {
 
 			e.printStackTrace();

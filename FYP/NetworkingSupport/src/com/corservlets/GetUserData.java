@@ -42,6 +42,8 @@ public class GetUserData {
 	String userName;
 	String user;
 
+	String daily;
+	String weekly;
 	public void getData( String name) throws SQLException
 	{
 		userName = name;
@@ -99,7 +101,7 @@ public class GetUserData {
 
 		try{	
 			
-			System.out.print("GH " + user);
+			
 
 			String query1 = "SELECT StartTime,BreakIn,BreakOut,FinishTime FROM "+user+" " +
 					"WHERE Day = '"+"Monday"+"'";
@@ -269,10 +271,7 @@ public class GetUserData {
 				o= Float.parseFloat(breakO);
 			}
 
-			System.out.println("s" +s);
-			System.out.println("f" +f);
-			System.out.println("i" +i);
-			System.out.println("o" +o);
+		
 
 			sum = ((o -i) - (f- s));
 
@@ -285,10 +284,6 @@ public class GetUserData {
 
 			String insertHD = Float.toString(x);
 
-			//System.out.println("sum" + insertHD);
-			//System.out.println("sum" + name);
-
-			
 			
 
 
@@ -309,7 +304,7 @@ public class GetUserData {
 
 			}
 
-			System.out.println("weeklyHours" + weeklyHours);
+			
 
 			if(!weeklyHours.trim().equals(""))
 			{
@@ -351,12 +346,65 @@ public class GetUserData {
 
 
 	}
+	
+	public void getHoursTotal(String username)
+	{
+		
+		
+		try {
+			connect();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+
+		try {
+
+			String query= "SELECT HoursWorkedD FROM staffhours " +
+					"WHERE Name = '"+username+"'";
+
+			Statement stmt = connection.createStatement();
+
+			ResultSet rs = stmt.executeQuery(query);
+			if(rs.next())
+			{
+				daily=  rs.getString("HoursWorkedD");
+			}
+			
+		
+			
+			String query2= "SELECT HoursWorkedW FROM staffhours " +
+					"WHERE Name = '"+username+"'";
+
+			stmt = connection.createStatement();
+
+            rs = stmt.executeQuery(query2);
+			if(rs.next())
+			{
+				weekly =  rs.getString("HoursWorkedW");
+			}
+	
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		
+	}
 
 	public  String getDataResult(String key) {	
 		return data.get(key);
 	}
 	public  ArrayList<String> getUserDataResult() {	
 		return hours;
+	}
+	public String getDaily()
+	{
+		return daily;
+	}
+	public String getWeekly()
+	{
+		return weekly;
 	}
 
 	public void connect() throws Exception

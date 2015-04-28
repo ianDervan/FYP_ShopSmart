@@ -59,13 +59,12 @@ public class ManageData {
 			result = sqlInsertOp.executeUpdate();
 
 			if ( result == 0 ) {
-				connection.rollback(); // rollback update
+				connection.rollback(); 
 			}  
 
 			connection.commit();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.print("\n exception ..." + e);
 		}
 
@@ -177,14 +176,10 @@ public class ManageData {
 
 			}
 
-//			for (String str : storeArray) {
-//
-//				System.out.println("Item is: " + str);
-//
-//			}
+
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			System.out.print("\n exception ..." + e);
 		}
 

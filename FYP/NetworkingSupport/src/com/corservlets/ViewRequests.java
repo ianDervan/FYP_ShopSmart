@@ -207,7 +207,7 @@ public class ViewRequests {
 
 		try {
 
-			System.out.println("Item is: " + user);
+			//System.out.println("Item is: " + user);
 
 			sqlInsertStatus = connection.prepareStatement(
 					"DELETE FROM shoppinglists WHERE UserName = '"+user+"' ");
@@ -224,7 +224,7 @@ public class ViewRequests {
 
 		} catch (SQLException e) {
 
-			System.out.println("Item is: " + e);
+			//System.out.println("Item is: " + e);
 		}
 
 

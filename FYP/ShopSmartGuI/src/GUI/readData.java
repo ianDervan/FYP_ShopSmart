@@ -104,7 +104,7 @@ public class readData {
 			list.addAll(Arrays.asList(array));
 		}
 
-		System.out.println(Arrays.toString(list.toArray()));
+		//System.out.println(Arrays.toString(list.toArray()));
 
 		if(checkTable==1)
 		{
@@ -193,7 +193,7 @@ public class readData {
 			if(rs.next());
 			{
 				rowCount = rs.getInt(1);
-				System.out.println(rowCount);
+				
 			}
 			for(int index= 0;index<list.size();index++)
 			{
@@ -215,7 +215,6 @@ public class readData {
 
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			
 			System.out.print("exception" + e);
 			e.printStackTrace();
@@ -458,7 +457,7 @@ public class readData {
 			if(rs1.next())
 			{
 				gui.barcodeInDatabse=1;
-				System.out.print("IN DATABSE" + gui.barcodeInDatabse);
+				
 				
 			}
 			else
